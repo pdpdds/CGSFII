@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}</ProjectGuid>
+    <RootNamespace>ServerEngine</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.50522.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)/../VSProject/lib/x86/Debug/</OutDir>
+    <IntDir>$(ProjectDir)/../VSProject/Intermediate/$(Configuration)\$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <OutDir>$(ProjectDir)/../lib\x64\Debug\</OutDir>
+    <IntDir>$(ProjectDir)/../Intermediate/$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)/../VSProject/lib\x86\Release\</OutDir>
+    <IntDir>$(ProjectDir)/../VSProject/Intermediate/$(Configuration)\$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <OutDir>$(ProjectDir)/../lib\x64\Release\</OutDir>
+    <IntDir>$(ProjectDir)/../Intermediate/$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty;../ThirdParty/ACE/include;../P2PLayer;../ThirdParty/liblfds/include;../ThirdParty/msgpack/include;../ThirdParty/avro/include;./RPC;../ThirdParty/zeromq/include;../ThirdParty/httpxx/include;../ThirdParty/http-parser/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../VSProject/Lib/x86/debug;$(ProjectDir)/../ThirdParty/lib/x86/debug;$(ProjectDir)/../ThirdParty/ACE/lib/x86;$(ProjectDir)/../ThirdParty/MsgPack/lib/x86;$(ProjectDir)/../ThirdParty/Avro/lib/x86/Debug;$(ProjectDir)/../ThirdParty/liblfds/lib/x86/debug;$(ProjectDir)/../ThirdParty/httpxx/lib/x86/debug;$(ProjectDir)/../ThirdParty/http-parser/lib/x86/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprotobuf.lib;liblzf.lib;libglog.lib;aced.lib;commonlayer.lib;msgpackd.lib;avrocpp_s.lib;liblfds611.lib;zlib.lib;http-parser.lib;httpxx.lib</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty/ACE;../ThirdParty/google/glog/src/windows;../;../ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../VSProject/Lib/x64/debug;$(ProjectDir)/../ThirdParty/lib/x64/debug;$(ProjectDir)/../ThirdParty/ACE/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprotobuf.lib;zlib.lib;libglog.lib;aced.lib</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty;../ThirdParty/ACE/include;../P2PLayer;../ThirdParty/liblfds/include;../ThirdParty/msgpack/include;../ThirdParty/avro/include;./RPC;../ThirdParty/zeromq/include;../ThirdParty/httpxx/include;../ThirdParty/http-parser/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../VSProject/Lib/x86/Release;$(ProjectDir)/../ThirdParty/lib/x86/Release;$(ProjectDir)/../ThirdParty/ACE/lib/x86;$(ProjectDir)/../ThirdParty/MsgPack/lib/x86;$(ProjectDir)/../ThirdParty/Avro/lib/x86/Release;$(ProjectDir)/../ThirdParty/liblfds/lib/x86/RELEASE;$(ProjectDir)/../ThirdParty/httpxx/lib/x86/RELEASE;$(ProjectDir)/../ThirdParty/http-parser/lib/x86/RELEASE;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprotobuf.lib;liblzf.lib;zlib.lib;libglog.lib;ace.lib;commonlayer.lib;msgpack.lib;avrocpp_s.lib;liblfds611.lib;http-parser.lib;httpxx.lib</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty/ACE;../ThirdParty/google/glog/src/windows;../;../ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>libprotobuf.lib;zlib.lib;libglog.lib;ace.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../Lib/x64/Release;$(ProjectDir)/../ThirdParty/lib/x64/Release;$(ProjectDir)/../ThirdParty/ACE/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include=".\SFExcel.cpp" />
+    <ClCompile Include=".\SFIni.cpp" />
+    <ClCompile Include=".\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include=".\SFCheckSum.cpp" />
+    <ClCompile Include=".\SFIOBuffer.cpp" />
+    <ClCompile Include=".\SFPacket.cpp" />
+    <ClCompile Include=".\SFPacketProtocol.cpp" />
+    <ClCompile Include=".\SFPacketIOBuffer.cpp" />
+    <ClCompile Include=".\SFBridgeThread.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include=".\LogicEntry.cpp" />
+    <ClCompile Include=".\SFLogicGateway.cpp" />
+    <ClCompile Include="ILogicEntry.cpp" />
+    <ClCompile Include="DataBuffer.cpp" />
+    <ClCompile Include="SFBasePacketProtocol.cpp" />
+    <ClCompile Include="SFCGSFPacketProtocol.cpp" />
+    <ClCompile Include="SFClassicDispatcher.cpp" />
+    <ClCompile Include="SFConfigure.cpp" />
+    <ClCompile Include="SFEngine.cpp" />
+    <ClCompile Include=".\SFCasualGameDispatcher.cpp" />
+    <ClCompile Include=".\SFSessionService.cpp" />
+    <ClCompile Include="SFLogicDispatcher.cpp" />
+    <ClCompile Include="SFMMODispatcher.cpp" />
+    <ClCompile Include="SFObject.cpp" />
+    <ClCompile Include="SFObserver.cpp" />
+    <ClCompile Include="SFPacketDelaySendTask.cpp" />
+    <ClCompile Include="SFPacketProtocolManager.cpp" />
+    <ClCompile Include="SFPacketSendGateway.cpp" />
+    <ClCompile Include="SFProtobufPacket.cpp" />
+    <ClCompile Include="SFProtobufPacketImpl.cpp" />
+    <ClCompile Include="SFProtobufProtocol.cpp" />
+    <ClCompile Include="SFProtocol.cpp" />
+    <ClCompile Include="SFServerConnectionManager.cpp" />
+    <ClCompile Include="SFShouter.cpp" />
+    <ClCompile Include="SFSubject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include=".\SFExcel.h" />
+    <ClInclude Include=".\SFIni.h" />
+    <ClInclude Include=".\SFFactory.h" />
+    <ClInclude Include=".\SFMacro.h" />
+    <ClInclude Include=".\stdafx.h" />
+    <ClInclude Include=".\targetver.h" />
+    <ClInclude Include=".\SFCheckSum.h" />
+    <ClInclude Include=".\SFIOBuffer.h" />
+    <ClInclude Include=".\SFPacket.h" />
+    <ClInclude Include=".\SFPacketProtocol.h" />
+    <ClInclude Include=".\SFPacketIOBuffer.h" />
+    <ClInclude Include=".\SFBridgeThread.h" />
+    <ClInclude Include=".\ILogicEntry.h" />
+    <ClInclude Include=".\LogicEntry.h" />
+    <ClInclude Include=".\SFLogicGateway.h" />
+    <ClInclude Include=".\SFSinglton.h" />
+    <ClInclude Include=".\SFEngine.h" />
+    <ClInclude Include="ACEHeader.h" />
+    <ClInclude Include="DataBuffer.h" />
+    <ClInclude Include="CommonHeader.h" />
+    <ClInclude Include="ILogicDispatcher.h" />
+    <ClInclude Include="IPacketTask.h" />
+    <ClInclude Include="PacketProtocolConstant.h" />
+    <ClInclude Include="SFBasePacketProtocol.h" />
+    <ClInclude Include="SFClassicDispatcher.h" />
+    <ClInclude Include="SFConfigure.h" />
+    <ClInclude Include="SFConstant.h" />
+    <ClInclude Include="SFCGSFPacketProtocol.h" />
+    <ClInclude Include=".\SFCasualGameDispatcher.h" />
+    <ClInclude Include=".\SFSessionService.h" />
+    <ClInclude Include="SFLogicDispatcher.h" />
+    <ClInclude Include="SFMMODispatcher.h" />
+    <ClInclude Include="SFObject.h" />
+    <ClInclude Include="SFObserver.h" />
+    <ClInclude Include="SFPacketDelaySendTask.h" />
+    <ClInclude Include="SFPacketProtocolManager.h" />
+    <ClInclude Include="SFPacketSendGateway.h" />
+    <ClInclude Include="SFProtobufPacket.h" />
+    <ClInclude Include="SFProtobufPacketImpl.h" />
+    <ClInclude Include="SFProtobufProtocol.h" />
+    <ClInclude Include="SFProtocol.h" />
+    <ClInclude Include="SFServerConnectionManager.h" />
+    <ClInclude Include="SFShouter.h" />
+    <ClInclude Include="SFStructure.h" />
+    <ClInclude Include="SFSubject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include=".\ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
