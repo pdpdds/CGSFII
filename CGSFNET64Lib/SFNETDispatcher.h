@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "ILogicDispatcher.h"
-#include "RPCService.h"
 
 namespace CgsfNET64Lib {
 	
