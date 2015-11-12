@@ -4,6 +4,7 @@
 #include "SFEngine.h"
 #include "XML/StringConversion.h"
 #include "XML/Markup.h"
+#include <process.h>
 
 SFServerConnectionManager::SFServerConnectionManager()
 : m_hThread(NULL)

@@ -17,7 +17,12 @@
 #include <tchar.h>
 #include "Macro.h"
 #include "SFString.h"
-#include "SFSinglton.h"
+#include "SFObjectPool.h"
+#include "SFLogicGateway.h"
+#include "SFPacketSendGateway.h"
+#include "LogicEntry.h"
+#include "SFPacket.h"
+#include "SFPacketDelaySendTask.h"
 #include "SFPacketProtocol.H"
 #include "SFBridgeThread.h"
 

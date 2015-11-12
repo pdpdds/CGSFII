@@ -17,9 +17,6 @@
     <Filter Include="Logic">
       <UniqueIdentifier>{770a9c60-f72d-483c-bd26-9bb51653c8db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Singlton">
-      <UniqueIdentifier>{afa4362c-6b77-48cb-bb1d-20350fc9e7c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shouter">
       <UniqueIdentifier>{d07dc62e-052f-4e2a-a608-ed2f1312111a}</UniqueIdentifier>
     </Filter>
@@ -145,6 +142,9 @@
     <ClCompile Include="SFLogicDispatcher.cpp">
       <Filter>Dispatcher</Filter>
     </ClCompile>
+    <ClCompile Include="SFPacketPool.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".\SFExcel.h">
@@ -173,9 +173,6 @@
     </ClInclude>
     <ClInclude Include=".\SFLogicGateway.h">
       <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include=".\SFSinglton.h">
-      <Filter>Singlton</Filter>
     </ClInclude>
     <ClInclude Include="SFShouter.h">
       <Filter>Shouter</Filter>
@@ -237,9 +234,6 @@
     <ClInclude Include="SFPacketSendGateway.h">
       <Filter>Logic</Filter>
     </ClInclude>
-    <ClInclude Include="ACEHeader.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include=".\SFCasualGameDispatcher.h">
       <Filter>Dispatcher</Filter>
     </ClInclude>
@@ -281,6 +275,9 @@
     </ClInclude>
     <ClInclude Include="SFLogicDispatcher.h">
       <Filter>Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="SFPacketPool.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

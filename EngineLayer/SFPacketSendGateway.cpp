@@ -1,9 +1,18 @@
 #include "stdafx.h"
 #include "SFPacketSendGateway.h"
 
+SFPacketSendGateway* SFPacketSendGateway::m_pPacketSendGateway = NULL;
 
 SFPacketSendGateway::SFPacketSendGateway(void)
 {
+}
+
+SFPacketSendGateway* SFPacketSendGateway::GetInstance()
+{
+	if (m_pPacketSendGateway == NULL)
+		m_pPacketSendGateway = new SFPacketSendGateway();
+
+	return m_pPacketSendGateway;
 }
 
 

@@ -67,6 +67,8 @@ namespace EchoServerNet
                 DevLog.Write(string.Format("[Init] 네트워크 라이브러리 초기화 실패. {0}, {1}", result.ToString(), result), LOG_LEVEL.ERROR);
             }
 
+            ServerNet.Start(0);
+
             // 반복 처리를 위한 스레드(UI 동기)
             workProcessTimer.Tick += new EventHandler(OnProcessTimedEvent);
             workProcessTimer.Interval = new TimeSpan(0, 0, 0, 0, 32);

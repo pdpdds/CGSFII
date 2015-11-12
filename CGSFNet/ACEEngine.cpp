@@ -24,11 +24,13 @@ ACEEngine::ACEEngine(IEngine* pEngine)
 	, m_TimeOutHandler(this)
 	, m_acceptorIndex(1)
 {
+	ACE::init();
 	ProactorServiceManagerSinglton::instance();
 }
 
 ACEEngine::~ACEEngine(void)
 {
+	ACE::fini();
 }
 
 bool ACEEngine::SendRequest(BasePacket* pPacket)

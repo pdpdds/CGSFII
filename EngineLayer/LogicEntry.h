@@ -14,9 +14,12 @@ public:
 	{
 		m_pLogicEntry = pLogic;
 	}
+	
+	static LogicEntry* GetInstance();
 
 protected:
 
 private:
+	static LogicEntry* m_pLogic;
 	ILogicEntry* m_pLogicEntry;
 };

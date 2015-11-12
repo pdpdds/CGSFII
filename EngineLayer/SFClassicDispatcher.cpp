@@ -12,7 +12,7 @@ SFClassicDispatcher::~SFClassicDispatcher()
 
 void SFClassicDispatcher::Dispatch(BasePacket* pPacket)
 {
-	LogicEntrySingleton::instance()->ProcessPacket(pPacket);
+	LogicEntry::GetInstance()->ProcessPacket(pPacket);
 
 	if (pPacket->GetPacketType() != SFPACKET_DB)
 	{
@@ -22,7 +22,7 @@ void SFClassicDispatcher::Dispatch(BasePacket* pPacket)
 
 bool SFClassicDispatcher::CreateLogicSystem(ILogicEntry* pLogicEntry)
 {
-	LogicEntrySingleton::instance()->SetLogic(pLogicEntry);
+	LogicEntry::GetInstance()->SetLogic(pLogicEntry);
 	return true;
 }
 

@@ -7,6 +7,8 @@
 #include  <Lmshare.h>
 #include  <Lm.h>
 
+#pragma comment( lib, "Netapi32.lib") 
+
 #pragma warning(disable : 4996)
 #pragma warning(disable : 4706) 
 

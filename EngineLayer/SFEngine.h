@@ -11,6 +11,9 @@
 #include "Macro.h"
 #include "SFPacket.h"
 #include "SFPacketProtocol.h"
+#include "TinyThread/tinythread.h"
+#include "SFObjectPool.h"
+#include "SFPacketDelaySendTask.h"
 
 class IRPCInterface;
 class SFServerConnectionManager;
@@ -65,7 +68,9 @@ public:
 	int  AddListener(char* szIP, unsigned short port, int packetProtocolId, bool bDefaultListener = false);
 	int  AddConnector(int connectorId, char* szIP, unsigned short port);
 	void AddRPCService(IRPCService* pService);
-	bool AddPacketProtocol(int packetProtocolId, IPacketProtocol* pProtocol);	
+	bool AddPacketProtocol(int packetProtocolId, IPacketProtocol* pProtocol);
+
+	SFObjectPool<SFPacketDelaySendTask> m_delayedSendTaskPool;
 
 	SFConfigure* GetConfig(){return &m_Config;}
 	void SetConfig(SFConfigure& Config){m_Config = Config;}
@@ -87,7 +92,7 @@ private:
 	bool Start(char* szIP, unsigned short port); //클라이언트 전용, 이후 deprecated 될 것임	
 
 	SFConfigure m_Config;
-	int m_packetSendThreadId;
+	tthread::thread* m_packetSendThread;
 
 	HINSTANCE m_engineHandle;
 	INetworkEngine* m_pNetworkEngine;

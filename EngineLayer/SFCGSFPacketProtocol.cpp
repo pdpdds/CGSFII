@@ -3,6 +3,7 @@
 #include "SFCompressor.h"
 #include "ISession.h"
 #include "SFEngine.h"
+#include "SFPacketPool.h"
 
 SFCGSFPacketProtocol::SFCGSFPacketProtocol(void)
 {
@@ -31,13 +32,13 @@ bool SFCGSFPacketProtocol::Initialize(int ioBufferSize, unsigned short packetSiz
 
 BasePacket* SFCGSFPacketProtocol::GetPacket(int& errorCode)
 {
-	SFPacket* pPacket = PacketPoolSingleton::instance()->Alloc();
+	SFPacket* pPacket = SFPacketPool::GetInstance()->Alloc();
 
 	pPacket->Initialize();
 
 	if (FALSE == m_pPacketIOBuffer->GetPacket(*pPacket->GetHeader(), (char*)pPacket->GetData(), m_packetSize, errorCode))
 	{
-		PacketPoolSingleton::instance()->Release(pPacket);
+		SFPacketPool::GetInstance()->Release(pPacket);
 		return NULL;
 	}
 
@@ -82,5 +83,5 @@ bool SFCGSFPacketProtocol::DisposePacket(BasePacket* pPacket)
 	SFPacket* pSFPacket = static_cast<SFPacket*>(pPacket);
 
 	SFASSERT(pSFPacket != NULL);
-	return PacketPoolSingleton::instance()->Release(pSFPacket);
+	return SFPacketPool::GetInstance()->Release(pSFPacket);
 }

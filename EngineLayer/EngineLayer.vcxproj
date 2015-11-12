@@ -111,7 +111,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty/ACE;../ThirdParty/google/glog/src/windows;../;../ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty/google/glog/src/windows;../;../ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -120,8 +120,8 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)/../VSProject/Lib/x64/debug;$(ProjectDir)/../ThirdParty/lib/x64/debug;$(ProjectDir)/../ThirdParty/ACE/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobuf.lib;zlib.lib;libglog.lib;aced.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)/../VSProject/Lib/x64/debug;$(ProjectDir)/../ThirdParty/lib/x64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprotobuf.lib;zlib.lib;libglog.lib</AdditionalDependencies>
       <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
@@ -197,6 +197,7 @@
     <ClCompile Include="SFObject.cpp" />
     <ClCompile Include="SFObserver.cpp" />
     <ClCompile Include="SFPacketDelaySendTask.cpp" />
+    <ClCompile Include="SFPacketPool.cpp" />
     <ClCompile Include="SFPacketProtocolManager.cpp" />
     <ClCompile Include="SFPacketSendGateway.cpp" />
     <ClCompile Include="SFProtobufPacket.cpp" />
@@ -223,9 +224,7 @@
     <ClInclude Include=".\ILogicEntry.h" />
     <ClInclude Include=".\LogicEntry.h" />
     <ClInclude Include=".\SFLogicGateway.h" />
-    <ClInclude Include=".\SFSinglton.h" />
     <ClInclude Include=".\SFEngine.h" />
-    <ClInclude Include="ACEHeader.h" />
     <ClInclude Include="DataBuffer.h" />
     <ClInclude Include="CommonHeader.h" />
     <ClInclude Include="ILogicDispatcher.h" />
@@ -243,6 +242,7 @@
     <ClInclude Include="SFObject.h" />
     <ClInclude Include="SFObserver.h" />
     <ClInclude Include="SFPacketDelaySendTask.h" />
+    <ClInclude Include="SFPacketPool.h" />
     <ClInclude Include="SFPacketProtocolManager.h" />
     <ClInclude Include="SFPacketSendGateway.h" />
     <ClInclude Include="SFProtobufPacket.h" />

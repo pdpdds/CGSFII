@@ -1,9 +1,7 @@
 #include "stdafx.h"
-#include "ACEHeader.h"
 #include "SFEngine.h"
 #include <stdlib.h>  
 #include "ILogicDispatcher.h"
-#include "ace/os_ns_thread.h"
 #include "SFBridgeThread.h"
 #include "SFSessionService.h"
 #include "SFCasualGameDispatcher.h"
@@ -15,17 +13,15 @@
 
 #pragma comment(lib, "BaseLayer.lib")
 
-SFEngine* SFEngine::m_pEngine = NULL;
+SFEngine* SFEngine::m_pEngine = nullptr;
 
-SFEngine::SFEngine()
-	: m_packetSendThreadId(-1)
-	, m_pNetworkEngine(0)	
-	, m_pPacketProtocolManager(NULL)
-	, m_pServerConnectionManager(NULL)
-{
-	ACE::init();
-
-	PacketDelayedSendTask::instance()->Init(100);
+SFEngine::SFEngine()	
+	: m_pNetworkEngine(0)	
+	, m_pPacketProtocolManager(nullptr)
+	, m_pServerConnectionManager(nullptr)
+	, m_packetSendThread(nullptr)
+{	
+	m_delayedSendTaskPool.Init(100);	
 
 	google::InitGoogleLogging("CGSF");
 	m_Config.Read(L"EngineConfig.xml");
@@ -41,9 +37,7 @@ SFEngine::SFEngine()
 }
 
 SFEngine::~SFEngine(void)
-{	
-	ACE::fini();
-
+{		
 	if (m_pNetworkEngine)
 		delete m_pNetworkEngine;
 
@@ -87,8 +81,8 @@ void SFEngine::AddRPCService(IRPCService* pService)
 }
 
 bool SFEngine::CreatePacketSendThread()
-{	
-	m_packetSendThreadId = ACE_Thread_Manager::instance()->spawn_n(1, (ACE_THR_FUNC)PacketSendThread, this, THR_NEW_LWP, ACE_DEFAULT_THREAD_PRIORITY);
+{		
+	m_packetSendThread = new tthread::thread(PacketSendThread, this);
 
 	return TRUE;
 }
@@ -335,13 +329,13 @@ bool SFEngine::ShutDown()
 	m_pLogicDispatcher->ShutDownLogicSystem();
 	LOG(INFO) << "Engine Shut Down Step (1) ShutDownLogicSystem";	
 
-	if (m_packetSendThreadId >= 0)
+	if (m_packetSendThread != nullptr)
 	{
-		PacketSendSingleton::instance()->PushTask(NULL);
+		SFPacketSendGateway::GetInstance()->PushTask(NULL);
 		LOG(INFO) << "Engine Shut Down Step (2) instance()->PushTask(NULL)";
 
-		ACE_Thread_Manager::instance()->wait_grp(m_packetSendThreadId);
-		LOG(INFO) << "Engine Shut Down Step (3) wait_grp(m_packetSendThreadId)";
+		m_packetSendThread->join();
+		delete m_packetSendThread;
 	}
 
 	if (m_pNetworkEngine)
@@ -410,7 +404,7 @@ bool SFEngine::SendRequest(BasePacket* pPacket)
 
 bool SFEngine::SendDelayedRequest(BasePacket* pPacket, std::vector<int>* pOwnerList)
 {
-	 SFPacketDelaySendTask* pTask = PacketDelayedSendTask::instance()->Alloc();
+	SFPacketDelaySendTask* pTask = m_delayedSendTaskPool.Alloc();
 	 SFASSERT(NULL != pTask);
 
 	if (pOwnerList == NULL)
@@ -424,7 +418,7 @@ bool SFEngine::SendDelayedRequest(BasePacket* pPacket, std::vector<int>* pOwnerL
 		pTask->SetPacket(pPacket, *pOwnerList);
 	}
 
-	return PacketSendSingleton::instance()->PushTask(pTask);
+	return SFPacketSendGateway::GetInstance()->PushTask(pTask);
 }
 
 bool SFEngine::SendRequest(BasePacket* pPacket, std::vector<int>& ownerList)
@@ -487,5 +481,5 @@ bool SFEngine::AddPacketProtocol(int packetProtocolId, IPacketProtocol* pProtoco
 
 void SFEngine::SendToLogic(BasePacket* pMessage)
 {
-	LogicGatewaySingleton::instance()->PushPacket(pMessage);
+	SFLogicGateway::GetInstance()->PushPacket(pMessage);
 }

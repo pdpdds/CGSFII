@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "SFBridgeThread.h"
 #include "SFPacketDelaySendTask.h"
+#include "SFEngine.h"
 
 void PacketSendThread(void* Args)
 {
@@ -8,13 +9,14 @@ void PacketSendThread(void* Args)
 
 	while (1)
 	{
-		SFPacketDelaySendTask* pPacketTask = (SFPacketDelaySendTask*)PacketSendSingleton::instance()->PopTask();
+		SFPacketDelaySendTask* pPacketTask = (SFPacketDelaySendTask*)SFPacketSendGateway::GetInstance()->PopTask();
 
 		if (pPacketTask == NULL)
 			break;
 
 		pPacketTask->Execute();
 
-		PacketDelayedSendTask::instance()->Release((SFPacketDelaySendTask*)pPacketTask);
+
+		SFEngine::GetInstance()->m_delayedSendTaskPool.Release((SFPacketDelaySendTask*)pPacketTask);
 	}
 }
