@@ -7,7 +7,7 @@ void PacketSendThread(void* Args)
 {
 	UNREFERENCED_PARAMETER(Args);
 
-	while (1)
+	while (true)
 	{
 		SFPacketDelaySendTask* pPacketTask = (SFPacketDelaySendTask*)SFPacketSendGateway::GetInstance()->PopTask();
 

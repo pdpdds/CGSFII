@@ -121,7 +121,7 @@
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)/../VSProject/Lib/x64/debug;$(ProjectDir)/../ThirdParty/lib/x64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobuf.lib;zlib.lib;libglog.lib</AdditionalDependencies>
+      <AdditionalDependencies>libprotobufd.lib;zlib.lib;libglog.lib</AdditionalDependencies>
       <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
@@ -148,7 +148,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty/ACE;../ThirdParty/google/glog/src/windows;../;../ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty/google/glog/src/windows;../;../ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -158,7 +158,7 @@
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>libprotobuf.lib;zlib.lib;libglog.lib;ace.lib</AdditionalDependencies>
+      <AdditionalDependencies>libprotobuf.lib;zlib.lib;libglog.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)/../Lib/x64/Release;$(ProjectDir)/../ThirdParty/lib/x64/Release;$(ProjectDir)/../ThirdParty/ACE/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>

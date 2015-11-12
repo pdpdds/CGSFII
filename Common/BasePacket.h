@@ -58,5 +58,5 @@ private:
 	_SessionDesc m_sessiondesc;
 	unsigned int m_packetType;
 	unsigned short m_packetID;
-	short m_channelNum;
+	int m_channelNum;
 };

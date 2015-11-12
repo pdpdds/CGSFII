@@ -258,6 +258,7 @@ public:
 	{
 	}
 
+
 	virtual void Serialize(IXMLStreamWriter*) const 
 	{
 		assert(FALSE); 

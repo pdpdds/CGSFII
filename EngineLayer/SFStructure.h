@@ -5,16 +5,10 @@
 
 typedef struct tag_SFPacketHeader
 {
-//20151026
-	//USHORT packetID;
-	//DWORD  packetOption;
-	//DWORD  dataCRC;
-	//USHORT dataSize;
-
-	USHORT dataSize;
 	USHORT packetID;
-	WORD  packetOption;
-	WORD  dataCRC;
+	DWORD  packetOption;
+	DWORD  dataCRC;
+	USHORT dataSize;
 
 	tag_SFPacketHeader()
 	{

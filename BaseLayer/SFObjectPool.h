@@ -18,7 +18,7 @@ public:
 	void Init(int MaxCount);
 
 	T* Alloc();
-	BOOL Release(T* pObj);
+	bool Release(T* pObj);
 
 protected:
 
@@ -71,7 +71,7 @@ template<typename T> T* SFObjectPool<T>::Alloc()
 }
 
 
-template<typename T> BOOL SFObjectPool<T>::Release(T* pObj)
+template<typename T> bool SFObjectPool<T>::Release(T* pObj)
 {
 	if(NULL == pObj)
 		return FALSE;
