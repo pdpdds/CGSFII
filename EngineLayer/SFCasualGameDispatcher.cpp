@@ -70,6 +70,19 @@ bool SFCasualGameDispatcher::ShutDownLogicSystem()
 		SFLogicGateway::GetInstance()->PushPacket(pCommand);
 	}
 
+	for (auto thread : m_mapThread)
+	{
+		tthread::thread* pThread = thread.second;
+		if (pThread->joinable())
+		{
+			pThread->join();
+		}
+
+		delete pThread;
+	}
+
+	m_mapThread.clear();
+
 	LogicEntry::GetInstance()->DestroyLogic();
 
 	return true;

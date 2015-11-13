@@ -19,12 +19,9 @@
 #include "SFString.h"
 #include "SFObjectPool.h"
 #include "SFLogicGateway.h"
-#include "SFPacketSendGateway.h"
 #include "LogicEntry.h"
 #include "SFPacket.h"
-#include "SFPacketDelaySendTask.h"
 #include "SFPacketProtocol.H"
-#include "SFBridgeThread.h"
 
 #define GOOGLE_GLOG_DLL_DECL
 #define GLOG_NO_ABBREVIATED_SEVERITIES

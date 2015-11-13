@@ -1,6 +1,8 @@
 #pragma once
 #include "SFBasePacketProtocol.h"
+#include "SFPacketProtocol.h"
 
+class SFPacketIOBuffer;
 class SFCommand;
 
 class SFCGSFPacketProtocol : public SFBasePacketProtocol

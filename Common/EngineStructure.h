@@ -1,16 +1,23 @@
 #pragma once
 #include <string>
 
+enum class SESSION_TYPE : int
+{
+	SESSION_UNKNOWN = -1,
+	SESSION_LISTENER = 0,
+	SESSION_CONNECTOR = 1,
+};
+
 typedef struct tag_SessionDesc
 {
-	int sessionType; // 0 listener, 1 connector
+	SESSION_TYPE sessionType;
 	int identifier;
 	std::string szIP;
 	unsigned short port;
 
 	tag_SessionDesc()
 	{
-		sessionType = -1;
+		sessionType = SESSION_TYPE::SESSION_UNKNOWN;
 		identifier = -1;		
 		port = 0;
 	}

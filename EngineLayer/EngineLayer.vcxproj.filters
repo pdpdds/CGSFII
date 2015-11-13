@@ -58,9 +58,6 @@
     <ClCompile Include="SFShouter.cpp">
       <Filter>Shouter</Filter>
     </ClCompile>
-    <ClCompile Include=".\SFBridgeThread.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
     <ClCompile Include="SFProtobufPacketImpl.cpp">
       <Filter>Packet\ProtobufPacket</Filter>
     </ClCompile>
@@ -100,9 +97,6 @@
     <ClCompile Include="SFConfigure.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="SFPacketSendGateway.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
     <ClCompile Include=".\SFCasualGameDispatcher.cpp">
       <Filter>Dispatcher</Filter>
     </ClCompile>
@@ -120,9 +114,6 @@
     </ClCompile>
     <ClCompile Include="SFSubject.cpp">
       <Filter>Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="SFPacketDelaySendTask.cpp">
-      <Filter>Packet\PacketTask</Filter>
     </ClCompile>
     <ClCompile Include="SFServerConnectionManager.cpp">
       <Filter>Network</Filter>
@@ -183,9 +174,6 @@
     <ClInclude Include="SFStructure.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include=".\SFBridgeThread.h">
-      <Filter>Network</Filter>
-    </ClInclude>
     <ClInclude Include=".\SFEngine.h">
       <Filter>Network</Filter>
     </ClInclude>
@@ -231,9 +219,6 @@
     <ClInclude Include="CommonHeader.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="SFPacketSendGateway.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
     <ClInclude Include=".\SFCasualGameDispatcher.h">
       <Filter>Dispatcher</Filter>
     </ClInclude>
@@ -253,9 +238,6 @@
       <Filter>Pattern</Filter>
     </ClInclude>
     <ClInclude Include="IPacketTask.h">
-      <Filter>Packet\PacketTask</Filter>
-    </ClInclude>
-    <ClInclude Include="SFPacketDelaySendTask.h">
       <Filter>Packet\PacketTask</Filter>
     </ClInclude>
     <ClInclude Include="SFServerConnectionManager.h">

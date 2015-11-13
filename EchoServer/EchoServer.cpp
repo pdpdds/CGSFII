@@ -15,7 +15,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	SFEngine::GetInstance()->AddPacketProtocol(0, new SFPacketProtocol<SFCGSFPacketProtocol>);
-	SFEngine::GetInstance()->Start(0);
+	SFEngine::GetInstance()->Start();
 
 	getchar();
 	

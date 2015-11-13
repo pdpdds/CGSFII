@@ -2,11 +2,9 @@
 #include "SFEngine.h"
 #include <stdlib.h>  
 #include "ILogicDispatcher.h"
-#include "SFBridgeThread.h"
 #include "SFSessionService.h"
 #include "SFCasualGameDispatcher.h"
 #include "SFUtil.h"
-#include "SFPacketDelaySendTask.h"
 #include "SFServerConnectionManager.h"
 #include "SFPacketProtocolManager.h"
 #include "XMl/StringConversion.h"
@@ -15,23 +13,19 @@
 
 SFEngine* SFEngine::m_pEngine = nullptr;
 
-SFEngine::SFEngine()	
-	: m_pNetworkEngine(0)	
-	, m_pPacketProtocolManager(nullptr)
-	, m_pServerConnectionManager(nullptr)
-	, m_packetSendThread(nullptr)
-{	
-	m_delayedSendTaskPool.Init(100);	
+SFEngine::SFEngine()
+	: m_pNetworkEngine(nullptr)
+	, m_engineHandle(nullptr)
+	, m_pServerConnectionManager(nullptr)	
+{		
 
-	google::InitGoogleLogging("CGSF");
-	m_Config.Read(L"EngineConfig.xml");
+	google::InitGoogleLogging("CGSFII");
+	m_config.Read(L"EngineConfig.xml");
 
 #ifdef _DEBUG
 	_putenv_s("GLOG_logbufsecs", "0");
 	google::LogToStderr();
 #endif
-	
-	m_engineHandle = 0;
 
 	m_pPacketProtocolManager = new SFPacketProtocolManager();
 }
@@ -47,7 +41,7 @@ SFEngine::~SFEngine(void)
 
 SFEngine* SFEngine::GetInstance()
 {
-	if (m_pEngine == NULL)
+	if (m_pEngine == nullptr)
 		m_pEngine = new SFEngine();
 
 	return m_pEngine;
@@ -55,54 +49,50 @@ SFEngine* SFEngine::GetInstance()
 
 NET_ERROR_CODE SFEngine::CreateEngine(char* szModuleName)
 {
-
 	m_engineHandle = ::LoadLibraryA(szModuleName);
 
-	if (m_engineHandle == 0)
+	if (m_engineHandle == nullptr)
 		return NET_ERROR_CODE::ENGINE_INIT_CREAT_ENGINE_LOAD_DLL_FAIL;
 
 	CREATENETWORKENGINE *pfunc;
 	pfunc = (CREATENETWORKENGINE*)::GetProcAddress(m_engineHandle, "CreateNetworkEngine");
 	m_pNetworkEngine = pfunc(this);
 
-	if(m_pNetworkEngine == NULL)
+	if (m_pNetworkEngine == nullptr)
 		return NET_ERROR_CODE::ENGINE_INIT_CREAT_ENGINE_FUNC_NULL;
 
-	if(FALSE == m_pNetworkEngine->Init())
+	if(false == m_pNetworkEngine->Init())
 		return NET_ERROR_CODE::ENGINE_INIT_CREAT_ENGINE_INIT_FAIL;
 	
 	return NET_ERROR_CODE::SUCCESS;
 }
 
-void SFEngine::AddRPCService(IRPCService* pService)
+bool SFEngine::AddRPCService(IRPCService* pService)
 {
-	m_pLogicDispatcher->AddRPCService(pService);
-	
-}
-
-bool SFEngine::CreatePacketSendThread()
-{		
-	m_packetSendThread = new tthread::thread(PacketSendThread, this);
-
-	return TRUE;
+	return m_pLogicDispatcher->AddRPCService(pService);	
 }
 
 ISessionService* SFEngine::CreateSessionService(_SessionDesc& desc)
 {
-	IPacketProtocol* pSourceProtocol = NULL;
-	if (desc.sessionType == 0)
+	IPacketProtocol* pSourceProtocol = nullptr;
+	if (desc.sessionType == SESSION_TYPE::SESSION_LISTENER)
 		pSourceProtocol = m_pPacketProtocolManager->GetPacketProtocolWithListenerId(desc.identifier);
 	else
 		pSourceProtocol = m_pPacketProtocolManager->GetPacketProtocolWithConnectorId(desc.identifier);
+
+	if (pSourceProtocol == nullptr)
+	{
+		SFASSERT(0);
+	}
 		
-	IPacketProtocol* pCloneProtocol = pSourceProtocol->Clone();	
+	IPacketProtocol* pCloneProtocol = pSourceProtocol->Clone();
 	return new SFSessionService(pCloneProtocol);
 }
 
-void SFEngine::SetLogFolder(TCHAR* szPath)
+void SFEngine::SetLogFolder()
 {
 	WCHAR szFilePath[MAX_PATH] = { 0, };
-	GetModuleFileName(NULL, szFilePath, MAX_PATH);
+	GetModuleFileName(nullptr, szFilePath, MAX_PATH);
 
 	WCHAR* path = SFUtil::ExtractPathInfo(szFilePath, SFUtil::PATH_DIR);
 	SetCurrentDirectory(path);
@@ -110,17 +100,17 @@ void SFEngine::SetLogFolder(TCHAR* szPath)
 	std::wstring szLogPath = path;
 	szLogPath += L"Log\\";
 
-	CreateDirectory(szLogPath.c_str(), NULL);
+	CreateDirectory(szLogPath.c_str(), nullptr);
+	
+	std::wstring szLogInfo = szLogPath + L"INFO_";
+	std::wstring szLogWarning = szLogPath + L"WARNING_";
+	std::wstring szLogError = szLogPath + L"ERROR_";
 
-	if (szPath)
-		szLogPath = szPath;
+	google::SetLogDestination(google::GLOG_INFO, (char*)StringConversion::ToASCII(szLogInfo).c_str());
+	google::SetLogDestination(google::GLOG_WARNING, (char*)StringConversion::ToASCII(szLogWarning).c_str());
+	google::SetLogDestination(google::GLOG_ERROR, (char*)StringConversion::ToASCII(szLogError).c_str());
 
-	google::SetLogDestination(google::GLOG_INFO, (char*)StringConversion::ToASCII(szLogPath).c_str());
-	// INFO와 같은 폴더를 정의해서 파일 중복으로 경고나 에러 로그를 찍을 때 에러 발생.
-	//google::SetLogDestination(google::GLOG_WARNING, (char*)StringConversion::ToASCII(szLogPath).c_str());
-	//google::SetLogDestination(google::GLOG_ERROR, (char*)StringConversion::ToASCII(szLogPath).c_str());
-
-	LOG(INFO) << "Log Destination " << (char*)StringConversion::ToASCII(szLogPath).c_str();
+	LOG(INFO) << "Log Destination " << (char*)StringConversion::ToASCII(szLogPath).c_str();	
 }
 
 NET_ERROR_CODE SFEngine::Intialize(ILogicEntry* pLogicEntry, ILogicDispatcher* pDispatcher)
@@ -130,9 +120,9 @@ NET_ERROR_CODE SFEngine::Intialize(ILogicEntry* pLogicEntry, ILogicDispatcher* p
 	SetLogFolder();	
 
 	if (NULL == pLogicEntry)
-		return NET_ERROR_CODE::ENGINE_INIT_LOGIC_ENTRY_NULL;	
+		return NET_ERROR_CODE::ENGINE_INIT_LOGIC_ENTRY_NULL;
 
-	if (pDispatcher == NULL)
+	if (pDispatcher == nullptr)
 	{
 		pDispatcher = new SFCasualGameDispatcher();
 	}
@@ -149,7 +139,7 @@ NET_ERROR_CODE SFEngine::Intialize(ILogicEntry* pLogicEntry, ILogicDispatcher* p
 	}
 	
 	
-	_EngineConfig* pInfo = m_Config.GetConfigureInfo();
+	_EngineConfig* pInfo = m_config.GetConfigureInfo();
 	
 	LOG(INFO) << "Basic Port: " << pInfo->serverPort;
 
@@ -179,9 +169,7 @@ NET_ERROR_CODE SFEngine::Intialize(ILogicEntry* pLogicEntry, ILogicDispatcher* p
 	{
 		LOG(ERROR) << "Logic System Creation FAIL!!";
 		return NET_ERROR_CODE::ENGINE_INIT_CREAT_LOGIC_SYSTEM_FAIL;
-	}
-
-	CreatePacketSendThread();
+	}	
 
 	LOG(INFO) << "Engine Initialize Complete!! ";
 	return NET_ERROR_CODE::SUCCESS;
@@ -237,9 +225,7 @@ bool SFEngine::CancelTimer(int timerID)
 	{
 		bResult = GetNetworkEngine()->CancelTimer(timerID);
 	}
-
 	
-
 	if (bResult == false)
 	{
 		LOG(INFO) << "Timer Cancel Fail. Id : " << timerID;
@@ -254,44 +240,21 @@ bool SFEngine::CancelTimer(int timerID)
 	return true;
 }
 
-bool SFEngine::Start(char* szIP, unsigned short port)
-{
-	_EngineConfig* pInfo = m_Config.GetConfigureInfo();
-
-	if (szIP != NULL && port != 0)
-		LOG(INFO) << "Engine Starting... IP : " << szIP << " Port : " << port;
-	else
-		LOG(INFO) << "Engine Starting... IP : " << (char*)StringConversion::ToASCII(pInfo->serverIP).c_str() << " Port : " << pInfo->serverPort;
-	
-	bool bResult = false;
-	if (port != 0)
-		bResult = m_pNetworkEngine->Start(szIP, port);
-	else
-		bResult = m_pNetworkEngine->Start((char*)StringConversion::ToASCII(pInfo->serverIP).c_str(), pInfo->serverPort);
-	
-	if (bResult == false)
-	{
-		LOG(ERROR) << "Engine Start Fail!!";
-		return false;
-	}
-	LOG(INFO) << "Engine Start!!";
-
-	return true;
-}
-
 bool SFEngine::Start(int protocolId)
 {
 	bool bResult = false;
-	_EngineConfig* pInfo = m_Config.GetConfigureInfo();
+	_EngineConfig* pInfo = m_config.GetConfigureInfo();
 	LOG(INFO) << "Engine Starting... IP : " << (char*)StringConversion::ToASCII(pInfo->serverIP).c_str() << " Port : " << pInfo->serverPort;
+	char* serverIP = (char*)StringConversion::ToASCII(pInfo->serverIP).c_str();
+	short port = pInfo->serverPort;
 
 	if (protocolId >= 0)
 	{
 		IPacketProtocol* pProtocol = m_pPacketProtocolManager->GetPacketProtocol(protocolId);
 
-		if (pProtocol == NULL)
+		if (pProtocol == nullptr)
 		{
-			LOG(ERROR) << "Engine Start Fail. PacketProtocol None";
+			LOG(ERROR) << "Engine Start Fail. PacketProtocol : " << protocolId;
 			return false;
 		}
 
@@ -299,21 +262,22 @@ bool SFEngine::Start(int protocolId)
 		
 		if (pInfo->serverPort != 0)
 		{
-			listenerId = AddListener((char*)StringConversion::ToASCII(pInfo->serverIP).c_str(), pInfo->serverPort, protocolId, true);
+			
+			listenerId = AddListener(serverIP, port, protocolId, true);
 
 			if (listenerId <= 0)
 			{
-				LOG(ERROR) << "Engine Start Fail. m_pNetworkEngine->AddListener fail";
+				LOG(ERROR) << "Engine Start Fail. m_pNetworkEngine->AddListener fail. " << serverIP << ":" << port;
 				return false;
 			}
 		}
 	}
 
-	bResult = m_pNetworkEngine->Start((char*)StringConversion::ToASCII(pInfo->serverIP).c_str(), pInfo->serverPort);
+	bResult = m_pNetworkEngine->Start(serverIP, port);
 
 	if (bResult == false)
 	{
-		LOG(ERROR) << "Engine Start Fail!!";
+		LOG(ERROR) << "Engine Start Fail!! " << serverIP << ":" << port;;
 		return false;
 	}
 	LOG(INFO) << "Engine Start!!";
@@ -327,21 +291,12 @@ bool SFEngine::ShutDown()
 	LOG(INFO) << "Engine Shut Down!!";	
 		
 	m_pLogicDispatcher->ShutDownLogicSystem();
-	LOG(INFO) << "Engine Shut Down Step (1) ShutDownLogicSystem";	
-
-	if (m_packetSendThread != nullptr)
-	{
-		SFPacketSendGateway::GetInstance()->PushTask(NULL);
-		LOG(INFO) << "Engine Shut Down Step (2) instance()->PushTask(NULL)";
-
-		m_packetSendThread->join();
-		delete m_packetSendThread;
-	}
+	LOG(INFO) << "Engine Shut Down Step (1) ShutDownLogicSystem";		
 
 	if (m_pNetworkEngine)
 	{
 		m_pNetworkEngine->Shutdown();
-		LOG(INFO) << "Engine Shut Down Step (4) m_pNetworkEngine->Shutdown()";		
+		LOG(INFO) << "Engine Shut Down Step (2) m_pNetworkEngine->Shutdown()";		
 				
 		//delete m_pNetworkEngine;
 	}
@@ -349,11 +304,11 @@ bool SFEngine::ShutDown()
 	if (m_pServerConnectionManager)
 	{
 		delete m_pServerConnectionManager;
-		LOG(INFO) << "Engine Shut Down Step (5) delete Server Connecton Manager";
+		LOG(INFO) << "Engine Shut Down Step (3) delete Server Connecton Manager";
 	}
 	
 	delete this;
-	LOG(INFO) << "Engine Shut Down Step (6) Engine Delete";
+	LOG(INFO) << "Engine Shut Down Step (4) Engine Delete";
 
 	google::ShutdownGoogleLogging();
 	
@@ -402,46 +357,6 @@ bool SFEngine::SendRequest(BasePacket* pPacket)
 	return GetNetworkEngine()->SendRequest(pPacket);
 }
 
-bool SFEngine::SendDelayedRequest(BasePacket* pPacket, std::vector<int>* pOwnerList)
-{
-	SFPacketDelaySendTask* pTask = m_delayedSendTaskPool.Alloc();
-	 SFASSERT(NULL != pTask);
-
-	if (pOwnerList == NULL)
-	{
-		std::vector<int> owner;
-		owner.push_back(pPacket->GetSerial());
-		pTask->SetPacket(pPacket, owner);
-	}
-	else
-	{
-		pTask->SetPacket(pPacket, *pOwnerList);
-	}
-
-	return SFPacketSendGateway::GetInstance()->PushTask(pTask);
-}
-
-bool SFEngine::SendRequest(BasePacket* pPacket, std::vector<int>& ownerList)
-{
-	auto iter = ownerList.begin();
-	for (; iter != ownerList.end(); iter++)
-	{
-		pPacket->SetSerial(*iter);
-		if (false == GetNetworkEngine()->SendRequest(pPacket))
-		{
-			DLOG(ERROR) << "broad cast fail";
-		}
-	}
-
-	return true;
-}
-
-bool SFEngine::ReleasePacket(BasePacket* pPacket)
-{
-	pPacket->Release();
-	return true;
-}
-
 bool SFEngine::Disconnect(int serial)
 {
 	return GetNetworkEngine()->Disconnect(serial);
@@ -482,4 +397,10 @@ bool SFEngine::AddPacketProtocol(int packetProtocolId, IPacketProtocol* pProtoco
 void SFEngine::SendToLogic(BasePacket* pMessage)
 {
 	SFLogicGateway::GetInstance()->PushPacket(pMessage);
+}
+
+bool SFEngine::ReleasePacket(BasePacket* pPacket)
+{
+	pPacket->Release();
+	return true;
 }
