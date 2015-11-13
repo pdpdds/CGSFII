@@ -35,6 +35,9 @@
     <Filter Include="Pattern">
       <UniqueIdentifier>{12fdbb0e-6319-4186-aa65-cef494e100f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Packet\JSON">
+      <UniqueIdentifier>{50c56833-13c0-43c3-bf53-eef4d94ec4e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include=".\SFExcel.cpp">
@@ -132,6 +135,12 @@
     </ClCompile>
     <ClCompile Include="SFPacketPool.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SFJsonProtocol.cpp">
+      <Filter>Packet\JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="SFJsonPacket.cpp">
+      <Filter>Packet\JSON</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +263,12 @@
     </ClInclude>
     <ClInclude Include="SFPacketPool.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SFJsonProtocol.h">
+      <Filter>Packet\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="SFJsonPacket.h">
+      <Filter>Packet\JSON</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

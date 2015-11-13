@@ -104,7 +104,7 @@
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)/../VSProject/Lib/x86/debug;$(ProjectDir)/../ThirdParty/lib/x86/debug;$(ProjectDir)/../ThirdParty/ACE/lib/x86;$(ProjectDir)/../ThirdParty/MsgPack/lib/x86;$(ProjectDir)/../ThirdParty/Avro/lib/x86/Debug;$(ProjectDir)/../ThirdParty/liblfds/lib/x86/debug;$(ProjectDir)/../ThirdParty/httpxx/lib/x86/debug;$(ProjectDir)/../ThirdParty/http-parser/lib/x86/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobufd.lib;liblzf.lib;libglog.lib;zlib.lib</AdditionalDependencies>
+      <AdditionalDependencies>libprotobufd.lib;libglog.lib;zlib.lib</AdditionalDependencies>
       <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
@@ -140,7 +140,7 @@
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)/../Lib/x86/Release;$(ProjectDir)/../ThirdParty/lib/x86/Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobuf.lib;liblzf.lib;zlib.lib;libglog.lib</AdditionalDependencies>
+      <AdditionalDependencies>libprotobuf.lib;zlib.lib;libglog.lib</AdditionalDependencies>
       <AdditionalOptions>/ignore:4221 /ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
@@ -188,6 +188,8 @@
     <ClCompile Include="SFEngine.cpp" />
     <ClCompile Include=".\SFCasualGameDispatcher.cpp" />
     <ClCompile Include=".\SFSessionService.cpp" />
+    <ClCompile Include="SFJsonPacket.cpp" />
+    <ClCompile Include="SFJsonProtocol.cpp" />
     <ClCompile Include="SFLogicDispatcher.cpp" />
     <ClCompile Include="SFMMODispatcher.cpp" />
     <ClCompile Include="SFObject.cpp" />
@@ -229,6 +231,8 @@
     <ClInclude Include="SFCGSFPacketProtocol.h" />
     <ClInclude Include=".\SFCasualGameDispatcher.h" />
     <ClInclude Include=".\SFSessionService.h" />
+    <ClInclude Include="SFJsonPacket.h" />
+    <ClInclude Include="SFJsonProtocol.h" />
     <ClInclude Include="SFLogicDispatcher.h" />
     <ClInclude Include="SFMMODispatcher.h" />
     <ClInclude Include="SFObject.h" />
