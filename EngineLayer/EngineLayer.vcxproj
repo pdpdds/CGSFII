@@ -221,7 +221,6 @@
     <ClInclude Include="DataBuffer.h" />
     <ClInclude Include="CommonHeader.h" />
     <ClInclude Include="ILogicDispatcher.h" />
-    <ClInclude Include="IPacketTask.h" />
     <ClInclude Include="PacketProtocolConstant.h" />
     <ClInclude Include="SFBasePacketProtocol.h" />
     <ClInclude Include="SFClassicDispatcher.h" />

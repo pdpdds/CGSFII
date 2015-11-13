@@ -35,9 +35,6 @@
     <Filter Include="Pattern">
       <UniqueIdentifier>{12fdbb0e-6319-4186-aa65-cef494e100f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Packet\PacketTask">
-      <UniqueIdentifier>{2e1e993a-e71a-45bb-ad01-d455981ed3d9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include=".\SFExcel.cpp">
@@ -236,9 +233,6 @@
     </ClInclude>
     <ClInclude Include="SFSubject.h">
       <Filter>Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="IPacketTask.h">
-      <Filter>Packet\PacketTask</Filter>
     </ClInclude>
     <ClInclude Include="SFServerConnectionManager.h">
       <Filter>Network</Filter>
