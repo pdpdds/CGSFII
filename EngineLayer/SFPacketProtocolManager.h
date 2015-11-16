@@ -13,7 +13,7 @@ public:
 	SFPacketProtocolManager();
 	virtual ~SFPacketProtocolManager();
 	
-	bool AddPacketProtocol(int packetProtocolId, IPacketProtocol* pProtocol);
+	int  AddPacketProtocol(IPacketProtocol* pProtocol);
 	bool AddListenerInfo(int listenerId, int packetProtocolId);
 	bool AddConnectorInfo(_ConnectorInfo* pInfo);
 	bool SetConnectorPacketProtocol(int connectorId, int packetProtocolId);
@@ -53,4 +53,5 @@ private:
 	mapPacketProtocol m_mapPacketProtocol;
 	listListenerInfo m_listListenerInfo;
 	listConnectorInfo m_listConnectorInfo;
+	static int m_protocolIdentifier;
 };

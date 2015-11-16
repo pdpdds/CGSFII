@@ -261,9 +261,8 @@ bool SFEngine::Start(int protocolId)
 		int listenerId = -1;
 		
 		if (pInfo->serverPort != 0)
-		{
-			
-			listenerId = AddListener(serverIP, port, protocolId, true);
+		{			
+			listenerId = AddListener(serverIP, port, protocolId);
 
 			if (listenerId <= 0)
 			{
@@ -273,7 +272,8 @@ bool SFEngine::Start(int protocolId)
 		}
 	}
 
-	bResult = m_pNetworkEngine->Start(serverIP, port);
+//리스너가 하나라도 등록되어 있지 않은 false를 리턴한다.
+	bResult = m_pNetworkEngine->Start();
 
 	if (bResult == false)
 	{
@@ -367,9 +367,9 @@ int SFEngine::AddConnector(int connectorId, char* szIP, unsigned short port)
 	return GetNetworkEngine()->AddConnector(connectorId, szIP, port);
 }
 
-int SFEngine::AddListener(char* szIP, unsigned short port, int packetProtocolId, bool bDefaultListener)
+int SFEngine::AddListener(char* szIP, unsigned short port, int packetProtocolId)
 {
-	int listenerId = GetNetworkEngine()->AddListener(szIP, port, bDefaultListener);
+	int listenerId = GetNetworkEngine()->AddListener(szIP, port);
 
 	if (listenerId)
 	{
@@ -389,9 +389,9 @@ bool SFEngine::SetupServerReconnectSys()
 	return m_pServerConnectionManager->SetupServerReconnectSys();
 }
 
-bool SFEngine::AddPacketProtocol(int packetProtocolId, IPacketProtocol* pProtocol)
+int SFEngine::AddPacketProtocol(IPacketProtocol* pProtocol)
 {
-	return m_pPacketProtocolManager->AddPacketProtocol(packetProtocolId, pProtocol);
+	return m_pPacketProtocolManager->AddPacketProtocol(pProtocol);
 }
 
 void SFEngine::SendToLogic(BasePacket* pMessage)

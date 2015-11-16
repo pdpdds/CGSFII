@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "SFPacketProtocolManager.h"
 
+int SFPacketProtocolManager::m_protocolIdentifier = -1;
+
 SFPacketProtocolManager::SFPacketProtocolManager()
 {
 }
@@ -16,12 +18,18 @@ SFPacketProtocolManager::~SFPacketProtocolManager()
 	m_mapPacketProtocol.clear();
 }
 
-bool SFPacketProtocolManager::AddPacketProtocol(int packetProtocolId, IPacketProtocol* pProtocol)
+int SFPacketProtocolManager::AddPacketProtocol(IPacketProtocol* pProtocol)
 {
-	
-	m_mapPacketProtocol.insert(std::make_pair(packetProtocolId, pProtocol));
-	return true;
+	m_protocolIdentifier++;
+	std::pair< std::map<int, IPacketProtocol*>::iterator, bool > result;
+	result = m_mapPacketProtocol.insert(std::make_pair(m_protocolIdentifier, pProtocol));
+
+	if (result.second == false)
+		return -1;
+
+	return m_protocolIdentifier;
 }
+
 
 bool SFPacketProtocolManager::AddListenerInfo(int listenerId, int packetProtocolId)
 {

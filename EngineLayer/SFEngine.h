@@ -43,7 +43,7 @@ public:
 
 //Packet Protocol Manager
 	SFPacketProtocolManager* GetPacketProtocolManager(){ return m_pPacketProtocolManager; }
-	bool AddPacketProtocol(int packetProtocolId, IPacketProtocol* pProtocol);
+	int AddPacketProtocol(IPacketProtocol* pProtocol);
 
 	bool AddTimer(int timerID, DWORD period, DWORD delay);
 	bool CancelTimer(int timerID);
@@ -58,7 +58,7 @@ public:
 	SFServerConnectionManager* GetServerConnectionManager(){ return m_pServerConnectionManager; }
 	bool SetupServerReconnectSys();
 	bool LoadConnectorList(WCHAR* szFileName);
-	int  AddListener(char* szIP, unsigned short port, int packetProtocolId, bool bDefaultListener = false);
+	int  AddListener(char* szIP, unsigned short port, int packetProtocolId);
 	int  AddConnector(int connectorId, char* szIP, unsigned short port);
 
 //Remote Procedure Call System

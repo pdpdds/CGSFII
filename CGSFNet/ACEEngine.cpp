@@ -22,7 +22,7 @@ INetworkEngine * CreateNetworkEngine(IEngine* pEngine)
 ACEEngine::ACEEngine(IEngine* pEngine)
 	: INetworkEngine(pEngine)
 	, m_TimeOutHandler(this)
-	, m_acceptorIndex(1)
+	, m_acceptorIndex(0)
 {
 	ACE::init();
 	ProactorServiceManagerSinglton::instance();
@@ -46,6 +46,9 @@ bool ACEEngine::Disconnect(int serial)
 
 bool ACEEngine::NetworkOpen()
 {
+	if (m_mapAcceptor.size() == 0)
+		return false;
+
 	for (auto& acceptor : m_mapAcceptor)
 	{
 		ProactorAcceptor* pAcceptor = acceptor.second;
@@ -113,17 +116,10 @@ int ACEEngine::AddConnector(int connectorIndex, char* szIP, unsigned short port)
 
 	return pService->GetSerial();
 }
-#define DEFAULT_LISTENER_INDEX 1
-int ACEEngine::AddListener(char* szIP, unsigned short port, bool bDefaultListener)
+
+int ACEEngine::AddListener(char* szIP, unsigned short port)
 {
 	ProactorAcceptor* pAcceptor = new ProactorAcceptor(this, szIP, port);
-
-	if (bDefaultListener == true)
-	{
-		m_mapAcceptor.insert(std::make_pair(DEFAULT_LISTENER_INDEX, pAcceptor));
-		pAcceptor->SetAcceptorNum(DEFAULT_LISTENER_INDEX);
-		return DEFAULT_LISTENER_INDEX;
-	}
 
 	m_acceptorIndex++;
 	pAcceptor->SetAcceptorNum(m_acceptorIndex);
@@ -161,7 +157,7 @@ bool ACEEngine::Init()
 	return true;
 }
 
-bool ACEEngine::Start(char* szIP, unsigned short port)
+bool ACEEngine::Start()
 {	
 	return NetworkOpen();
 }
