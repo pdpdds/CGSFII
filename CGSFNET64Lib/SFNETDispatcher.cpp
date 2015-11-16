@@ -2,17 +2,22 @@
 #include "SFNETDispatcher.h"
 #include "SFEngine.h"
 #include "SFPacket.h"
+#include "LogicEntry.h"
+#include "SFLogicGateway.h"
+#include "SFPacketPool.h"
 
 
 namespace CgsfNET64Lib { 
 
 	bool SFNETDispatcher::m_bLogicEnd = false;
+	
+	typedef std::map<int, tthread::thread*> mapThread;
+	mapThread m_mapThread;
 
 
 	SFNETDispatcher::SFNETDispatcher(void)
 	{
 		m_nLogicThreadCnt = 1;
-		m_logicThreadGroupId = -1;
 	}
 
 	SFNETDispatcher::~SFNETDispatcher(void)
@@ -26,7 +31,7 @@ namespace CgsfNET64Lib {
 
 	void SFNETDispatcher::Dispatch(BasePacket* pPacket)
 	{
-		LogicGatewaySingleton::instance()->PushPacket(pPacket);
+		SFLogicGateway::GetInstance()->PushPacket(pPacket);
 	}
 
 	void SFNETDispatcher::LogicThreadProc(void* Args)
@@ -37,9 +42,9 @@ namespace CgsfNET64Lib {
 		{
 			//로직게이트웨이 큐에서 패킷을 꺼낸다.
 			//로직엔트리 객체의 ProcessPacket 메소드를 호출해서 패킷 처리를 수행한다.
-			BasePacket* pPacket = LogicGatewaySingleton::instance()->PopPacket();
+			BasePacket* pPacket = SFLogicGateway::GetInstance()->PopPacket();
 
-			LogicEntrySingleton::instance()->ProcessPacket(pPacket);
+			LogicEntry::GetInstance()->ProcessPacket(pPacket);
 
 			ReleasePacket(pPacket);
 		}
@@ -75,9 +80,14 @@ namespace CgsfNET64Lib {
 	
 	bool SFNETDispatcher::CreateLogicSystem(ILogicEntry* pLogicEntry)
 	{
-		m_logicThreadGroupId = ACE_Thread_Manager::instance()->spawn_n(m_nLogicThreadCnt, (ACE_THR_FUNC)LogicThreadProc, this, THR_NEW_LWP, ACE_DEFAULT_THREAD_PRIORITY);
+		for (int index = 0; index < m_nLogicThreadCnt; index++)
+		{
+			tthread::thread* pThread = new tthread::thread(LogicThreadProc, this);
+			m_mapThread.insert(std::make_pair(index, pThread));
+		}
 
-		LogicEntrySingleton::instance()->SetLogic(pLogicEntry);
+
+		LogicEntry::GetInstance()->SetLogic(pLogicEntry);
 
 		return true;
 	}
@@ -88,15 +98,26 @@ namespace CgsfNET64Lib {
 
 		for (int i = 0; i < m_nLogicThreadCnt; i++)
 		{
-			BasePacket* pCommand = PacketPoolSingleton::instance()->Alloc();
+			BasePacket* pCommand = SFPacketPool::GetInstance()->Alloc();
 			pCommand->SetSerial(-1);
 			pCommand->SetPacketType(SFPACKET_SERVERSHUTDOWN);
-			LogicGatewaySingleton::instance()->PushPacket(pCommand);			
+			SFLogicGateway::GetInstance()->PushPacket(pCommand);			
 		}
 
-		ACE_Thread_Manager::instance()->wait_grp(m_logicThreadGroupId);
+		for (auto thread : m_mapThread)
+		{
+			tthread::thread* pThread = thread.second;
+			if (pThread->joinable())
+			{
+				pThread->join();
+			}
 
-		LogicEntrySingleton::instance()->DestroyLogic();		
+			delete pThread;
+		}
+
+		m_mapThread.clear();
+
+		LogicEntry::GetInstance()->DestroyLogic();
 
 		return true;
 	}

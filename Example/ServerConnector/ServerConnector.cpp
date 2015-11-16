@@ -8,6 +8,7 @@
 #include "SFServerConnectionManager.h"
 #include "AuthServerCallback.h"
 #include "DatabaseServerCallback.h"
+#include "SFPacketProtocol.h"
 
 #pragma comment(lib, "EngineLayer.lib")
 

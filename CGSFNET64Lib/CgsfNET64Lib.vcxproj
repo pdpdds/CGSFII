@@ -120,7 +120,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir);..\..\EngineLayer;..\..\Common;$(SolutionDir)/../../ThirdParty/ACE/include;$(SolutionDir)/../../ThirdParty;../../BaseLayer</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);..\..\EngineLayer;..\..\Common;$(SolutionDir)/../../ThirdParty;../../BaseLayer</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
