@@ -100,7 +100,7 @@ int ACEEngine::AddConnector(int connectorIndex, char* szIP, unsigned short port)
 
 	_SessionDesc sessionDesc;
 	sessionDesc.identifier = connectorIndex;
-	sessionDesc.sessionType = 1;
+	sessionDesc.sessionType = SESSION_TYPE::SESSION_CONNECTOR;
 
 	ProactorService* pService = new ProactorService();
 	pService->SetOwner(this);

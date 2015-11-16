@@ -31,7 +31,7 @@ ProactorService* ProactorAcceptor::make_handler()
 {
 	_SessionDesc sessionDesc;
 	sessionDesc.identifier = m_acceptorNum;
-	sessionDesc.sessionType = 0;
+	sessionDesc.sessionType = SESSION_TYPE::SESSION_LISTENER;
 
 	ProactorService* pProactorService = new ProactorService();
 	pProactorService->SetOwner(m_pOwner);
