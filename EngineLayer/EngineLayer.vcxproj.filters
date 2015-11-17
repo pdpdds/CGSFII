@@ -97,9 +97,6 @@
     <ClCompile Include="SFConfigure.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include=".\SFCasualGameDispatcher.cpp">
-      <Filter>Dispatcher</Filter>
-    </ClCompile>
     <ClCompile Include="SFProtobufPacket.cpp">
       <Filter>Packet\ProtobufPacket</Filter>
     </ClCompile>
@@ -127,9 +124,6 @@
     <ClCompile Include="SFPacketProtocolManager.cpp">
       <Filter>Packet\PacketProtocol</Filter>
     </ClCompile>
-    <ClCompile Include="SFMMODispatcher.cpp">
-      <Filter>Dispatcher</Filter>
-    </ClCompile>
     <ClCompile Include="SFLogicDispatcher.cpp">
       <Filter>Dispatcher</Filter>
     </ClCompile>
@@ -141,6 +135,12 @@
     </ClCompile>
     <ClCompile Include="SFJsonPacket.cpp">
       <Filter>Packet\JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="SFSingleLogicDispatcher.cpp">
+      <Filter>Dispatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMultiLogicDispatcher.cpp">
+      <Filter>Dispatcher</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -225,9 +225,6 @@
     <ClInclude Include="CommonHeader.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include=".\SFCasualGameDispatcher.h">
-      <Filter>Dispatcher</Filter>
-    </ClInclude>
     <ClInclude Include="ILogicDispatcher.h">
       <Filter>Dispatcher</Filter>
     </ClInclude>
@@ -252,9 +249,6 @@
     <ClInclude Include="SFPacketProtocolManager.h">
       <Filter>Packet\PacketProtocol</Filter>
     </ClInclude>
-    <ClInclude Include="SFMMODispatcher.h">
-      <Filter>Dispatcher</Filter>
-    </ClInclude>
     <ClInclude Include="PacketProtocolConstant.h">
       <Filter>Packet\PacketProtocol</Filter>
     </ClInclude>
@@ -269,6 +263,12 @@
     </ClInclude>
     <ClInclude Include="SFJsonPacket.h">
       <Filter>Packet\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="SFSingleLogicDispatcher.h">
+      <Filter>Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMultiLogicDispatcher.h">
+      <Filter>Dispatcher</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

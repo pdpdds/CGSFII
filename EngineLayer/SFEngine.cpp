@@ -3,7 +3,7 @@
 #include <stdlib.h>  
 #include "ILogicDispatcher.h"
 #include "SFSessionService.h"
-#include "SFCasualGameDispatcher.h"
+#include "SFSingleLogicDispatcher.h"
 #include "SFUtil.h"
 #include "SFServerConnectionManager.h"
 #include "SFPacketProtocolManager.h"
@@ -124,7 +124,7 @@ NET_ERROR_CODE SFEngine::Intialize(ILogicEntry* pLogicEntry, ILogicDispatcher* p
 
 	if (pDispatcher == nullptr)
 	{
-		pDispatcher = new SFCasualGameDispatcher();
+		pDispatcher = new SFSingleLogicDispatcher();
 	}
 
 	SetLogicDispathcer(pDispatcher);
