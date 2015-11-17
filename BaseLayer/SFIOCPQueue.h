@@ -49,6 +49,12 @@ public:
 
 		return nullptr;
 	}
+	
+	bool Finally()
+	{
+		CloseHandle(m_hIOCP);
+		return true;
+	}
 
 protected:
 	//virtual
@@ -57,14 +63,7 @@ protected:
 		m_hIOCP = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, NULL, 0);
 
 		return m_hIOCP != NULL;
-	}
-
-	//virtual 
-		bool Finally()
-	{
-		CloseHandle(m_hIOCP);
-		return true;
-	}
+	}	
 
 private:
 	HANDLE m_hIOCP;

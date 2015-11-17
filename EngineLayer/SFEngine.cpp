@@ -291,7 +291,7 @@ bool SFEngine::ShutDown()
 	LOG(INFO) << "Engine Shut Down!!";	
 		
 	m_pLogicDispatcher->ShutDownLogicSystem();
-	LOG(INFO) << "Engine Shut Down Step (1) ShutDownLogicSystem";		
+	LOG(INFO) << "Engine Shut Down Step (1) ShutDownLogicSystem";
 
 	if (m_pNetworkEngine)
 	{

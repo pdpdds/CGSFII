@@ -7,6 +7,7 @@ volatile int g_currentSessionCnt = 0;
 ProactorService::ProactorService()
 	: m_bServiceCloseFlag(false)
 	, m_pTimerLock(0)
+	, m_channel(0)
 {
 	InterlockedIncrement((LONG *)&g_currentSessionCnt);
 }
@@ -73,7 +74,6 @@ void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
 
 	if(szIP != NULL)
 		m_sessionDesc.szIP = inet_ntoa(addr.sin_addr);
-
 
 	ISession::OnConnect(this->m_serial, m_sessionDesc);
 

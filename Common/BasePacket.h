@@ -13,7 +13,7 @@
 class BasePacket
 {
 public:
-	BasePacket(){ m_serial = -1; m_packetType = (unsigned int)SFPACKET_NONE; m_packetID = (unsigned short)-1; m_channelNum = -1; }
+	BasePacket(){ m_serial = -1; m_packetType = (unsigned int)SFPACKET_NONE; m_packetID = (unsigned short)-1; m_channelNum = 0; }
 	virtual ~BasePacket() {}
 
 	void SetPacketType(unsigned int PacketType){ m_packetType = PacketType; }
