@@ -6,8 +6,7 @@ volatile int g_currentSessionCnt = 0;
 
 ProactorService::ProactorService()
 	: m_bServiceCloseFlag(false)
-	, m_pTimerLock(0)
-	, m_channel(0)
+	, m_pTimerLock(0)	
 {
 	InterlockedIncrement((LONG *)&g_currentSessionCnt);
 }

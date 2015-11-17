@@ -40,8 +40,7 @@ private:
 	ACE_Asynch_Write_Stream m_AsyncWriter;
 	ACE_Asynch_Read_Stream m_AsyncReader;
 
-	int m_serial;
-	int m_channel;
+	int m_serial;	
 	_SessionDesc m_sessionDesc;
 	InterlockedValue* m_pTimerLock;
 
