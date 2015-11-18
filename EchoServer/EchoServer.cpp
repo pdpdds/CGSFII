@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "EchoLogicEntry.h"
 #include "SFCGSFPacketProtocol.h"
-#include "SFMultiLogicDispatcher.h"
+//#include "SFMultiLogicDispatcher.h"
 
 #pragma comment(lib, "EngineLayer.lib")
 

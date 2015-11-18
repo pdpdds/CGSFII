@@ -41,3 +41,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	return 0;
 }
+
+ILogicEntry* ServerConnectorLogicEntry::Clone()
+{
+	return new ServerConnectorLogicEntry();
+}

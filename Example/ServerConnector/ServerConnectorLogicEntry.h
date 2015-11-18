@@ -11,5 +11,6 @@ public:
 
 	virtual bool Initialize() override;
 	virtual bool ProcessPacket(BasePacket* pBasePacket) override;
+	virtual ILogicEntry* Clone() override;
 };
 
