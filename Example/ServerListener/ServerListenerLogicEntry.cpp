@@ -27,3 +27,8 @@ bool ServerListenerLogicEntry::ProcessPacket(BasePacket* pPacket)
 	return true;
 }
 
+ILogicEntry* ServerListenerLogicEntry::Clone()
+{
+	return new ServerListenerLogicEntry();
+}
+
