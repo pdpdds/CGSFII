@@ -26,6 +26,7 @@ void SFSingleLogicDispatcher::LogicThreadProc(void* Args)
 {
 	UNREFERENCED_PARAMETER(Args);
 	LogicEntry* pEntry = LogicEntry::GetInstance();
+	pEntry->Initialize();
 
 	while (m_bLogicEnd == false)
 	{

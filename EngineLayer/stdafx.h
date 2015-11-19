@@ -21,6 +21,7 @@
 #include "SFLogicGateway.h"
 #include "LogicEntry.h"
 #include "SFPacket.h"
+#include "ErrorCode.h"
 #include "SFPacketProtocol.H"
 
 #define GOOGLE_GLOG_DLL_DECL

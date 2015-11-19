@@ -14,13 +14,25 @@ LogicEntry::~LogicEntry(void)
 {
 }
 
-bool LogicEntry::ProcessPacket(BasePacket* pPacket)
+bool LogicEntry::Initialize()
 {
 	if (!sLogicEntry.get())
 	{
 		sLogicEntry.reset(m_pLogicEntry->Clone());
+		LOG(INFO) << "LogicEntry Init. threadId :" << GetCurrentThreadId();
+		
+		if (false == sLogicEntry->Initialize())
+		{
+			LOG(ERROR) << "LogicEntry Intialize Fail!!";
+			return false;
+		}
 	}
-	
+
+	return true;
+}
+
+bool LogicEntry::ProcessPacket(BasePacket* pPacket)
+{		
 	_SessionDesc& desc = pPacket->GetSessionDesc();
 	if (desc.sessionType <= SESSION_TYPE::SESSION_LISTENER)
 		sLogicEntry->ProcessPacket(pPacket);

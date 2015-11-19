@@ -12,6 +12,9 @@ SFClassicDispatcher::~SFClassicDispatcher()
 
 void SFClassicDispatcher::Dispatch(BasePacket* pPacket)
 {
+//임시 코드
+	LogicEntry::GetInstance()->Initialize();
+
 	LogicEntry::GetInstance()->ProcessPacket(pPacket);
 
 	if (pPacket->GetPacketType() != SFPACKET_DB)

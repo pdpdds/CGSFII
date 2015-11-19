@@ -45,18 +45,7 @@ bool SFMultiLogicDispatcher::ShutDownLogicSystem()
 	BasePacket* pCommand = SFPacketPool::GetInstance()->Alloc();
 	pCommand->SetSerial(-1);
 	pCommand->SetPacketType(SFPACKET_SERVERSHUTDOWN);
-	SFLogicGateway::GetInstance()->PushPacket(pCommand);
-
-	for (auto& queue : m_mapQueue)
-	{
-		BasePacket* pCommand = SFPacketPool::GetInstance()->Alloc();
-		pCommand->SetSerial(-1);
-		pCommand->SetPacketType(SFPACKET_SERVERSHUTDOWN);
-		SFLogicGateway::GetInstance()->PushPacket(pCommand);
-
-		SFIOCPQueue<BasePacket>* pQueue = queue.second;	
-		pQueue->Push(pCommand);
-	}
+	SFLogicGateway::GetInstance()->PushPacket(pCommand);	
 
 	if (m_packetDistrubutor->joinable())
 		m_packetDistrubutor->join();
@@ -76,11 +65,13 @@ bool SFMultiLogicDispatcher::ShutDownLogicSystem()
 	for (auto& queue : m_mapQueue)
 	{
 		SFIOCPQueue<BasePacket>* pQueue = queue.second;
-		pQueue->Finally();		
-		delete pQueue;		
+		//pQueue->Finally();		
+		//delete pQueue;		
 	}
 
 	m_mapQueue.clear();
+
+	LogicEntry::GetInstance()->Destroy();
 
 	return true;
 }
@@ -93,21 +84,35 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 	{
 		BasePacket* pPacket = SFLogicGateway::GetInstance()->PopPacket();
 		
-		if (pPacket->GetPacketID() == SFPACKET_CONNECT)
+		if (pPacket->GetPacketType() == SFPACKET_CONNECT)
 		{
 
 		}
-		else if (pPacket->GetPacketID() == SFPACKET_DISCONNECT)
+		else if (pPacket->GetPacketType() == SFPACKET_DISCONNECT)
 		{			
 			
 		}
-		else if (pPacket->GetPacketID() == SFPACKET_TIMER)
+		else if (pPacket->GetPacketType() == SFPACKET_TIMER)
 		{
 			for (auto& iter : pDispatcher->m_mapQueue)
 			{
 				SFIOCPQueue<BasePacket>* pQueue = iter.second;
 				pQueue->Push(pPacket);
 			}			
+		}
+		else if (pPacket->GetPacketType() == SFPACKET_SERVERSHUTDOWN)
+		{
+			for (auto& queue : pDispatcher->m_mapQueue)
+			{
+				BasePacket* pCommand = SFPacketPool::GetInstance()->Alloc();
+				pCommand->SetSerial(-1);
+				pCommand->SetPacketType(SFPACKET_SERVERSHUTDOWN);
+
+				SFIOCPQueue<BasePacket>* pQueue = queue.second;
+				pQueue->Push(pCommand);
+			}
+
+			break;
 		}
 		else
 		{
@@ -130,12 +135,16 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 void SFMultiLogicDispatcher::MultiLogicProc(void* Args)
 {
 	SFIOCPQueue<BasePacket>* pQueue = static_cast<SFIOCPQueue<BasePacket>*>(Args);
+	
+	LogicEntry::GetInstance()->Initialize();
 
 	while (m_bLogicEnd == false)
 	{
 		BasePacket* pPacket = pQueue->Pop(INFINITE);
 
-		if (pPacket)
+		if (pPacket->GetPacketType() == SFPACKET_SERVERSHUTDOWN)
+			break;
+		else
 		{
 			LogicEntry::GetInstance()->ProcessPacket(pPacket);
 			if (pPacket->GetPacketType() != SFPACKET_DB)
@@ -143,7 +152,5 @@ void SFMultiLogicDispatcher::MultiLogicProc(void* Args)
 				ReleasePacket(pPacket);
 			}
 		}
-	}
-
-	LogicEntry::GetInstance()->Destroy();
+	}	
 }

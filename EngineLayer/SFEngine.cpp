@@ -130,14 +130,6 @@ NET_ERROR_CODE SFEngine::Intialize(ILogicEntry* pLogicEntry, ILogicDispatcher* p
 	SetLogicDispathcer(pDispatcher);
 
 	m_pServerConnectionManager = new SFServerConnectionManager();
-
-	LOG(INFO) << "Logic Entry Initialize";
-	if (false == pLogicEntry->Initialize())
-	{
-		LOG(ERROR) << "LogicEntry Intialize Fail!!";
-		return NET_ERROR_CODE::ENGINE_INIT_LOGIC_ENTRY_FAIL;
-	}
-	
 	
 	_EngineConfig* pInfo = m_config.GetConfigureInfo();
 	

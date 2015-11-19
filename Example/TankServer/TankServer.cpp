@@ -11,19 +11,24 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-
 	TankLogicEntry* pLogicEntry = new TankLogicEntry();
-	SFEngine::GetInstance()->Intialize(pLogicEntry, new SFMultiLogicDispatcher(10));
+	
+	auto errorCode = SFEngine::GetInstance()->Intialize(pLogicEntry, new SFMultiLogicDispatcher(10));
+	if (errorCode != NET_ERROR_CODE::SUCCESS)
+		return 0;
+
 	SFEngine::GetInstance()->AddPacketProtocol(new SFPacketProtocol<TankProtocol>);
 
-	SFEngine::GetInstance()->Start(0);
+	bool result = SFEngine::GetInstance()->Start();
+
+	if (false == result)
+		return 0;
 
 	google::FlushLogFiles(google::GLOG_INFO);
 
 	getchar();
 
-	SFEngine::GetInstance()->ShutDown();
+	SFEngine::GetInstance()->ShutDown();	
 
 	return 0;
 }
-
