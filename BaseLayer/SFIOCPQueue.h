@@ -48,22 +48,24 @@ public:
 			return (T*)(pCompletionKey);
 
 		return nullptr;
-	}
-	
-	bool Finally()
-	{
-		CloseHandle(m_hIOCP);
-		return true;
-	}
+	}	
 
 protected:
 	//virtual
-		bool Initialize()
+	bool Initialize()
 	{
 		m_hIOCP = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, NULL, 0);
 
 		return m_hIOCP != NULL;
-	}	
+	}
+
+	bool Finally()
+	{
+		if (m_hIOCP)
+			::CloseHandle(m_hIOCP);
+
+		return true;
+	}
 
 private:
 	HANDLE m_hIOCP;

@@ -3,8 +3,6 @@
 #include "SFEngine.h"
 #include "SFPacketPool.h"
 
-bool SFMultiLogicDispatcher::m_bLogicEnd = false;
-
 SFMultiLogicDispatcher::SFMultiLogicDispatcher(int channelCount)
 : m_channelCount(channelCount)
 {
@@ -40,8 +38,6 @@ bool SFMultiLogicDispatcher::CreateLogicSystem(ILogicEntry* pLogicEntry)
 
 bool SFMultiLogicDispatcher::ShutDownLogicSystem()
 {
-	m_bLogicEnd = false;
-
 	BasePacket* pCommand = SFPacketPool::GetInstance()->Alloc();
 	pCommand->SetSerial(-1);
 	pCommand->SetPacketType(SFPACKET_SERVERSHUTDOWN);
@@ -64,9 +60,8 @@ bool SFMultiLogicDispatcher::ShutDownLogicSystem()
 
 	for (auto& queue : m_mapQueue)
 	{
-		SFIOCPQueue<BasePacket>* pQueue = queue.second;
-		//pQueue->Finally();		
-		//delete pQueue;		
+		SFIOCPQueue<BasePacket>* pQueue = queue.second;		
+		delete pQueue;		
 	}
 
 	m_mapQueue.clear();
@@ -80,7 +75,7 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 {
 	SFMultiLogicDispatcher* pDispatcher = static_cast<SFMultiLogicDispatcher*>(Args);
 
-	while (m_bLogicEnd == false)
+	while (true)
 	{
 		BasePacket* pPacket = SFLogicGateway::GetInstance()->PopPacket();
 		
@@ -138,7 +133,7 @@ void SFMultiLogicDispatcher::MultiLogicProc(void* Args)
 	
 	LogicEntry::GetInstance()->Initialize();
 
-	while (m_bLogicEnd == false)
+	while (true)
 	{
 		BasePacket* pPacket = pQueue->Pop(INFINITE);
 

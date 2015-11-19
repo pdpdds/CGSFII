@@ -35,7 +35,6 @@ private:
 	tthread::thread* m_packetDistrubutor;
 
 	static void PacketDistributorProc(void* Args);
-	static void MultiLogicProc(void* Args);
-	static bool m_bLogicEnd;
+	static void MultiLogicProc(void* Args);	
 };
 
