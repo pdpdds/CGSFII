@@ -67,7 +67,7 @@ Global
 		{C4393F8C-89E4-47E9-853E-B211C0086898}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{C4393F8C-89E4-47E9-853E-B211C0086898}.Release|Win32.ActiveCfg = Release|Win32
 		{C4393F8C-89E4-47E9-853E-B211C0086898}.Release|Win32.Build.0 = Release|Win32
-		{C4393F8C-89E4-47E9-853E-B211C0086898}.Release|x64.ActiveCfg = Release|Win32
+		{C4393F8C-89E4-47E9-853E-B211C0086898}.Release|x64.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
