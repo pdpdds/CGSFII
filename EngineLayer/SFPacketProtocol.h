@@ -129,11 +129,9 @@ bool SFPacketProtocol<T>::OnReceive(INT serial, char* pBuffer, UINT dwTransferre
 			pPacket->SetPacketType(SFPACKET_DATA);
 
 		pPacket->SetSerial(serial);	
-		pPacket->SetSessionDesc(desc);
-
-		pPacket->Release();
+		pPacket->SetSessionDesc(desc);		
 		
-		//SendLogicLayer(pPacket);
+		SendLogicLayer(pPacket);
 	}
 	while(true);
 	

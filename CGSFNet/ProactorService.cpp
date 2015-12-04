@@ -107,8 +107,7 @@ void ProactorService::handle_read_stream( const ACE_Asynch_Read_Stream::Result& 
 			ReserveClose();
 			return;
 		}
-//20150322 memory leak fix
-		SendInternal(block.rd_ptr(), (unsigned short)block.length());
+//20150322 memory leak fix		
 		block.release();
 
 
