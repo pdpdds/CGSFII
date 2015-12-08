@@ -112,7 +112,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>./External;../Common;../BaseLayer;../DatabaseLayer;../ThirdParty/google/glog/src/windows;../;../ThirdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -189,6 +189,7 @@
     <ClCompile Include="SFClassicDispatcher.cpp" />
     <ClCompile Include="SFConfigure.cpp" />
     <ClCompile Include="SFEngine.cpp" />
+    <ClCompile Include="SFProtobufExtensionProtocol.cpp" />
     <ClCompile Include="SFSingleLogicDispatcher.cpp" />
     <ClCompile Include=".\SFSessionService.cpp" />
     <ClCompile Include="SFJsonPacket.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="SFConfigure.h" />
     <ClInclude Include="SFConstant.h" />
     <ClInclude Include="SFCGSFPacketProtocol.h" />
+    <ClInclude Include="SFProtobufExtensionProtocol.h" />
     <ClInclude Include="SFSingleLogicDispatcher.h" />
     <ClInclude Include=".\SFSessionService.h" />
     <ClInclude Include="SFJsonPacket.h" />

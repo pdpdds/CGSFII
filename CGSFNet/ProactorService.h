@@ -45,4 +45,11 @@ private:
 	InterlockedValue* m_pTimerLock;
 
 	bool m_bServiceCloseFlag;
+
+	int transferredData;
+	int sendData;
+	int receiveCount;
+	int sendCount;
+	unsigned int startTime;
+	unsigned int elapsedTime;
 };

@@ -142,6 +142,9 @@
     <ClCompile Include="SFMultiLogicDispatcher.cpp">
       <Filter>Dispatcher</Filter>
     </ClCompile>
+    <ClCompile Include="SFProtobufExtensionProtocol.cpp">
+      <Filter>Packet\ProtobufPacket</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".\SFExcel.h">
@@ -269,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="SFMultiLogicDispatcher.h">
       <Filter>Dispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="SFProtobufExtensionProtocol.h">
+      <Filter>Packet\ProtobufPacket</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

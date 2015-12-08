@@ -50,8 +50,8 @@ namespace CGSF
             read = tcp.GetStream().EndRead(result);
             if (read == 0)
             {
-                // Connection has been closed.
-                //tcp.GetStream().Close();
+                //Connection has been closed.
+                tcp.GetStream().Close();
                 return;
             }
 

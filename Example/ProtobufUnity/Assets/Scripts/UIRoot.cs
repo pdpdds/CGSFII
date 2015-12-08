@@ -6,12 +6,19 @@ using System;
 
 namespace CGSF
 {
-    public class UIRoot : MonoBehaviour {
-
+    public class UIRoot : MonoBehaviour
+    {
         public GameObject sendButton = null;
         public InputField inputField = null;
+        public Text connectionText = null;
+        public ScrollRect outputScroll = null;
 
         TCPNetwork network = new TCPNetwork();
+
+        public void Awake()
+        {
+            
+        }
 
         // Use this for initialization
         void Start() {
@@ -20,7 +27,14 @@ namespace CGSF
 
         // Update is called once per frame
         void Update() {
-
+            if(network.IsConnected())
+            {
+                connectionText.text = "Connected";
+            }
+            else
+            {
+                connectionText.text = "Disconnected";
+            }
         }
 
         public void OnSendButton()
@@ -40,6 +54,9 @@ namespace CGSF
         public void OnConnect()
         {
             network.AsyncConnect("192.168.0.13", 25251);
+            connectionText.text = "Connecting...";
+            outputScroll.GetComponentInChildren<Text>().text = "sdffsdfdsd";
+            outputScroll.GetComponentInChildren<Scrollbar>().enabled = true;
         }
 
         // .Net Thread

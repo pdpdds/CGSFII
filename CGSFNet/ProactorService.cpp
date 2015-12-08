@@ -9,6 +9,13 @@ ProactorService::ProactorService()
 	, m_pTimerLock(0)	
 {
 	InterlockedIncrement((LONG *)&g_currentSessionCnt);
+
+	transferredData = 0;
+	sendData = 0;
+	receiveCount = 0;
+	sendCount = 0;
+	startTime = GetTickCount();
+	elapsedTime = GetTickCount();
 }
 
 ProactorService::~ProactorService( void )
@@ -18,6 +25,11 @@ ProactorService::~ProactorService( void )
 		delete m_pTimerLock;
 		m_pTimerLock = NULL;
 	}
+
+#ifdef _DEBUG
+	elapsedTime = GetTickCount() - startTime;
+	printf("log result : elapsedTime : %d, transferred : %d, sendData : %d, receiveCount : %d, sendCount : %d\n", elapsedTime, transferredData, sendData, receiveCount, sendCount);
+#endif
 
 	InterlockedDecrement((LONG *)&g_currentSessionCnt);
 }
@@ -93,6 +105,7 @@ void ProactorService::PostRecv()
 
 void ProactorService::handle_read_stream( const ACE_Asynch_Read_Stream::Result& result )
 {
+	transferredData += result.bytes_transferred();
 	ACE_Message_Block& block = result.message_block();
 	if (!result.success() || result.bytes_transferred() == 0)
 	{
@@ -109,7 +122,7 @@ void ProactorService::handle_read_stream( const ACE_Asynch_Read_Stream::Result& 
 		}
 //20150322 memory leak fix		
 		block.release();
-
+		receiveCount++;
 
 		PostRecv();
 	}
@@ -117,6 +130,7 @@ void ProactorService::handle_read_stream( const ACE_Asynch_Read_Stream::Result& 
 
 void ProactorService::handle_write_stream( const ACE_Asynch_Write_Stream::Result& result )
 {
+	sendCount++;
 	result.message_block().release();
 }
 
@@ -168,16 +182,13 @@ void ProactorService::handle_time_out(const ACE_Time_Value& tv, const void* arg)
 }
 
 void ProactorService::SendInternal(char* pBuffer, int bufferSize)
-{		
-	if (this->handle() != ACE_INVALID_HANDLE)
-		ACE_OS::closesocket(this->handle());
-
-	this->handle(ACE_INVALID_HANDLE);
-	/*ACE_Message_Block* pBlock = NULL;
+{			
+	ACE_Message_Block* pBlock = NULL;
 
 	ACE_NEW_NORETURN(pBlock, ACE_Message_Block(bufferSize));
 
 	pBlock->copy((const char*)pBuffer, bufferSize);
+	sendData += bufferSize;
 
 	if(NULL == pBlock->cont())
 	{
@@ -186,7 +197,7 @@ void ProactorService::SendInternal(char* pBuffer, int bufferSize)
 	else
 	{
 		m_AsyncWriter.writev(*pBlock, pBlock->total_length());
-	}	*/
+	}
 }
 
 bool ProactorService::SendRequest(BasePacket* pPacket)

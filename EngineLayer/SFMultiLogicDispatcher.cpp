@@ -79,7 +79,7 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 	{
 		BasePacket* pPacket = SFLogicGateway::GetInstance()->PopPacket();
 		
-		if (pPacket->GetPacketType() == SFPACKET_CONNECT)
+		/*if (pPacket->GetPacketType() == SFPACKET_CONNECT)
 		{
 
 		}
@@ -87,7 +87,7 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 		{			
 			
 		}
-		else if (pPacket->GetPacketType() == SFPACKET_TIMER)
+		else */if (pPacket->GetPacketType() == SFPACKET_TIMER)
 		{
 			for (auto& iter : pDispatcher->m_mapQueue)
 			{
