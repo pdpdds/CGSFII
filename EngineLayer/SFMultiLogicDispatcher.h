@@ -5,11 +5,17 @@
 #include "TinyThread/tinythread.h"
 #include <map>
 
+typedef struct tag_ClientInfo
+{
+	int serial;
+	int channel;
+}ClientInfo;
+
 class SFMultiLogicDispatcher : public SFLogicDispatcher
 {
 	typedef std::map<int, SFIOCPQueue<BasePacket>*> mapQueue;
-	typedef std::map<int, tthread::thread*> mapThread;
-	typedef std::map<int, int> mapSerialChannel;
+	typedef std::map<int, tthread::thread*> mapThread;	
+	typedef std::map<int, ClientInfo> mapClient;
 
 public:
 	SFMultiLogicDispatcher(int channelCount = 1);
@@ -23,6 +29,11 @@ public:
 
 	int GetMaxChannelCount() { return m_channelCount; }
 
+	void RegisterClient(BasePacket* pPacket);
+	void UnregisterClient(BasePacket* pPacket);
+	bool ChangeChannel(int serial, int channelId);
+	ClientInfo* FindClient(int serial);
+
 protected:
 
 private:
@@ -30,7 +41,7 @@ private:
 	mapQueue m_mapQueue;
 	mapThread m_mapThread;
 
-	mapSerialChannel m_mapSerialChannel;
+	mapClient m_mapClient;
 
 	tthread::thread* m_packetDistrubutor;
 

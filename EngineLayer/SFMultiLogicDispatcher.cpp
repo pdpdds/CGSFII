@@ -3,6 +3,8 @@
 #include "SFEngine.h"
 #include "SFPacketPool.h"
 
+#define DEFAULT_CHANNEL 0
+
 SFMultiLogicDispatcher::SFMultiLogicDispatcher(int channelCount)
 : m_channelCount(channelCount)
 {
@@ -79,15 +81,12 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 	{
 		BasePacket* pPacket = SFLogicGateway::GetInstance()->PopPacket();
 		
-		/*if (pPacket->GetPacketType() == SFPACKET_CONNECT)
+		if (pPacket->GetPacketType() == SFPACKET_CONNECT)
 		{
-
+			pDispatcher->RegisterClient(pPacket);
 		}
-		else if (pPacket->GetPacketType() == SFPACKET_DISCONNECT)
-		{			
-			
-		}
-		else */if (pPacket->GetPacketType() == SFPACKET_TIMER)
+		
+		if (pPacket->GetPacketType() == SFPACKET_TIMER)
 		{
 			for (auto& iter : pDispatcher->m_mapQueue)
 			{
@@ -111,19 +110,33 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 		}
 		else
 		{
-			const auto& iter = pDispatcher->m_mapQueue.find(0);//pPacket->GetChannelNum());
+			ClientInfo* pInfo = pDispatcher->FindClient(pPacket->GetSerial());
 
-			if (iter != pDispatcher->m_mapQueue.end())
+			if (pInfo != nullptr)
 			{
-				SFIOCPQueue<BasePacket>* pQueue = iter->second;
-				pQueue->Push(pPacket);
+				const auto& iter = pDispatcher->m_mapQueue.find(pInfo->channel);
+
+				if (iter != pDispatcher->m_mapQueue.end())
+				{
+					SFIOCPQueue<BasePacket>* pQueue = iter->second;
+					pQueue->Push(pPacket);
+				}
+				else
+				{
+					LOG(WARNING) << "Invalid Channel Num : " << pInfo->channel;
+					ReleasePacket(pPacket);
+				}
 			}
 			else
 			{
-				LOG(WARNING) << "Invalid Channel Num : " << 0;//pPacket->GetChannelNum();
-				ReleasePacket(pPacket);
+				LOG(WARNING) << "ClientInfo NULL : " << pPacket->GetSerial();
 			}
-		}						
+		}
+
+		if (pPacket->GetPacketType() == SFPACKET_DISCONNECT)
+		{
+			pDispatcher->UnregisterClient(pPacket);
+		}
 	}
 }
 
@@ -148,4 +161,39 @@ void SFMultiLogicDispatcher::MultiLogicProc(void* Args)
 			}
 		}
 	}	
+}
+
+void SFMultiLogicDispatcher::RegisterClient(BasePacket* pPacket)
+{
+	ClientInfo info;
+	info.channel = DEFAULT_CHANNEL;
+	info.serial = pPacket->GetSerial();
+	
+	m_mapClient.insert(std::make_pair(info.serial, info));
+}
+
+void SFMultiLogicDispatcher::UnregisterClient(BasePacket* pPacket)
+{
+	m_mapClient.erase(pPacket->GetSerial());
+}
+
+ClientInfo* SFMultiLogicDispatcher::FindClient(int serial)
+{
+	auto iter = m_mapClient.find(serial);
+
+	if (iter == m_mapClient.end())
+		return nullptr;
+
+	return &iter->second;	
+}
+
+bool SFMultiLogicDispatcher::ChangeChannel(int serial, int channel)
+{
+	auto iter = m_mapClient.find(serial);
+	
+	if (iter == m_mapClient.end())
+		return false;
+
+	ClientInfo& info = iter->second;
+	info.channel = channel;
 }
