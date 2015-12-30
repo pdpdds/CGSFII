@@ -10,8 +10,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineLayer", "EngineLayer\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BaseLayer", "BaseLayer\BaseLayer.vcxproj", "{835E9346-EC73-421D-8C4B-16C4673E3680}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EchoServer", "EchoServer\EchoServer.vcxproj", "{DD9698A1-F393-47EF-B4E7-41DB22BA2DD6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EchoServer", "Example\EchoServer\EchoServer.vcxproj", "{DD9698A1-F393-47EF-B4E7-41DB22BA2DD6}"
 	ProjectSection(ProjectDependencies) = postProject
+		{835E9346-EC73-421D-8C4B-16C4673E3680} = {835E9346-EC73-421D-8C4B-16C4673E3680}
 		{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511} = {F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}
 	EndProjectSection
 EndProject
