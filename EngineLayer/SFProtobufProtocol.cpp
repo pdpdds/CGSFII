@@ -158,7 +158,7 @@ int SFProtobufProtocol::tryDeframeIncomingPacket(DataBuffer& Buffer, BasePacket*
 
 	nExtractedBytes = packetLen;
 
-	pPacket = CreateIncomingPacketFromPacketId(packetId);
+	pPacket = CreateIncomingPacketFromPacketId(packetId, 0);
 
 	if (pPacket == NULL)
 		return SFProtocol::eUndefinedFailure;

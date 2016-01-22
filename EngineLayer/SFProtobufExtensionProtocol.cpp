@@ -164,7 +164,7 @@ int SFProtobufExtensionProtocol::tryDeframeIncomingPacket(DataBuffer& Buffer, Ba
 
 	nExtractedBytes = packetLen;
 
-	pPacket = CreateIncomingPacketFromPacketId(packetId);
+	pPacket = CreateIncomingPacketFromPacketId(packetId, 0);
 
 	SFProtobufPacketImpl& gPacket = (SFProtobufPacketImpl&)(*pPacket);
 

@@ -6,11 +6,12 @@
 #include "SFProtobufProtocol.h"
 
 #define nReceiveBufferSize 8096
-SFProtobufPacketImpl::SFProtobufPacketImpl( int serviceId, google::protobuf::Message* message )
+SFProtobufPacketImpl::SFProtobufPacketImpl( int serviceId, int channel, google::protobuf::Message* message )
 : extendedData(nReceiveBufferSize)
 {
 	this->serviceId = serviceId;
 	this->message = message;
+	this->m_channel = channel;
 	pEncodedStream = NULL;
 }
 

@@ -26,7 +26,7 @@ public:
 	static bool DisposePacket(BasePacket* pPacket);
 
 protected:
-	virtual BasePacket* CreateIncomingPacketFromPacketId(int packetId) = 0;
+	virtual BasePacket* CreateIncomingPacketFromPacketId(int packetId, int channel) = 0;
 
 protected:
 	virtual int encodeOutgoingPacket(BasePacket& packet);

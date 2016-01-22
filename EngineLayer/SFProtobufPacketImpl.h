@@ -15,7 +15,7 @@
 class SFProtobufPacketImpl : public BasePacket
 {
 public:
-	SFProtobufPacketImpl(int serviceId, google::protobuf::Message* message);
+	SFProtobufPacketImpl(int serviceId, int channel, google::protobuf::Message* message);
 	~SFProtobufPacketImpl(void);
 public:
 	virtual bool Decode(char* pBuf, unsigned int nSize);
@@ -25,6 +25,7 @@ public:
 
 private:
 	int serviceId;
+	int m_channel;
 	std::string* pEncodedStream;
 	google::protobuf::Message* message;
 
@@ -34,6 +35,8 @@ public:
 	std::string* getEncodedStream() const { return pEncodedStream; }
 	int getEncodedStreamSize();	
 	int getServiceId() const { return serviceId; }
+	void SetChannel(int channel) { m_channel = channel; }
+	int GetChannel() const { return m_channel; }
 
 	DataBuffer* getExtendedData(){ return &extendedData; }
 	int getExtendedDataSize(){ return extendedData.GetDataSize(); }

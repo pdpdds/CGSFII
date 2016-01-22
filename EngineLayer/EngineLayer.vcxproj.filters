@@ -145,6 +145,9 @@
     <ClCompile Include="SFProtobufExtensionProtocol.cpp">
       <Filter>Packet\ProtobufPacket</Filter>
     </ClCompile>
+    <ClCompile Include="SFProtobuf2ExtensionProtocol.cpp">
+      <Filter>Packet\ProtobufPacket</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".\SFExcel.h">
@@ -274,6 +277,9 @@
       <Filter>Dispatcher</Filter>
     </ClInclude>
     <ClInclude Include="SFProtobufExtensionProtocol.h">
+      <Filter>Packet\ProtobufPacket</Filter>
+    </ClInclude>
+    <ClInclude Include="SFProtobuf2ExtensionProtocol.h">
       <Filter>Packet\ProtobufPacket</Filter>
     </ClInclude>
   </ItemGroup>

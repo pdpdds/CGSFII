@@ -189,6 +189,7 @@
     <ClCompile Include="SFClassicDispatcher.cpp" />
     <ClCompile Include="SFConfigure.cpp" />
     <ClCompile Include="SFEngine.cpp" />
+    <ClCompile Include="SFProtobuf2ExtensionProtocol.cpp" />
     <ClCompile Include="SFProtobufExtensionProtocol.cpp" />
     <ClCompile Include="SFSingleLogicDispatcher.cpp" />
     <ClCompile Include=".\SFSessionService.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="SFConfigure.h" />
     <ClInclude Include="SFConstant.h" />
     <ClInclude Include="SFCGSFPacketProtocol.h" />
+    <ClInclude Include="SFProtobuf2ExtensionProtocol.h" />
     <ClInclude Include="SFProtobufExtensionProtocol.h" />
     <ClInclude Include="SFSingleLogicDispatcher.h" />
     <ClInclude Include=".\SFSessionService.h" />
