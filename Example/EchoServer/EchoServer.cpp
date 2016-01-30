@@ -15,6 +15,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 0;
 
 	SFEngine::GetInstance()->AddPacketProtocol(new SFPacketProtocol<SFCGSFPacketProtocol>);	
+	SFEngine::GetInstance()->AddTimer(1, 1000, 1000);
+
 	bool result = SFEngine::GetInstance()->Start();
 
 	if (false == result)

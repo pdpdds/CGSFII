@@ -32,6 +32,9 @@ bool EchoLogicEntry::ProcessPacket(BasePacket* pPacket)
 	case SFPACKET_DATA:		
 		SFEngine::GetInstance()->SendRequest(pPacket);
 		break;
+	case SFPACKET_TIMER:
+		printf("timer call!\n");
+		break;
 	}
 
 	return true;
