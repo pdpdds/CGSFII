@@ -11,7 +11,8 @@ public:
 	 virtual void handle_time_out (const ACE_Time_Value &tv,
                                 const void *arg)
     {
-		m_pOwner->GetEngine()->OnTimer(arg);
+		IEngine* pEngine = m_pOwner->GetEngine();
+		pEngine->OnTimer(arg);
     }
 
 protected:
