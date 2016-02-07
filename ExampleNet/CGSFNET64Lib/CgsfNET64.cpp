@@ -18,6 +18,7 @@ namespace CgsfNET64Lib {
 
 	CgsfNET64::CgsfNET64()  
 	{
+		
 	}
 
 	CgsfNET64::~CgsfNET64()
@@ -62,11 +63,11 @@ namespace CgsfNET64Lib {
 		SetNetworkConfig(config);
 
 		m_pLogicEntry = new ServerLogicEntry();
-		m_pLogicEntry->m_refPacketQueue = m_packetQueue;
+		m_pLogicEntry->m_refPacketQueue = m_packetQueue;	
 		m_pLogicEntry->m_parent = this;
 
 		//m_pDispatcher = new SFNETMultiDispatcher(m_networkConfig->ThreadCount);	
-		m_pDispatcher = new SFNETMultiDispatcher(2);
+		m_pDispatcher = new SFNETMultiDispatcher(10);
 
 		m_pServerConnectCallback = new ServerConnectCallback;
 		m_pServerConnectCallback->m_refPacketQueue = m_packetQueue;
@@ -141,7 +142,7 @@ namespace CgsfNET64Lib {
 		bool isResult = SFEngine::GetInstance()->Start(protocolID);
 		
 		google::FlushLogFiles(google::GLOG_INFO);
-		google::FlushLogFiles(google::GLOG_ERROR);
+		google::FlushLogFiles(google::GLOG_ERROR);		
 
 		return isResult;
 	}

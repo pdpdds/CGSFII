@@ -45,7 +45,10 @@ namespace CgsfNET64Lib {
 
 		virtual ILogicEntry* Clone() override
 		{
-			return new ServerLogicEntry();
+			ServerLogicEntry* logicEntry = new ServerLogicEntry();
+			logicEntry->m_parent = m_parent;
+			return logicEntry;
+			
 		}
 		
 		/// <summary>
