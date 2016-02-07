@@ -1,12 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoServerNet", "EchoServerNet.csproj", "{73F38E9A-1C38-4DEE-8542-89C938599796}"
 	ProjectSection(ProjectDependencies) = postProject
 		{32BA163D-2969-45C9-B7EC-468010CC6B52} = {32BA163D-2969-45C9-B7EC-468010CC6B52}
-		{F6E71E53-99A4-4172-8197-6C11F2D69106} = {F6E71E53-99A4-4172-8197-6C11F2D69106}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGSFNETCommon", "..\CGSFNET64Common\CGSFNETCommon.csproj", "{32BA163D-2969-45C9-B7EC-468010CC6B52}"

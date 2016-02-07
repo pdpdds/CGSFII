@@ -67,6 +67,7 @@ namespace EchoServerNet
                 DevLog.Write(string.Format("[Init] 네트워크 라이브러리 초기화 실패. {0}, {1}", result.ToString(), result), LOG_LEVEL.ERROR);
             }
 
+
             bool resulta = ServerNet.AddTimer(1, 1000, 1000);
             ServerNet.Start(0);
 

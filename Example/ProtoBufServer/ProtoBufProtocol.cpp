@@ -14,7 +14,7 @@ ProtoBufProtocol::~ProtoBufProtocol()
 {
 }
 
-BasePacket* ProtoBufProtocol::CreateIncomingPacketFromPacketId(int packetId)
+BasePacket* ProtoBufProtocol::CreateIncomingPacketFromPacketId(int packetId, int channel)
 {
 	switch (packetId)
 	{

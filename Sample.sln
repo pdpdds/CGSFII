@@ -1,13 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Listener", "Example\ServerListener\ServerListener.vcxproj", "{5730DE4F-BEA1-42BA-857E-7EF4D7F5A8C8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511} = {F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Connector", "Example\ServerConnector\ServerConnector.vcxproj", "{448F9D05-7F45-4033-A03C-98C18DEB0329}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511} = {F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TankServer", "Example\TankServer\TankServer.vcxproj", "{C4393F8C-89E4-47E9-853E-B211C0086898}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511} = {F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProtoBufServer", "Example\ProtoBufServer\ProtoBufServer.vcxproj", "{27C35E90-0AFF-4289-AA53-ED8E5758230D}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -20,6 +29,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGSFNet", "CGSFNet\CGSFNet.vcxproj", "{D3434D93-3187-430C-885F-FD6F9613366A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EchoServer", "Example\EchoServer\EchoServer.vcxproj", "{DD9698A1-F393-47EF-B4E7-41DB22BA2DD6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511} = {F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

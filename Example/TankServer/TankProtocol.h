@@ -7,6 +7,6 @@ public:
 	TankProtocol();
 	virtual ~TankProtocol();
 
-	BasePacket* CreateIncomingPacketFromPacketId(int packetId) override;
+	BasePacket* CreateIncomingPacketFromPacketId(int packetId, int channel) override;
 };
 

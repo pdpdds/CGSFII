@@ -14,7 +14,7 @@ TankProtocol::~TankProtocol()
 {
 }
 
-BasePacket* TankProtocol::CreateIncomingPacketFromPacketId(int packetId)
+BasePacket* TankProtocol::CreateIncomingPacketFromPacketId(int packetId, int channel)
 {
 	switch (packetId)
 	{
