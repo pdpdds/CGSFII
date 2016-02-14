@@ -2,8 +2,14 @@
 #include "EchoLogicEntry.h"
 #include "SFCGSFPacketProtocol.h"
 #include "SFMultiLogicDispatcher.h"
+#include "DBStruct.h"
+#include "SFZdb.h"
 
 #pragma comment(lib, "EngineLayer.lib")
+#pragma comment(lib, "DatabaseLayer.lib")
+
+SFZdb* g_db = nullptr;
+void CreateDatabase();
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -17,6 +23,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	SFEngine::GetInstance()->AddPacketProtocol(new SFPacketProtocol<SFCGSFPacketProtocol>);	
 	SFEngine::GetInstance()->AddTimer(1, 1000, 1000);
 
+	CreateDatabase();
+
 	bool result = SFEngine::GetInstance()->Start();
 
 	if (false == result)
@@ -27,4 +35,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	SFEngine::GetInstance()->ShutDown();
 
 	return 0;
+}
+
+void CreateDatabase()
+{
+	g_db = new SFZdb();
+
 }
