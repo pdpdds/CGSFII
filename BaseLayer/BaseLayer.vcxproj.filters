@@ -4,9 +4,6 @@
     <Filter Include="json">
       <UniqueIdentifier>{f7ec9860-5053-435f-b8af-857fd9b710fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="File">
-      <UniqueIdentifier>{9620745b-ec4d-4a9f-980a-c44e3e618a56}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="json\JsonBuilder.cpp">
@@ -15,43 +12,19 @@
     <ClCompile Include="json\JsonNode.cpp">
       <Filter>json</Filter>
     </ClCompile>
-    <ClCompile Include=".\SFIni.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="SFEncryptionXOR.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include=".\SFBitArray.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="SFFastCRC.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="SFCompressZLib.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="Markup.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneralPool.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include=".\SFRegexChecker.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="SFFString.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="SFList.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="tinythread.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
-    <ClCompile Include="BitSet.cpp">
-      <Filter>File</Filter>
-    </ClCompile>
     <ClCompile Include="crc.cpp" />
+    <ClCompile Include="BitSet.cpp" />
+    <ClCompile Include="GeneralPool.cpp" />
+    <ClCompile Include="Markup.cpp" />
+    <ClCompile Include=".\SFBitArray.cpp" />
+    <ClCompile Include="SFCompressZLib.cpp" />
+    <ClCompile Include="SFEncryptionXOR.cpp" />
+    <ClCompile Include="SFFastCRC.cpp" />
+    <ClCompile Include="SFFString.cpp" />
+    <ClCompile Include=".\SFIni.cpp" />
+    <ClCompile Include="SFList.cpp" />
+    <ClCompile Include=".\SFRegexChecker.cpp" />
+    <ClCompile Include="tinythread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json\writer.h">
@@ -75,88 +48,34 @@
     <ClInclude Include="json\DataTypeConvertor.h">
       <Filter>json</Filter>
     </ClInclude>
-    <ClInclude Include=".\SFIni.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFEncryption.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFEncryptionXOR.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include=".\SFBitArray.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFFastCRC.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFCompressor.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFCompressZLib.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="Macro.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="VMemPool\VMemPool.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneralPool.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include=".\SFRegexChecker.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFFString.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFString.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="CGSFDefine.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseCommonHeader.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="GPGLockFreeQueue.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFIOCPQueue.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFList.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFLock.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFLockDeque.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFLockQueue.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFObjectPool.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFQueue.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFTree.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="SFTSSyncQueue.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="tinythread.h">
-      <Filter>File</Filter>
-    </ClInclude>
-    <ClInclude Include="BitSet.h">
-      <Filter>File</Filter>
-    </ClInclude>
     <ClInclude Include="crc.h" />
+    <ClInclude Include="BaseCommonHeader.h" />
+    <ClInclude Include="BitSet.h" />
+    <ClInclude Include="CGSFDefine.h" />
+    <ClInclude Include="GeneralPool.h" />
+    <ClInclude Include="GPGLockFreeQueue.h" />
+    <ClInclude Include="Macro.h" />
+    <ClInclude Include=".\SFBitArray.h" />
+    <ClInclude Include="SFCompressor.h" />
+    <ClInclude Include="SFCompressZLib.h" />
+    <ClInclude Include="SFEncryption.h" />
+    <ClInclude Include="SFEncryptionXOR.h" />
+    <ClInclude Include="SFFastCRC.h" />
+    <ClInclude Include="SFFString.h" />
+    <ClInclude Include=".\SFIni.h" />
+    <ClInclude Include="SFIOCPQueue.h" />
+    <ClInclude Include="SFList.h" />
+    <ClInclude Include="SFLock.h" />
+    <ClInclude Include="SFLockDeque.h" />
+    <ClInclude Include="SFLockQueue.h" />
+    <ClInclude Include="SFObjectPool.h" />
+    <ClInclude Include="SFQueue.h" />
+    <ClInclude Include=".\SFRegexChecker.h" />
+    <ClInclude Include="SFString.h" />
+    <ClInclude Include="SFTree.h" />
+    <ClInclude Include="SFTSSyncQueue.h" />
+    <ClInclude Include="tinythread.h" />
+    <ClInclude Include="VMemPool\VMemPool.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include=".\ReadMe.txt" />

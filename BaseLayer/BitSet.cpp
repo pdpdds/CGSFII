@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BitSet.h"
-#include <memory>
+#include <string.h>
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -59,7 +59,7 @@ BOOL CBitSet::Create( DWORD dwBits , BOOL bZeroInit, BOOL b32BitAlign /*= TRUE*/
 	}
 
 	if( bZeroInit )
-		memset( m_pBitSet, 0, m_dwUsedBytes );
+		memset(m_pBitSet, 0, m_dwUsedBytes );
 
 	return TRUE;
 }
