@@ -3,7 +3,6 @@
 //////////////////////////////////////////////////////////////////////
 
 
-#include "stdafx.h"
 #include "DirectoryChanges.h"
 #include "DelayedDirectoryChangeHandler.h"
 #include <process.h>//for _beginthreadex

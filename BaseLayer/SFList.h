@@ -1,4 +1,5 @@
 #pragma once
+#include "CGSFDefine.h"
 
 typedef struct _node
 {

@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "JsonBuilder.h"
 #include "JsonNode.h"
 
@@ -31,7 +30,7 @@ JsonBuilder::~JsonBuilder()
 
 bool JsonBuilder::PushBuffer( const char* buffer, size_t bufferLen )
 {
-	return AddBuffer(buffer, (UINT)bufferLen);
+	return AddBuffer(buffer, (unsigned int)bufferLen);
 }
 
 bool JsonBuilder::PopCompleteNode( JsonObjectNode& node, unsigned short dataSize )
@@ -65,7 +64,7 @@ bool JsonBuilder::PopCompleteNode( JsonObjectNode& node, unsigned short dataSize
 
 bool JsonBuilder::AddBuffer( const char* buffer, unsigned int bufferLen )
 {
-	if ((INT)(m_writtenOffset + bufferLen) > m_ioSize)
+	if ((int)(m_writtenOffset + bufferLen) > m_ioSize)
 		return false;
 
 	memcpy(&m_bufferPtr[m_writtenOffset], buffer, bufferLen);

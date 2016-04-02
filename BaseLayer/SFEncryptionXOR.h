@@ -6,11 +6,11 @@ public:
 	SFEncryptionXOR();
 	virtual ~SFEncryptionXOR();
 
-	static bool Encrypt(BYTE* pSrc, DWORD Length);
-	static bool Decrypt(BYTE* pSrc, DWORD Length);
+	static bool Encrypt(unsigned char* pSrc, unsigned int Length);
+	static bool Decrypt(unsigned char* pSrc, unsigned int Length);
 
 protected:
 
 private:
-	static DWORD m_EncrytionKey;
+	static unsigned int m_EncrytionKey;
 };

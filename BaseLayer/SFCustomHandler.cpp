@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "SFCustomHandler.h"
 #include "tchar.h"
 #include "crtdbg.h"

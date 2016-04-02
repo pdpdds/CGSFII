@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "SFStackWalker.h"
 #include "SFExceptionHandlerUtil.h"
 #include <stdio.h>

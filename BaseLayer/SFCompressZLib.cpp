@@ -1,6 +1,10 @@
-#include "StdAfx.h"
 #include "SFCompressZLib.h"
+
+#ifdef _WIN32
 #include <zlib/zlib.h>
+#else
+#include <zlib.h>
+#endif
 
 SFCompressZLib::SFCompressZLib(void)
 {
@@ -10,16 +14,16 @@ SFCompressZLib::~SFCompressZLib(void)
 {
 }
 
-bool SFCompressZLib::Compress(BYTE* pDest, int& DestLen, BYTE* pSrc, int SrcLen)
+bool SFCompressZLib::Compress(char* pDest, int& destLen, unsigned char* pSrc, int srcLen)
 {
-	int Result = compress(pDest,(uLongf*)&DestLen, pSrc, SrcLen);
+	int result = compress((unsigned char*)pDest,(uLongf*)&destLen, (const unsigned char*)pSrc, srcLen);
 
-	return Result >= 0;
+	return result >= 0;
 }
 
-bool SFCompressZLib::Uncompress(BYTE* pDest, int& DestLen, BYTE* pSrc, int SrcLen)
+bool SFCompressZLib::Uncompress(unsigned char* pDest, int& destLen, unsigned char* pSrc, int srcLen)
 {
-	int Result = uncompress(pDest, (uLongf*)&DestLen, pSrc, SrcLen);
+	int result = uncompress((unsigned char*)pDest, (uLongf*)&destLen, (const unsigned char*)pSrc, srcLen);
 
-	return Result >= 0;
+	return result >= 0;
 }

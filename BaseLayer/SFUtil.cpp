@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "SFUtil.h"
 #include <objbase.h>
 #include <Shellapi.h>

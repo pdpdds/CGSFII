@@ -7,18 +7,18 @@ public:
 	SFEncrytion(void);
 	virtual ~SFEncrytion(void);
 
-	static bool Encrypt(BYTE* pSrc, DWORD Length);
-	static bool Decrypt(BYTE* pSrc, DWORD Length);
+	static bool Encrypt(unsigned char* pSrc, unsigned int Length);
+	static bool Decrypt(unsigned char* pSrc, unsigned int Length);
 };
 
 template <typename T>
-bool SFEncrytion<T>::Encrypt(BYTE* pSrc, DWORD Length)
+bool SFEncrytion<T>::Encrypt(unsigned char* pSrc, unsigned int Length)
 {
 	return T::Encrypt(pSrc, Length);
 }
 
 template <typename T>
-bool SFEncrytion<T>::Decrypt(BYTE* pSrc, DWORD Length)
+bool SFEncrytion<T>::Decrypt(unsigned char* pSrc, unsigned int Length)
 {
 	return T::Decrypt(pSrc, Length);
 }

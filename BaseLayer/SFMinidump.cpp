@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "SFMinidump.h"
 #include "tchar.h"
 #include "SFExceptionHandlerUtil.h"

@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "CPUDesc.h"
 #include "cpu_info.h"
 

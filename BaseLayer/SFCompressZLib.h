@@ -6,8 +6,8 @@ public:
 	SFCompressZLib(void);
 	virtual ~SFCompressZLib(void);
 
-	bool Compress(BYTE* pDest, int& DestLen, BYTE* pSrc, int SrcLen);
-	bool Uncompress(BYTE* pDest, int& DestLen, BYTE* pSrc, int SrcLen);
+	bool Compress(char* pDest, int& destLen, unsigned char* pSrc, int srcLen);
+	bool Uncompress(unsigned char* pDest, int& destLen, unsigned char* pSrc, int srcLen);
 
 protected:
 

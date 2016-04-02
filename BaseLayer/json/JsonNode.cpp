@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "JsonNode.h"
 
 #pragma warning( push )
@@ -253,7 +252,7 @@ unsigned int JsonObjectNode::Parse( const char* content, size_t len )
 		return 0;
 	}
 
-	return (INT)ToString().length();
+	return (int)ToString().length();
 }
 
 //////////////////////////////////////////////////////////////////////////

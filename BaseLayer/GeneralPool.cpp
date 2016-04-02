@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "generalpool.h"
 #include <assert.h>
 #include <stdio.h>

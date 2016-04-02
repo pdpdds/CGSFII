@@ -23,7 +23,6 @@
  *  2005-08-05   v5    - Removed most Lint (http://www.gimpel.com/) errors... thanks to Okko Willeboordse!
  *
  **********************************************************************/
-#include "StdAfx.h"
 #include <windows.h>
 #include <tchar.h>
 #include <stdio.h>

@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "tchar.h"
 #include "Process.h"
 #include "SFExceptionHandlerUtil.h"

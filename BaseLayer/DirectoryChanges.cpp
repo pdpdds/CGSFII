@@ -190,7 +190,7 @@
 					
 ************************************************************/
 
-#include "stdafx.h"
+
 #include "DirectoryChanges.h"
 #include "DelayedDirectoryChangeHandler.h"
 #include "CStdString.h"

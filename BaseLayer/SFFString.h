@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "CGSFDefine.h"
 
 class SFFString;
 

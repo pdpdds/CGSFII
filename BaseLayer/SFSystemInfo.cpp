@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include <VersionHelpers.h>
 #include "SFSystemInfo.h"
 #include "stdio.h"

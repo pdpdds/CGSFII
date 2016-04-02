@@ -1,9 +1,8 @@
-#include "StdAfx.h"
 #include "SFEncryptionXOR.h"
 
 #define ENCRYPTION_KEY 0xAFB7E3D9
 
-DWORD SFEncryptionXOR::m_EncrytionKey = ENCRYPTION_KEY;
+unsigned int SFEncryptionXOR::m_EncrytionKey = ENCRYPTION_KEY;
 
 SFEncryptionXOR::SFEncryptionXOR()
 {
@@ -14,27 +13,27 @@ SFEncryptionXOR::~SFEncryptionXOR(void)
 {
 }
 
-bool SFEncryptionXOR::Encrypt(BYTE* pSrc, DWORD Length)
+bool SFEncryptionXOR::Encrypt(unsigned char* pSrc, unsigned int Length)
 {
-	DWORD Remain = Length % sizeof(DWORD);
+	unsigned int Remain = Length % sizeof(unsigned int);
 	Length -= Remain;
 
-	for(DWORD i = 0; i < Length; i = i + sizeof(DWORD))
+	for(unsigned int i = 0; i < Length; i = i + sizeof(unsigned int))
 	{
-		*(DWORD*)(pSrc + i) = *(DWORD*)(pSrc + i) ^ m_EncrytionKey;
+		*(unsigned int*)(pSrc + i) = *(unsigned int*)(pSrc + i) ^ m_EncrytionKey;
 	}
 
 	return true;
 }
 
-bool SFEncryptionXOR::Decrypt(BYTE* pSrc, DWORD Length)
+bool SFEncryptionXOR::Decrypt(unsigned char* pSrc, unsigned int Length)
 {
-	DWORD Remain = Length % sizeof(DWORD);
+	unsigned int Remain = Length % sizeof(unsigned int);
 	Length -= Remain;
 
-	for(DWORD i = 0; i < Length; i = i + sizeof(DWORD))
+	for(unsigned int i = 0; i < Length; i = i + sizeof(unsigned int))
 	{
-		*(DWORD*)(pSrc + i) = *(DWORD*)(pSrc + i) ^ m_EncrytionKey;
+		*(unsigned int*)(pSrc + i) = *(unsigned int*)(pSrc + i) ^ m_EncrytionKey;
 	}
 
 	return true;

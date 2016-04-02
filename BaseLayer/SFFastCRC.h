@@ -7,11 +7,10 @@ public:
 	virtual ~SFFastCRC(void);
 
 	bool Initialize();
-	bool GetCRC(BYTE* pBuffer, DWORD BufferSize, DWORD& CRC);
-	bool GetSimpleCRC(BYTE* pBuffer, DWORD BufferSize, DWORD& CRC);
-	bool Get7zCRC(BYTE* pBuffer, DWORD BufferSize, DWORD& CRC);
-	bool GetZLibCRC(BYTE* pBuffer, DWORD BufferSize, DWORD& CRC);
-	bool GetadlerCRC(BYTE* pBuffer, DWORD BufferSize, DWORD& CRC);
+	bool GetCRC(const unsigned char* pBuffer, unsigned int BufferSize, unsigned int& CRC);
+	bool GetSimpleCRC(const char* pBuffer, unsigned int BufferSize, unsigned int& CRC);	
+	bool GetZLibCRC(const unsigned char* pBuffer, unsigned int BufferSize, unsigned int& CRC);
+	bool GetadlerCRC(const unsigned char* pBuffer, unsigned int BufferSize, unsigned int& CRC);
 };
 
 
