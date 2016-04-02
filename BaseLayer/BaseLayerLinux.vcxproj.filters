@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="SFBitArray.cpp" />
+    <ClCompile Include="SFCompressZLib.cpp" />
+    <ClCompile Include="SFEncryptionXOR.cpp" />
+    <ClCompile Include="SFRegexChecker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SFBitArray.h" />
+    <ClInclude Include="SFCompressor.h" />
+    <ClInclude Include="SFCompressZLib.h" />
+    <ClInclude Include="SFEncryption.h" />
+    <ClInclude Include="SFEncryptionXOR.h" />
+    <ClInclude Include="SFRegexChecker.h" />
+  </ItemGroup>
+</Project>
