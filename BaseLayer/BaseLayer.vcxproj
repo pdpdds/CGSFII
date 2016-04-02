@@ -154,11 +154,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include=".\SFIni.cpp" />
     <ClCompile Include=".\SFRegexChecker.cpp" />
     <ClCompile Include="BitSet.cpp" />
     <ClCompile Include="crc.cpp" />
-    <ClCompile Include="GeneralPool.cpp" />
     <ClCompile Include="json\JsonBuilder.cpp" />
     <ClCompile Include="json\JsonNode.cpp" />
     <ClCompile Include="Markup.cpp" />
@@ -171,13 +169,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".\SFBitArray.h" />
-    <ClInclude Include=".\SFIni.h" />
     <ClInclude Include=".\SFRegexChecker.h" />
     <ClInclude Include="BaseCommonHeader.h" />
     <ClInclude Include="BitSet.h" />
     <ClInclude Include="CGSFDefine.h" />
     <ClInclude Include="crc.h" />
-    <ClInclude Include="GeneralPool.h" />
     <ClInclude Include="GPGLockFreeQueue.h" />
     <ClInclude Include="json\DataTypeConvertor.h" />
     <ClInclude Include="json\elements.h" />

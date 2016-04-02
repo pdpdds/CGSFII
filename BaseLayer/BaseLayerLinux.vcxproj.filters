@@ -7,17 +7,12 @@
     <ClCompile Include="SFRegexChecker.cpp" />
     <ClCompile Include="base64.cpp" />
     <ClCompile Include="BitSet.cpp" />
-    <ClCompile Include="cpu_info.cpp" />
     <ClCompile Include="crc.cpp" />
-    <ClCompile Include="GeneralPool.cpp" />
     <ClCompile Include="Markup.cpp" />
     <ClCompile Include="md5.cpp" />
     <ClCompile Include="SFFastCRC.cpp" />
     <ClCompile Include="SFFString.cpp" />
-    <ClCompile Include="SFIni.cpp" />
     <ClCompile Include="SFList.cpp" />
-    <ClCompile Include="SFUtil.cpp" />
-    <ClCompile Include="StackWalker.cpp" />
     <ClCompile Include="tinythread.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -36,7 +31,6 @@
     <ClInclude Include="crc.h" />
     <ClInclude Include="CStdString.h" />
     <ClInclude Include="fast_mutex.h" />
-    <ClInclude Include="GeneralPool.h" />
     <ClInclude Include="GPGLockFreeQueue.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Markup.h" />
@@ -45,7 +39,6 @@
     <ClInclude Include="SFDispatch.h" />
     <ClInclude Include="SFFastCRC.h" />
     <ClInclude Include="SFFString.h" />
-    <ClInclude Include="SFIni.h" />
     <ClInclude Include="SFIOCPQueue.h" />
     <ClInclude Include="SFList.h" />
     <ClInclude Include="SFLock.h" />
@@ -59,8 +52,6 @@
     <ClInclude Include="SFTimer.h" />
     <ClInclude Include="SFTree.h" />
     <ClInclude Include="SFTSSyncQueue.h" />
-    <ClInclude Include="SFUtil.h" />
-    <ClInclude Include="StackWalker.h" />
     <ClInclude Include="tinythread.h" />
     <ClInclude Include="VMemPool.h" />
   </ItemGroup>

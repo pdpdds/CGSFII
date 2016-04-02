@@ -14,14 +14,12 @@
     </ClCompile>
     <ClCompile Include="crc.cpp" />
     <ClCompile Include="BitSet.cpp" />
-    <ClCompile Include="GeneralPool.cpp" />
     <ClCompile Include="Markup.cpp" />
     <ClCompile Include=".\SFBitArray.cpp" />
     <ClCompile Include="SFCompressZLib.cpp" />
     <ClCompile Include="SFEncryptionXOR.cpp" />
     <ClCompile Include="SFFastCRC.cpp" />
     <ClCompile Include="SFFString.cpp" />
-    <ClCompile Include=".\SFIni.cpp" />
     <ClCompile Include="SFList.cpp" />
     <ClCompile Include=".\SFRegexChecker.cpp" />
     <ClCompile Include="tinythread.cpp" />
@@ -52,7 +50,6 @@
     <ClInclude Include="BaseCommonHeader.h" />
     <ClInclude Include="BitSet.h" />
     <ClInclude Include="CGSFDefine.h" />
-    <ClInclude Include="GeneralPool.h" />
     <ClInclude Include="GPGLockFreeQueue.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include=".\SFBitArray.h" />
@@ -62,7 +59,6 @@
     <ClInclude Include="SFEncryptionXOR.h" />
     <ClInclude Include="SFFastCRC.h" />
     <ClInclude Include="SFFString.h" />
-    <ClInclude Include=".\SFIni.h" />
     <ClInclude Include="SFIOCPQueue.h" />
     <ClInclude Include="SFList.h" />
     <ClInclude Include="SFLock.h" />
