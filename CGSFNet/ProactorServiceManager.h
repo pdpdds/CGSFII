@@ -56,11 +56,11 @@ public:
 		return true;
 	}
 
-	bool BroadCastAll(int ownerSerial, char* buffer, unsigned int bufferSize)
+	/*bool BroadCastAll(int ownerSerial, char* buffer, unsigned int bufferSize)
 	{
 		SFLockHelper lock(&m_lock);
 
-		IDMap::ITERATOR iter = m_IDMap.begin();
+		SFIDMap<T>::IDMap::ITERATOR iter = m_IDMap.begin();
 
 		for (; iter != m_IDMap.end(); iter++)
 		{
@@ -75,7 +75,7 @@ public:
 		}
 
 		return true;
-	}
+	}*/
 
 	int Register(T* p)
 	{

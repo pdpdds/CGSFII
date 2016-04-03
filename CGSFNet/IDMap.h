@@ -41,7 +41,7 @@ public:
 
 	int Size()
 	{
-		return (uint32)m_IDMap.current_size();
+		return (int)m_IDMap.current_size();
 	}
 
 protected:

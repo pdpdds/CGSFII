@@ -1,8 +1,7 @@
 #pragma once
 #include <ace/Asynch_IO.h>
-#include <ACE/OS.h>
-#include <ACE/Message_Block.h>
-#include "InterlockedValue.h"
+#include <ace/OS.h>
+#include <ace/Message_Block.h>
 
 #include "EngineStructure.h"
 #include "BasePacket.h"
@@ -42,7 +41,6 @@ private:
 
 	int m_serial;	
 	_SessionDesc m_sessionDesc;
-	InterlockedValue* m_pTimerLock;
 
 	bool m_bServiceCloseFlag;
 

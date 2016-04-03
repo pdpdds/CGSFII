@@ -1,37 +1,34 @@
 #include "ProactorService.h"
 #include "SingltonObject.h"
-#include <Assert.h>
+#include <assert.h>
 
 volatile int g_currentSessionCnt = 0;
 
 ProactorService::ProactorService()
-	: m_bServiceCloseFlag(false)
-	, m_pTimerLock(0)	
+	: m_bServiceCloseFlag(false)	
 {
-	InterlockedIncrement((LONG *)&g_currentSessionCnt);
+	//InterlockedIncrement((LONG *)&g_currentSessionCnt);
 
 	transferredData = 0;
 	sendData = 0;
 	receiveCount = 0;
 	sendCount = 0;
+#ifdef _WIN32
 	startTime = GetTickCount();
 	elapsedTime = GetTickCount();
+#endif
 }
 
 ProactorService::~ProactorService( void )
-{	
-	if(m_pTimerLock)
-	{
-		delete m_pTimerLock;
-		m_pTimerLock = NULL;
-	}
+{		
 
-#ifdef _DEBUG
+#ifdef  _WIN32
+#ifdef _DEBUG 
 	elapsedTime = GetTickCount() - startTime;
 	printf("log result : elapsedTime : %d, transferred : %d, sendData : %d, receiveCount : %d, sendCount : %d\n", elapsedTime, transferredData, sendData, receiveCount, sendCount);
 #endif
-
-	InterlockedDecrement((LONG *)&g_currentSessionCnt);
+#endif //  _WIN32
+	//InterlockedDecrement((LONG *)&g_currentSessionCnt);
 }
 
 void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
@@ -42,14 +39,11 @@ void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
 	{
 		delete this;
 		return;
-	}
-	
-	m_pTimerLock = new InterlockedValue();
-	m_pTimerLock->Release();
+	}	
 
 	m_bServiceCloseFlag = false;
 
-	if (g_currentSessionCnt > GetEngine()->GetMaxUserAccept())
+	/*if (g_currentSessionCnt > GetEngine()->GetMaxUserAccept())
 	{
 		if (this->handle() != ACE_INVALID_HANDLE)
 			ACE_OS::closesocket(this->handle());
@@ -58,7 +52,7 @@ void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
 
 		delete this;
 		return;
-	}
+	}*/
 
 	m_serial = ProactorServiceManagerSinglton::instance()->Register(this);	
 
@@ -174,7 +168,7 @@ void ProactorService::handle_time_out(const ACE_Time_Value& tv, const void* arg)
 	ACE_UNUSED_ARG(tv);
 	ACE_UNUSED_ARG(arg);
 
-	if(m_bServiceCloseFlag == true && m_pTimerLock->Acquire() == true)
+	if(m_bServiceCloseFlag == true)
 	{			
 		UnregisterTimer();
 		delete this;	
@@ -190,14 +184,14 @@ void ProactorService::SendInternal(char* pBuffer, int bufferSize)
 	pBlock->copy((const char*)pBuffer, bufferSize);
 	sendData += bufferSize;
 
-	if(NULL == pBlock->cont())
-	{
+	//if(NULL == pBlock->cont())
+	//{
 		m_AsyncWriter.write(*pBlock, pBlock->length());
-	}
-	else
-	{
-		m_AsyncWriter.writev(*pBlock, pBlock->total_length());
-	}
+	//}
+	//else
+	//{
+		//m_AsyncWriter.writev(*pBlock, pBlock->total_length());
+	//}
 }
 
 bool ProactorService::SendRequest(BasePacket* pPacket)
