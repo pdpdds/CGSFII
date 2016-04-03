@@ -19,7 +19,7 @@ public:
 	void AddConnectorInfo(_ConnectorInfo& connectorInfo);
 
 protected:
-	unsigned int static __stdcall ServerReconnectProc(void* arg);
+	
 
 private:
 	std::list<_ConnectorInfo> m_listConnectorInfo;

@@ -1,8 +1,13 @@
 #include "EngineLayerHeader.h"
 #include "SFPacket.h"
+#ifdef _WIN32
 #include "SFCompressor.h"
 #include "SFCompressZLib.h"
-//#include "SFChecksum.h"
+#else
+#include "../BaseLayerLinux/SFCompressor.h"
+#include "../BaseLayerLinux/SFCompressZLib.h"
+#endif // _WIN32
+
 #include "SFCGSFPacketProtocol.h"
 
 USHORT SFPacket::m_packetMaxSize = MAX_PACKET_SIZE;

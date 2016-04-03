@@ -1,8 +1,13 @@
 #pragma once
 #include "EngineLayerHeader.h"
 #include "SFLogicDispatcher.h"
+#ifdef _WIN32
 #include "SFIOCPQueue.h"
 #include "tinythread.h"
+#else
+#include "../BaseLayerLinux/SFLockQueue.h"
+#include "../BaseLayerLinux/tinythread.h"
+#endif
 #include <map>
 
 typedef struct tag_ClientInfo
@@ -13,8 +18,8 @@ typedef struct tag_ClientInfo
 
 class SFMultiLogicDispatcher : public SFLogicDispatcher
 {
-	typedef std::map<int, SFIOCPQueue<BasePacket>*> mapQueue;
-	typedef std::map<int, tthread::thread*> mapThread;	
+	typedef std::map<int, SFLockQueue<BasePacket>*> mapQueue;
+	typedef std::map<int, tthread::thread*> mapThread;
 	typedef std::map<int, ClientInfo> mapClient;
 
 public:

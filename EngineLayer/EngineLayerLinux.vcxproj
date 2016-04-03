@@ -29,12 +29,17 @@
   <ItemGroup>
     <ClInclude Include="CommonHeader.h" />
     <ClInclude Include="DataBuffer.h" />
+    <ClInclude Include="DataTypeConvertor.h" />
+    <ClInclude Include="elements.h" />
     <ClInclude Include="EngineLayerHeader.h" />
     <ClInclude Include="GPGLockFree.h" />
     <ClInclude Include="ILogicDispatcher.h" />
     <ClInclude Include="ILogicEntry.h" />
     <ClInclude Include="INetworkFramework.h" />
+    <ClInclude Include="JsonBuilder.h" />
+    <ClInclude Include="JsonNode.h" />
     <ClInclude Include="LogicEntry.h" />
+    <ClInclude Include="reader.h" />
     <ClInclude Include="SFACEAllocator.h" />
     <ClInclude Include="SFBasePacketProtocol.h" />
     <ClInclude Include="SFCGSFPacketProtocol.h" />
@@ -42,10 +47,8 @@
     <ClInclude Include="SFConfigure.h" />
     <ClInclude Include="SFConstant.h" />
     <ClInclude Include="SFEngine.h" />
-    <ClInclude Include="SFExcel.h" />
     <ClInclude Include="SFFactory.h" />
     <ClInclude Include="SFIOBuffer.h" />
-    <ClInclude Include="SFIOCPFramework.h" />
     <ClInclude Include="SFJsonPacket.h" />
     <ClInclude Include="SFJsonProtocol.h" />
     <ClInclude Include="SFLogicDispatcher.h" />
@@ -68,27 +71,27 @@
     <ClInclude Include="SFProtocol.h" />
     <ClInclude Include="SFServerConnectionManager.h" />
     <ClInclude Include="SFSessionService.h" />
-    <ClInclude Include="SFShouter.h" />
     <ClInclude Include="SFSingleLogicDispatcher.h" />
     <ClInclude Include="SFStructure.h" />
     <ClInclude Include="SFSubject.h" />
+    <ClInclude Include="visitor.h" />
+    <ClInclude Include="writer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataBuffer.cpp" />
     <ClCompile Include="ILogicEntry.cpp" />
+    <ClCompile Include="JsonBuilder.cpp" />
+    <ClCompile Include="JsonNode.cpp" />
     <ClCompile Include="LogicEntry.cpp" />
     <ClCompile Include="SFBasePacketProtocol.cpp" />
     <ClCompile Include="SFCGSFPacketProtocol.cpp" />
     <ClCompile Include="SFClassicDispatcher.cpp" />
     <ClCompile Include="SFConfigure.cpp" />
     <ClCompile Include="SFEngine.cpp" />
-    <ClCompile Include="SFExcel.cpp" />
     <ClCompile Include="SFIOBuffer.cpp" />
-    <ClCompile Include="SFIOCPFramework.cpp" />
     <ClCompile Include="SFJsonPacket.cpp" />
     <ClCompile Include="SFJsonProtocol.cpp" />
     <ClCompile Include="SFLogicGateway.cpp" />
-    <ClCompile Include="SFMGClient.cpp" />
     <ClCompile Include="SFMultiLogicDispatcher.cpp" />
     <ClCompile Include="SFObject.cpp" />
     <ClCompile Include="SFObserver.cpp" />
@@ -105,12 +108,16 @@
     <ClCompile Include="SFProtocol.cpp" />
     <ClCompile Include="SFServerConnectionManager.cpp" />
     <ClCompile Include="SFSessionService.cpp" />
-    <ClCompile Include="SFShouter.cpp" />
     <ClCompile Include="SFSingleLogicDispatcher.cpp" />
     <ClCompile Include="SFSubject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="elements.inl" />
+    <None Include="reader.inl" />
+    <None Include="writer.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6CAABB07-A4D5-45F8-9F4B-DFC8F407B35D}</ProjectGuid>
@@ -151,7 +158,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(StlIncludeDirectories);%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(StlIncludeDirectories);%(AdditionalIncludeDirectories);./json</AdditionalIncludeDirectories>
+      <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <LibraryDependencies>

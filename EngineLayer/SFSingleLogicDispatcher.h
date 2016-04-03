@@ -1,6 +1,10 @@
 #pragma once
 #include "SFLogicDispatcher.h"
+#ifdef _WIN32
 #include "tinythread.h"
+#else
+#include "../BaseLayerLinux/tinythread.h"
+#endif
 
 class SFSingleLogicDispatcher : public SFLogicDispatcher
 {

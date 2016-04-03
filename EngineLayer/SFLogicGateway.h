@@ -1,12 +1,13 @@
 #pragma once
+
+
 #ifdef _WIN32
+#include "../CGSFNet/BasePacket.h"
 #include "../BaseLayer/SFIOCPQueue.h"
 #else
-#include "../BaseLayerLinux/SFTSSyncQueue.h"
+#include "../CGSFNetLinux/BasePacket.h"
+#include "../BaseLayerLinux/SFLockQueue.h"
 #endif // _WIN32
-
-
-class BasePacket;
 
 class SFLogicGateway
 {
@@ -23,7 +24,7 @@ private:
 #ifdef _WIN32
 	SFIOCPQueue<BasePacket> m_queue;
 #else
-	SFTSSyncQueue<BasePacket> m_queue;
+	SFLockQueue<BasePacket> m_queue;
 #endif
 	static SFLogicGateway* m_pLogicGateway;
 	

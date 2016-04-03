@@ -19,7 +19,7 @@
 #include "../CGSFNet/INetworkCallback.h"
 #include "../CGSFNet/IPacketProtocol.h"
 #include "../CGSFNet/BasePacket.h"
-#include "../BaseLayer/SFString.h"
+//#include "../BaseLayer/SFString.h"
 #include "../BaseLayer/SFObjectPool.h"
 #include "../BaseLayer/Macro.h"
 #else
@@ -32,7 +32,7 @@
 #include "../CGSFNetLinux/INetworkCallback.h"
 #include "../CGSFNetLinux/IPacketProtocol.h"
 #include "../CGSFNetLinux/BasePacket.h"
-#include "../BaseLayerLinux/SFString.h"
+//#include "../BaseLayerLinux/SFString.h"
 #include "../BaseLayerLinux/SFObjectPool.h"
 #include "../BaseLayerLinux/Macro.h"
 #endif

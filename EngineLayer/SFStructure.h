@@ -1,6 +1,6 @@
 #pragma once
 #ifdef _WIN32
-#include "../BaseLayer/CGSFDefine.h"
+#include <Windows.h>
 #else
 #include "../BaseLayerLinux/CGSFDefine.h"
 #endif

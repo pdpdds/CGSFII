@@ -1,8 +1,9 @@
 #include "SFCGSFPacketProtocol.h"
-#include "SFCompressor.h"
 #ifdef _WIN32
+#include "../BaseLayer/SFCompressor.h"
 #include "../CGSFNet/ISession.h"
 #else
+#include "../BaseLayerLinux/SFCompressor.h"
 #include "../CGSFNetLinux/ISession.h"
 #endif
 #include "SFEngine.h"

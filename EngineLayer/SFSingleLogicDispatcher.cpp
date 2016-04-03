@@ -23,7 +23,7 @@ void SFSingleLogicDispatcher::Dispatch(BasePacket* pPacket)
 
 void SFSingleLogicDispatcher::LogicThreadProc(void* Args)
 {
-	UNREFERENCED_PARAMETER(Args);
+	//UNREFERENCED_PARAMETER(Args);
 	LogicEntry* pEntry = LogicEntry::GetInstance();
 	pEntry->Initialize();
 

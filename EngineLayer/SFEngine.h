@@ -72,7 +72,7 @@ private:
 	void SetLogicDispathcer(ILogicDispatcher* pDispatcher){m_pLogicDispatcher = pDispatcher;}
 
 	static SFEngine* m_pEngine; //Framework Singleton
-	HINSTANCE m_engineHandle; //NetworkEngine Handle
+	void* m_engineHandle; //NetworkEngine Handle
 	INetworkEngine* m_pNetworkEngine; //NetworkEngine Object
 	ILogicDispatcher* m_pLogicDispatcher; //Logic Dispatcher
 	SFPacketProtocolManager* m_pPacketProtocolManager; //Protocol Manager

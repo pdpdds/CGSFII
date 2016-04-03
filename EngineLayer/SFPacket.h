@@ -4,6 +4,7 @@
 #include "../CGSFNet/BasePacket.h"
 #include "../BaseLayer/SFFastCRC.h"
 #else
+#include <string.h>
 #include "../BaseLayerLinux/CGSFDefine.h"
 #include "../CGSFNetLinux/BasePacket.h"
 #include "../BaseLayerLinux/SFFastCRC.h"
@@ -228,7 +229,11 @@ public:
 		if (m_usCurrentReadPosition + strLen + 1 > m_packetMaxSize)
 			return *this;
 
+#ifdef _WIN32
 		strcpy_s(szStr, strLen + 1, (char*)&m_pPacketBuffer[m_usCurrentReadPosition]);
+#else
+		strcpy(szStr, (char*)&m_pPacketBuffer[m_usCurrentReadPosition]);
+#endif
 		m_usCurrentReadPosition += (USHORT)(strLen + 1);
 
 		return *this;

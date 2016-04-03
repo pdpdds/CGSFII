@@ -33,8 +33,8 @@ SFEngine::~SFEngine(void)
 	if (m_pNetworkEngine)
 		delete m_pNetworkEngine;
 
-	if (m_engineHandle)
-		FreeLibrary(m_engineHandle);
+	//if (m_engineHandle)
+	//	FreeLibrary(m_engineHandle);
 }
 
 SFEngine* SFEngine::GetInstance()
@@ -47,10 +47,10 @@ SFEngine* SFEngine::GetInstance()
 
 NET_ERROR_CODE SFEngine::CreateEngine(char* szModuleName)
 {
-	m_engineHandle = ::LoadLibraryA(szModuleName);
+	//m_engineHandle = ::LoadLibraryA(szModuleName);
 
-	if (m_engineHandle == nullptr)
-		return NET_ERROR_CODE::ENGINE_INIT_CREAT_ENGINE_LOAD_DLL_FAIL;
+//	if (m_engineHandle == nullptr)
+		//return NET_ERROR_CODE::ENGINE_INIT_CREAT_ENGINE_LOAD_DLL_FAIL;
 
 	//CREATENETWORKENGINE *pfunc;
 	//pfunc = (CREATENETWORKENGINE*)::GetProcAddress(m_engineHandle, "CreateNetworkEngine");
@@ -89,17 +89,17 @@ ISessionService* SFEngine::CreateSessionService(_SessionDesc& desc)
 
 void SFEngine::SetLogFolder()
 {
-	WCHAR szFilePath[MAX_PATH] = { 0, };
-	GetModuleFileName(nullptr, szFilePath, MAX_PATH);
+	//WCHAR szFilePath[MAX_PATH] = { 0, };
+	//GetModuleFileName(nullptr, szFilePath, MAX_PATH);
 
 	//WCHAR* path = SFUtil::ExtractPathInfo(szFilePath, SFUtil::PATH_DIR);
-	WCHAR* path = L"./";
-	SetCurrentDirectory(path);
+	//WCHAR* path = L"./";
+	//SetCurrentDirectory(path);
 
-	std::wstring szLogPath = path;
+	std::wstring szLogPath;// = path;
 	szLogPath += L"Log\\";
 
-	CreateDirectory(szLogPath.c_str(), nullptr);
+	//CreateDirectory(szLogPath.c_str(), nullptr);
 	
 	std::wstring szLogInfo = szLogPath + L"INFO_";
 	std::wstring szLogWarning = szLogPath + L"WARNING_";

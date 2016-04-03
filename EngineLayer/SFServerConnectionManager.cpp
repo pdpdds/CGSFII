@@ -1,8 +1,13 @@
 #include "SFEngine.h"
 #include "SFServerConnectionManager.h"
 #include "SFPacketProtocolManager.h"
+#ifdef _WIN32
 #include "Markup.h"
 #include <process.h>
+#else
+#include "../BaseLayerLinux/Markup.h"
+#endif // _WIN32
+
 
 SFServerConnectionManager::SFServerConnectionManager()
 //: m_hThread(NULL)
@@ -12,6 +17,7 @@ SFServerConnectionManager::SFServerConnectionManager()
 {
 }
 
+static void ServerReconnectProc(void* arg);
 
 SFServerConnectionManager::~SFServerConnectionManager()
 {
@@ -134,7 +140,7 @@ bool SFServerConnectionManager::SetupServerReconnectSys()
 	return true;
 }
 
-unsigned int SFServerConnectionManager::ServerReconnectProc(void* arg)
+static void ServerReconnectProc(void* arg)
 {
 	/*SFServerConnectionManager * pConnectionManager = reinterpret_cast<SFServerConnectionManager*>(arg);
 	
@@ -156,8 +162,6 @@ unsigned int SFServerConnectionManager::ServerReconnectProc(void* arg)
 			}			
 		}
 	}*/
-
-	return 0;
 }
 
 bool SFServerConnectionManager::SetConnectorState(int connectorId, bool connected)

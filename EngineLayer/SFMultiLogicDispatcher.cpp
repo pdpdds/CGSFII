@@ -27,7 +27,8 @@ bool SFMultiLogicDispatcher::CreateLogicSystem(ILogicEntry* pLogicEntry)
 
 	for (int index = 0; index < m_channelCount; index++)
 	{
-		SFIOCPQueue<BasePacket>* pQueue = new SFIOCPQueue<BasePacket>();
+		//SFIOCPQueue<BasePacket>* pQueue = new SFIOCPQueue<BasePacket>();
+		SFLockQueue<BasePacket>* pQueue = new SFLockQueue<BasePacket>();
 
 		tthread::thread* pThread = new tthread::thread(MultiLogicProc, pQueue);
 		m_mapThread.insert(std::make_pair(index, pThread));
@@ -61,7 +62,8 @@ bool SFMultiLogicDispatcher::ShutDownLogicSystem()
 
 	for (auto& queue : m_mapQueue)
 	{
-		SFIOCPQueue<BasePacket>* pQueue = queue.second;		
+		//SFIOCPQueue<BasePacket>* pQueue = queue.second;		
+		SFLockQueue<BasePacket>* pQueue = queue.second;
 		delete pQueue;		
 	}
 
@@ -89,7 +91,8 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 		{
 			for (auto& iter : pDispatcher->m_mapQueue)
 			{
-				SFIOCPQueue<BasePacket>* pQueue = iter.second;
+				//SFIOCPQueue<BasePacket>* pQueue = iter.second;
+				SFLockQueue<BasePacket>* pQueue = iter.second;
 				pQueue->Push(pPacket);
 //일단 한스레드에만 패킷을 넘기고 전체 로직 스레드에게 타이머 패킷을 보낼 수 있도록 나중에 수정한다
 				continue;
@@ -103,7 +106,8 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 				pCommand->SetSerial(-1);
 				pCommand->SetPacketType(SFPACKET_SERVERSHUTDOWN);
 
-				SFIOCPQueue<BasePacket>* pQueue = queue.second;
+				//SFIOCPQueue<BasePacket>* pQueue = queue.second;
+				SFLockQueue<BasePacket>* pQueue = queue.second;
 				pQueue->Push(pCommand);
 			}
 
@@ -119,7 +123,8 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 
 				if (iter != pDispatcher->m_mapQueue.end())
 				{
-					SFIOCPQueue<BasePacket>* pQueue = iter->second;
+					//SFIOCPQueue<BasePacket>* pQueue = iter->second;
+					SFLockQueue<BasePacket>* pQueue = iter->second;
 					pQueue->Push(pPacket);
 				}
 				else
@@ -143,13 +148,14 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 
 void SFMultiLogicDispatcher::MultiLogicProc(void* Args)
 {
-	SFIOCPQueue<BasePacket>* pQueue = static_cast<SFIOCPQueue<BasePacket>*>(Args);
+	//SFIOCPQueue<BasePacket>* pQueue = static_cast<SFIOCPQueue<BasePacket>*>(Args);
+	SFLockQueue<BasePacket>* pQueue = static_cast<SFLockQueue<BasePacket>*>(Args);
 	
 	LogicEntry::GetInstance()->Initialize();
 
 	while (true)
 	{
-		BasePacket* pPacket = pQueue->Pop(INFINITE);
+		BasePacket* pPacket = pQueue->Pop(-1);
 
 		if (pPacket->GetPacketType() == SFPACKET_SERVERSHUTDOWN)
 			break;

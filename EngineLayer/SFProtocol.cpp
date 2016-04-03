@@ -1,7 +1,6 @@
 #pragma warning(disable : 4244)
 
 
-#include "stdafx.h"
 #include "SFProtocol.h"
 
 SFProtocol::SFProtocol(void)

@@ -1,6 +1,9 @@
 #pragma once
 #include "SFBasePacketProtocol.h"
 #include "SFPacketProtocol.h"
+#ifndef _WIN32
+#include "../BaseLayerLinux/CGSFDefine.h"
+#endif
 
 class SFPacketIOBuffer;
 class SFCommand;
