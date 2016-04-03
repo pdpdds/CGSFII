@@ -1,14 +1,12 @@
-#include "stdafx.h"
+#include "EchoServerHeader.h"
 #include "EchoLogicEntry.h"
 #include "SFCGSFPacketProtocol.h"
 #include "SFMultiLogicDispatcher.h"
 #include "DBStruct.h"
 #include "SFZdb.h"
 
-#pragma comment(lib, "EngineLayer.lib")
-#pragma comment(lib, "DatabaseLayer.lib")
-
 SFZdb* g_db = nullptr;
+
 void CreateDatabase();
 
 int _tmain(int argc, _TCHAR* argv[])

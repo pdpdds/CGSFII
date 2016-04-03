@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EchoServerHeader.h"
 #include "EchoLogicEntry.h"
 
 EchoLogicEntry::EchoLogicEntry(void)
