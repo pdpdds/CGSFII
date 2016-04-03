@@ -1,10 +1,9 @@
-#include "stdafx.h"
+#include "SFEngine.h"
 #include "SFJsonProtocol.h"
 #include <Json/JsonNode.h>
-#include "ISession.h"
 #include "SFJsonPacket.h"
 #include "SFProtocol.h"
-#include "SFEngine.h"
+
 
 SFJsonProtocol::SFJsonProtocol(void)
 : m_pBuffer(NULL)

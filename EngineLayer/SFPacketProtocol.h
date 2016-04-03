@@ -6,14 +6,16 @@
 // 실제 데이터의 처리는 템플릿으로 제공된 클래스가 담당합니다.
 // ============================================================================
 
-#include "IPacketProtocol.h"
+#include "EngineLayerHeader.h"
 #include "SFConstant.h"
-#include "SFChecksum.h"
 #include "SFPacketIOBuffer.h"
-#include "SFEncryption.h"
-#include "SFEncryptionXOR.h"
-
-#include "Macro.h"
+#ifdef _WIN32
+#include "../BaseLayer/SFEncryption.h"
+#include "../BaseLayer/SFEncryptionXOR.h"
+#else
+#include "../BaseLayerLinux/SFEncryption.h"
+#include "../BaseLayerLinux/SFEncryptionXOR.h"
+#endif
 
 class BasePacket;
 

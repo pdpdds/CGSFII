@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "SFSubject.h"
 #include "SFObserver.h"
 
@@ -10,26 +9,26 @@ SFSubject::~SFSubject(void)
 {
 }
 
-BOOL SFSubject::AddObserver( SFObserver* pObject )
+bool SFSubject::AddObserver( SFObserver* pObject )
 {
-	if(TRUE == CheckDuplicate(pObject))
-		return FALSE;
+	if(true == CheckDuplicate(pObject))
+		return false;
 
 	m_Observerlist.push_back(pObject);
 
-	return TRUE;
+	return true;
 }
 
-BOOL SFSubject::CheckDuplicate( SFObserver* pObject )
+bool SFSubject::CheckDuplicate( SFObserver* pObject )
 {
-	BOOL bDuplicate = FALSE;
+	bool bDuplicate = false;
 	Observerlist::iterator iter = m_Observerlist.begin();
 
 	for(; iter != m_Observerlist.end(); iter++)
 	{
 		if(*iter == pObject)
 		{
-			bDuplicate = TRUE;
+			bDuplicate = true;
 			break;
 		}
 	}
@@ -37,7 +36,7 @@ BOOL SFSubject::CheckDuplicate( SFObserver* pObject )
 	return bDuplicate;
 }
 
-BOOL SFSubject::DelObserver( SFObserver* pObject )
+bool SFSubject::DelObserver( SFObserver* pObject )
 {
 	Observerlist::iterator iter = m_Observerlist.begin();
 
@@ -50,10 +49,10 @@ BOOL SFSubject::DelObserver( SFObserver* pObject )
 		}
 	}
 
-	return TRUE;
+	return true;
 }
 
-BOOL SFSubject::PropagateMessage( SFMessage* pMessage )
+bool SFSubject::PropagateMessage( SFMessage* pMessage )
 {
 	Observerlist::iterator iter = m_Observerlist.begin();
 
@@ -63,5 +62,5 @@ BOOL SFSubject::PropagateMessage( SFMessage* pMessage )
 		pObserver->OnMessage(this, pMessage);
 	}
 
-	return TRUE;
+	return true;
 }

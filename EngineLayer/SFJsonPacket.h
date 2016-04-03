@@ -1,6 +1,6 @@
 #pragma once
+#include "EngineLayerHeader.h"
 #include <json/jsonnode.h>
-#include "BasePacket.h"
 
 class SFJsonPacket : public BasePacket
 {

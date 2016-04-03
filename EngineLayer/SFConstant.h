@@ -44,7 +44,7 @@
 #define TIMER_10_SEC	 7
 
 /////////////////////////////////////////////////////////////////////////
-typedef enum eDBResult
+enum eDBResult
 {
 	DBRESULT_ERROR_UNKNOWN = -999,
 	DBRESULT_STATE_SUCCESS = 0,

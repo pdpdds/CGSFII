@@ -1,7 +1,10 @@
 #pragma once
-
 #include "DataBuffer.h"
-#include "BasePacket.h"
+#ifdef _WIN32
+#include "../CGSFNet/BasePacket.h"
+#else
+#include "../CGSFNetLinux/BasePacket.h"
+#endif
 
 /**
 A subclass of this class defines a communication protocol between Push Framework and remote clients (or a category of remote
@@ -13,7 +16,7 @@ to construct the IncomingPacket instance and its accompanying service id.
 class SFProtocol
 {
 public:
-	typedef enum Result
+	enum Result
 	{
 		Success = 0,
 		eInsufficientBuffer,

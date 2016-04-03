@@ -1,5 +1,10 @@
 #pragma once
-//#include <d3dx9math.h>
+#ifdef _WIN32
+#include "../BaseLayer/CGSFDefine.h"
+#else
+#include "../BaseLayerLinux/CGSFDefine.h"
+#endif
+#include "SFConstant.h"
 #include <string>
 #pragma pack(push, 1)
 

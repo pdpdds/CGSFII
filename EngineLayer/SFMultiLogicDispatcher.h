@@ -1,8 +1,8 @@
 #pragma once
+#include "EngineLayerHeader.h"
 #include "SFLogicDispatcher.h"
 #include "SFIOCPQueue.h"
-#include "BasePacket.h"
-#include "TinyThread/tinythread.h"
+#include "tinythread.h"
 #include <map>
 
 typedef struct tag_ClientInfo

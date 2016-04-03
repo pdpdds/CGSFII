@@ -9,22 +9,22 @@ SFIOCPFramework::~SFIOCPFramework(void)
 {
 }
 
-BOOL SFIOCPFramework::Initialize(eNetworkFrameworkType Type)
+bool SFIOCPFramework::Initialize(eNetworkFrameworkType Type)
 {
-	return TRUE;
+	return true;
 }
 
-BOOL SFIOCPFramework::Start(ILogicEntry* pLogic)
+bool SFIOCPFramework::Start(ILogicEntry* pLogic)
 {
-	return TRUE;
+	return true;
 }
 
-BOOL SFIOCPFramework::End()
+bool SFIOCPFramework::End()
 {
-	return TRUE;
+	return true;
 }
 
-BOOL SFIOCPFramework::Finally()
+bool SFIOCPFramework::Finally()
 {
-	return TRUE;
+	return true;
 }

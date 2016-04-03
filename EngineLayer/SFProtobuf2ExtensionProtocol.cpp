@@ -1,9 +1,6 @@
-#include "stdafx.h"
-#include "stdafx.h"
+#include "SFEngine.h"
 #include "SFProtobuf2ExtensionProtocol.h"
 #include "SFProtobufPacketImpl.h"
-#include "ISession.h"
-#include "SFEngine.h"
 
 #pragma warning (disable : 4100) 
 
@@ -103,7 +100,7 @@ BasePacket* SFProtobuf2ExtensionProtocol::GetPacket(int& ErrorCode)
 	if (iResult == SFProtocol::Success)
 	{
 		m_Buffer.Pop(uExtractedBytes);
-		pPacket->SetPacketID(uCommandID);
+		pPacket->SetPacketID((unsigned short)uCommandID);
 	}
 	else if (iResult == SFProtocol::eDecodingFailure)
 	{
@@ -169,8 +166,6 @@ int SFProtobuf2ExtensionProtocol::tryDeframeIncomingPacket(DataBuffer& Buffer, B
 	nExtractedBytes = packetLen;
 
 	pPacket = CreateIncomingPacketFromPacketId(packetId, channel);
-
-	SFProtobufPacketImpl& gPacket = (SFProtobufPacketImpl&)(*pPacket);
 
 	if (pPacket == NULL)
 		return SFProtocol::eUndefinedFailure;

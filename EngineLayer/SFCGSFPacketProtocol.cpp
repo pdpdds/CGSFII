@@ -1,7 +1,10 @@
-#include "stdafx.h"
 #include "SFCGSFPacketProtocol.h"
 #include "SFCompressor.h"
-#include "ISession.h"
+#ifdef _WIN32
+#include "../CGSFNet/ISession.h"
+#else
+#include "../CGSFNetLinux/ISession.h"
+#endif
 #include "SFEngine.h"
 #include "SFPacketPool.h"
 

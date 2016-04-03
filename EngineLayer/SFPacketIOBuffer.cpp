@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "SFPacketIOBuffer.h"
 
 SFPacketIOBuffer::SFPacketIOBuffer(void)

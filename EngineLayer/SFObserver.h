@@ -9,5 +9,5 @@ public:
 	SFObserver(void);
 	virtual ~SFObserver(void);
 
-	virtual BOOL OnMessage(SFObject* pSender, SFMessage* pMessage);
+	virtual bool OnMessage(SFObject* pSender, SFMessage* pMessage);
 };

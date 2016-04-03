@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "EngineLayerHeader.h"
 #include "LogicEntry.h"
 #include <boost/thread/tss.hpp>
 
@@ -40,6 +40,7 @@ bool LogicEntry::ProcessPacket(BasePacket* pPacket)
 	{
 		sLogicEntry->ProcessConnectorPacket(pPacket);
 	}
+
 
 	return true;
 }

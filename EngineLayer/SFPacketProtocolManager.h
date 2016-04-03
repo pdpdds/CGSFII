@@ -1,5 +1,7 @@
 #pragma once
+#include "EngineLayerHeader.h"
 #include <list>
+#include <map>
 
 class IPacketProtocol;
 
@@ -24,7 +26,7 @@ public:
 		const auto& iter = m_mapPacketProtocol.find(packetProtocolId);
 		if (iter != m_mapPacketProtocol.end()) 
 			return iter->second; 
-		return NULL; 
+		return nullptr; 
 	}
 
 	IPacketProtocol* GetPacketProtocolWithListenerId(int listenerId)
@@ -35,7 +37,7 @@ public:
 				return GetPacketProtocol(iter.packetProtocolId);
 		}
 
-		return NULL;
+		return nullptr;
 	}
 
 	IPacketProtocol* GetPacketProtocolWithConnectorId(int connectorId)
@@ -46,7 +48,7 @@ public:
 				return GetPacketProtocol(iter.packetProtocolId);
 		}
 
-		return NULL;
+		return nullptr;
 	}
 
 private:

@@ -18,8 +18,8 @@
 	
 	
 *********************************************************************/
-#include "StdAfx.h"
 #include "DataBuffer.h"
+#include <string.h>
 
 #pragma warning(disable : 4244)
 #pragma warning(disable : 4267)
@@ -33,12 +33,12 @@ DataBuffer::DataBuffer(unsigned int uMaxSize)
 DataBuffer::DataBuffer()
 {
 	uSize = 0;
-	pBuffer = NULL;
+	pBuffer = nullptr;
 }
 
-void DataBuffer::Allocate( unsigned int uMaxSize )
+void DataBuffer::Allocate( unsigned int maxSize )
 {
-	this->uMaxSize = uMaxSize;
+	this->uMaxSize = maxSize;
 	pBuffer = new char[uMaxSize];
 }
 
@@ -52,7 +52,7 @@ bool DataBuffer::Append( char* _pBuffer, unsigned int _uSize )
 		return false;
 
 	//Copy the data :
-	CopyMemory(pBuffer+uSize,_pBuffer,_uSize);
+	memcpy(pBuffer+uSize,_pBuffer,_uSize);
 
 	//Update the size of the buffer.
 	uSize+=_uSize;
@@ -62,7 +62,7 @@ bool DataBuffer::Append( char* _pBuffer, unsigned int _uSize )
 
 void DataBuffer::Pop( int _uSize )
 {
-	MoveMemory(pBuffer,pBuffer+_uSize,(uSize-_uSize));
+	memmove(pBuffer,pBuffer+_uSize,(uSize-_uSize));
 	uSize-=_uSize;
 }
 

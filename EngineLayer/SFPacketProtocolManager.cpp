@@ -1,5 +1,6 @@
-#include "stdafx.h"
 #include "SFPacketProtocolManager.h"
+#include <map>
+#include "SFStructure.h"
 
 int SFPacketProtocolManager::m_protocolIdentifier = -1;
 

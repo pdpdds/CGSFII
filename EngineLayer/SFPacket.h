@@ -1,6 +1,13 @@
 #pragma once
-#include "BasePacket.h"
-#include "SFFastCRC.h"
+#ifdef _WIN32
+#include "../BaseLayer/CGSFDefine.h"
+#include "../CGSFNet/BasePacket.h"
+#include "../BaseLayer/SFFastCRC.h"
+#else
+#include "../BaseLayerLinux/CGSFDefine.h"
+#include "../CGSFNetLinux/BasePacket.h"
+#include "../BaseLayerLinux/SFFastCRC.h"
+#endif
 
 class SFCompress;
 

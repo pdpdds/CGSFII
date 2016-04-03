@@ -1,4 +1,3 @@
-#include "StdAfx.h"
 #include "SFPacketProtocol.h"
 #include "SFEngine.h"
 

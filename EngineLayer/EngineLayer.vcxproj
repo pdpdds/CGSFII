@@ -115,9 +115,10 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4100;4800;4302;4311</DisableSpecificWarnings>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)/../ThirdParty/lib/x64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -167,15 +168,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include=".\SFExcel.cpp" />
-    <ClCompile Include=".\SFIni.cpp" />
-    <ClCompile Include=".\stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include=".\SFCheckSum.cpp" />
     <ClCompile Include=".\SFIOBuffer.cpp" />
     <ClCompile Include=".\SFPacket.cpp" />
     <ClCompile Include=".\SFPacketProtocol.cpp" />
@@ -195,7 +187,6 @@
     <ClCompile Include=".\SFSessionService.cpp" />
     <ClCompile Include="SFJsonPacket.cpp" />
     <ClCompile Include="SFJsonProtocol.cpp" />
-    <ClCompile Include="SFLogicDispatcher.cpp" />
     <ClCompile Include="SFMultiLogicDispatcher.cpp" />
     <ClCompile Include="SFObject.cpp" />
     <ClCompile Include="SFObserver.cpp" />
@@ -206,17 +197,12 @@
     <ClCompile Include="SFProtobufProtocol.cpp" />
     <ClCompile Include="SFProtocol.cpp" />
     <ClCompile Include="SFServerConnectionManager.cpp" />
-    <ClCompile Include="SFShouter.cpp" />
     <ClCompile Include="SFSubject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include=".\SFExcel.h" />
-    <ClInclude Include=".\SFIni.h" />
     <ClInclude Include=".\SFFactory.h" />
     <ClInclude Include=".\SFMacro.h" />
-    <ClInclude Include=".\stdafx.h" />
     <ClInclude Include=".\targetver.h" />
-    <ClInclude Include=".\SFCheckSum.h" />
     <ClInclude Include=".\SFIOBuffer.h" />
     <ClInclude Include=".\SFPacket.h" />
     <ClInclude Include=".\SFPacketProtocol.h" />
@@ -251,7 +237,6 @@
     <ClInclude Include="SFProtobufProtocol.h" />
     <ClInclude Include="SFProtocol.h" />
     <ClInclude Include="SFServerConnectionManager.h" />
-    <ClInclude Include="SFShouter.h" />
     <ClInclude Include="SFStructure.h" />
     <ClInclude Include="SFSubject.h" />
   </ItemGroup>

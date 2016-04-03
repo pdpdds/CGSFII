@@ -1,7 +1,12 @@
 #pragma once
-#include "EngineStructure.h"
-#include "BasePacket.h"
 #include "SFConstant.h"
-#include "IEngine.h"
+#ifdef _WIN32
+#include "../CGSFNet/EngineStructure.h"
+#include "../CGSFNet/BasePacket.h"
+#include "../CGSFNet/IEngine.h"
+#else
+#include "../CGSFNetLinux/EngineStructure.h"
+#include "../CGSFNetLinux/BasePacket.h"
+#include "../CGSFNetLinux/IEngine.h"
+#endif
 #include "SFStructure.h"
-#include "SFMacro.h"

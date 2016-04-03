@@ -6,16 +6,14 @@ public:
 	SFIOBuffer();
 	virtual ~SFIOBuffer();
 
-	VOID	InitIOBuf();
-	BOOL	AllocIOBuf(int iBufSize);
-	BOOL	FreeIOBuf();
+	void	InitIOBuf();
+	bool	AllocIOBuf(int iBufSize);
+	bool	FreeIOBuf();
 
 	int GetHead(){ return m_iHead; }
-	inline VOID SetHead(int Head) { m_iHead = Head; CalcUsedBufferSize(); }
-
+	inline void SetHead(int Head) { m_iHead = Head; CalcUsedBufferSize(); }
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-
 	int		AppendData(const char* pBuffer, int iSize);
 	int		GetData(char* pBuffer, int iSize);
 	int		RemoveData(int iSize);
@@ -34,11 +32,11 @@ public:
 
 private:
 	int		m_iHead;
-	INT		m_iTail;
+	int		m_iTail;
 
 	int		m_iBufSize;
 	
-	CHAR*	m_pBuffer;
+	char*	m_pBuffer;
 
 	int		m_iUsedBufferSize;
 };

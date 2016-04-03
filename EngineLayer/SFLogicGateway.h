@@ -1,6 +1,10 @@
 #pragma once
-#include "SFTSSyncQueue.h"
-#include "SFIOCPQueue.h"
+#ifdef _WIN32
+#include "../BaseLayer/SFIOCPQueue.h"
+#else
+#include "../BaseLayerLinux/SFTSSyncQueue.h"
+#endif // _WIN32
+
 
 class BasePacket;
 
@@ -13,10 +17,14 @@ public:
 	static SFLogicGateway* GetInstance();
 
 	bool PushPacket(BasePacket* pPacket);
-	BasePacket* PopPacket(int WaitTime = INFINITE);
+	BasePacket* PopPacket(int WaitTime = -1);
 
 private:
-	SFIOCPQueue<BasePacket> m_IOCPQueue;
+#ifdef _WIN32
+	SFIOCPQueue<BasePacket> m_queue;
+#else
+	SFTSSyncQueue<BasePacket> m_queue;
+#endif
 	static SFLogicGateway* m_pLogicGateway;
 	
 };

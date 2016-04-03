@@ -1,8 +1,5 @@
-#include "stdafx.h"
-#include "ILogicEntry.h"
 #include "SFEngine.h"
 #include "SFServerConnectionManager.h"
-#include "INetworkCallback.h"
 #include "SFPacketProtocolManager.h"
 
 bool ILogicEntry::ProcessConnectorPacket(BasePacket* pPacket)

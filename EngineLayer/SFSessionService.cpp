@@ -1,6 +1,5 @@
-#include "stdafx.h"
+#include "EngineLayerHeader.h"
 #include "SFSessionService.h"
-#include "ISession.h"
 
 bool SFSessionService::OnReceive(char* pData, unsigned short Length, _SessionDesc& desc)
 {

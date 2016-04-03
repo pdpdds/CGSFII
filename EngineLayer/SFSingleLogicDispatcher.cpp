@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "SFSingleLogicDispatcher.h"
 #include "SFEngine.h"
 #include "SFPacket.h"

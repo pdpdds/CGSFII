@@ -1,28 +1,26 @@
-#include "stdafx.h"
+#include "SFEngine.h"
 #include "SFServerConnectionManager.h"
 #include "SFPacketProtocolManager.h"
-#include "SFEngine.h"
-#include "XML/StringConversion.h"
-#include "XML/Markup.h"
+#include "Markup.h"
 #include <process.h>
 
 SFServerConnectionManager::SFServerConnectionManager()
-: m_hThread(NULL)
-, m_hTimerEvent(NULL)
-, m_dwThreadID(0)
-, m_bThreadEnd(false)
+//: m_hThread(NULL)
+//, m_hTimerEvent(NULL)
+//: m_dwThreadID(0)
+: m_bThreadEnd(false)
 {
 }
 
 
 SFServerConnectionManager::~SFServerConnectionManager()
 {
-	if (m_hThread)
+	/*(if (m_hThread)
 	{
 		m_bThreadEnd = true;
 		WaitForSingleObject(m_hThread, INFINITE);
 		CloseHandle(m_hThread);
-	}
+	}*/
 }
 
 /*
@@ -55,9 +53,9 @@ bool SFServerConnectionManager::Save()
 	return true;
 }*/
 
-bool SFServerConnectionManager::LoadConnectorList(WCHAR* szFileName)
+bool SFServerConnectionManager::LoadConnectorList(char* szFileName)
 {
-	CMarkup xml;
+	/*CMarkup xml;
 	bool result = xml.Load(szFileName);
 
 	if (result == false)
@@ -84,22 +82,23 @@ bool SFServerConnectionManager::LoadConnectorList(WCHAR* szFileName)
 
 		
 		AddConnectorInfo(connectorInfo);
-	}
+	}*/
 
 	return true;
 }
 
 void SFServerConnectionManager::AddConnectorInfo(_ConnectorInfo& connectorInfo)
 {
-	m_listConnectorInfo.push_back(connectorInfo);
+	/*m_listConnectorInfo.push_back(connectorInfo);
 	SFEngine::GetInstance()->GetPacketProtocolManager()->AddConnectorInfo(&connectorInfo);
 
 	LOG(INFO) << "AddConnectorInfo. " << "connectID: " << connectorInfo.connectorId << ", ProtocolID: " << (int)connectorInfo.packetProtocolId << ", IP: " << connectorInfo.szIP.data() << ", Port: " << connectorInfo.port;
-	google::FlushLogFiles(google::GLOG_INFO);
+	google::FlushLogFiles(google::GLOG_INFO);*/
 }
 
 bool SFServerConnectionManager::SetupServerReconnectSys()
 {
+/*
 	m_hTimerEvent = CreateEvent(NULL, FALSE, FALSE, L"ServerReconnectEvent");
 
 	LOG(INFO) << "SetupServerReconnectSys. " << "First Connect";
@@ -113,7 +112,7 @@ bool SFServerConnectionManager::SetupServerReconnectSys()
 		google::FlushLogFiles(google::GLOG_INFO);
 
 		int serial = -1;
-		serial = SFEngine::GetInstance()->AddConnector(info.connectorId, (char*)StringConversion::ToASCII(info.szIP.c_str()).c_str(), info.port);
+		//serial = SFEngine::GetInstance()->AddConnector(info.connectorId, (char*)StringConversion::ToASCII(info.szIP.c_str()).c_str(), info.port);
 
 		if (serial >= 0)
 		{
@@ -131,13 +130,13 @@ bool SFServerConnectionManager::SetupServerReconnectSys()
 	}
 	
 	LOG(INFO) << "ServerReconnectProc success";
-
+	*/
 	return true;
 }
 
-UINT SFServerConnectionManager::ServerReconnectProc(LPVOID arg)
+unsigned int SFServerConnectionManager::ServerReconnectProc(void* arg)
 {
-	SFServerConnectionManager * pConnectionManager = reinterpret_cast<SFServerConnectionManager*>(arg);
+	/*SFServerConnectionManager * pConnectionManager = reinterpret_cast<SFServerConnectionManager*>(arg);
 	
 	while (WaitForSingleObject(pConnectionManager->m_hTimerEvent, 1000) != WAIT_OBJECT_0 && pConnectionManager->m_bThreadEnd == false)
 	{
@@ -148,7 +147,7 @@ UINT SFServerConnectionManager::ServerReconnectProc(LPVOID arg)
 			if (info.connected == false)
 			{
 				int serial = -1;
-				serial = SFEngine::GetInstance()->AddConnector(info.connectorId, (char*)StringConversion::ToASCII(info.szIP.c_str()).c_str(), info.port);
+				//serial = SFEngine::GetInstance()->AddConnector(info.connectorId, (char*)StringConversion::ToASCII(info.szIP.c_str()).c_str(), info.port);
 
 				if (serial >= 0)
 				{
@@ -156,7 +155,7 @@ UINT SFServerConnectionManager::ServerReconnectProc(LPVOID arg)
 				}
 			}			
 		}
-	}
+	}*/
 
 	return 0;
 }

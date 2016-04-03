@@ -1,6 +1,6 @@
 #pragma once
 #include <list>
-#include "SFLock.h"
+//#include "SFLock.h"
 
 class IServerConnector;
 
@@ -12,20 +12,20 @@ public:
 	virtual ~SFServerConnectionManager();
 
 	bool SetupServerReconnectSys();
-	bool LoadConnectorList(WCHAR* szFileName);
-	HANDLE m_hTimerEvent;
+	bool LoadConnectorList(char* szFileName);
+	//HANDLE m_hTimerEvent;
 	bool SetConnectorState(int connectorId, bool connected);
 
 	void AddConnectorInfo(_ConnectorInfo& connectorInfo);
 
 protected:
-	UINT static __stdcall ServerReconnectProc(LPVOID arg);
+	unsigned int static __stdcall ServerReconnectProc(void* arg);
 
 private:
 	std::list<_ConnectorInfo> m_listConnectorInfo;
-	HANDLE m_hThread;
+	//HANDLE m_hThread;
 	bool  m_bThreadEnd;
-	DWORD  m_dwThreadID;
+	//DWORD  m_dwThreadID;
 
-	SFLock m_Lock;
+	//SFLock m_Lock;
 };

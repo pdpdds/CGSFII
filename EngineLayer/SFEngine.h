@@ -1,15 +1,15 @@
 #pragma once
-#include "ErrorCode.h"
-#include "IEngine.h"
-#include "INetworkEngine.h"
-#include "IPacketProtocol.h"
-#include "EngineConstant.h"
+#include "EngineLayerHeader.h"
 #include "SFConfigure.h"
-#include "ILogicDispatcher.h"
-#include "ILogicEntry.h"
-#include "TinyThread/tinythread.h"
+
+#ifdef _WIN32
+#include "../BaseLayer/tinythread.h"
+#include "../BaseLayer/SFObjectPool.h"
+#else
+#include "../BaseLayerLinux/tinythread.h"
+#include "../BaseLayerLinux/SFObjectPool.h"
+#endif
 #include <vector>
-#include "SFObjectPool.h"
 
 class SFServerConnectionManager;
 class SFPacketProtocolManager;
@@ -57,7 +57,7 @@ public:
 //Server Connection Manager
 	SFServerConnectionManager* GetServerConnectionManager(){ return m_pServerConnectionManager; }
 	bool SetupServerReconnectSys();
-	bool LoadConnectorList(WCHAR* szFileName);
+	bool LoadConnectorList(char* szFileName);
 	int  AddListener(char* szIP, unsigned short port, int packetProtocolId);
 	int  AddConnector(int connectorId, char* szIP, unsigned short port);
 

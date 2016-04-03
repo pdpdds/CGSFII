@@ -1,6 +1,6 @@
 #pragma once
 #include "SFLogicDispatcher.h"
-#include "TinyThread/tinythread.h"
+#include "tinythread.h"
 
 class SFSingleLogicDispatcher : public SFLogicDispatcher
 {

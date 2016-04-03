@@ -1,7 +1,6 @@
-#include "StdAfx.h"
 #include "SFLogicGateway.h"
 
-SFLogicGateway* SFLogicGateway::m_pLogicGateway = NULL;
+SFLogicGateway* SFLogicGateway::m_pLogicGateway = nullptr;
 
 SFLogicGateway::SFLogicGateway(void)
 {
@@ -13,17 +12,17 @@ SFLogicGateway::~SFLogicGateway(void)
 
 bool SFLogicGateway::PushPacket( BasePacket* pPacket )
 {
-	return m_IOCPQueue.Push(pPacket);
+	return m_queue.Push(pPacket);
 }
 
 BasePacket* SFLogicGateway::PopPacket(int WaitTime)
 {
-	return m_IOCPQueue.Pop(WaitTime);
+	return m_queue.Pop(WaitTime);
 }
 
 SFLogicGateway* SFLogicGateway::GetInstance()
 {
-	if (m_pLogicGateway == NULL)
+	if (m_pLogicGateway == nullptr)
 		m_pLogicGateway = new SFLogicGateway();
 
 	return m_pLogicGateway;

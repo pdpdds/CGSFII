@@ -1,5 +1,6 @@
-#include "StdAfx.h"
+#include "SFConstant.h"
 #include "SFIOBuffer.h"
+#include "string.h"
 
 SFIOBuffer::SFIOBuffer(void)
 : m_iBufSize(0)
@@ -13,7 +14,7 @@ SFIOBuffer::~SFIOBuffer(void)
 	FreeIOBuf();
 }
 
-VOID SFIOBuffer::InitIOBuf()
+void SFIOBuffer::InitIOBuf()
 {
 	m_iTail = 0;
 	m_iHead = 0;
@@ -109,42 +110,42 @@ int	SFIOBuffer::RemoveData(int iSize)
 	return iSize;
 }
 
-BOOL SFIOBuffer::AllocIOBuf( int iBufSize )
+bool SFIOBuffer::AllocIOBuf( int iBufSize )
 {
 	if(iBufSize <= 0)
 		iBufSize = MAX_IO_SIZE;
 
 	if(iBufSize > MAX_IO_SIZE)
 	{		
-		return FALSE;
+		return false;
 	}
 
 	m_pBuffer = new char[iBufSize];
 	if(m_pBuffer == NULL)
 	{
-		return FALSE;
+		return false;
 	}
 
 	m_iBufSize = iBufSize;
 
 	InitIOBuf();
 
-	return TRUE;
+	return true;
 }
 
-BOOL SFIOBuffer::FreeIOBuf()
+bool SFIOBuffer::FreeIOBuf()
 {
 	if(m_pBuffer)
 	{
 		delete[] m_pBuffer;
-		m_pBuffer = NULL;
+		m_pBuffer = nullptr;
 	}
 
 	m_iBufSize = 0;
 	m_iHead = m_iTail = 0;
 	m_iUsedBufferSize = 0;
 
-	return TRUE;
+	return true;
 
 }
 

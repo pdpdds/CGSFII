@@ -1,6 +1,11 @@
 #pragma once
-#include "ISessionService.h"
-#include "IPacketProtocol.h"
+#ifdef _WIN32
+#include "../CGSFNet/ISessionService.h"
+#include "../CGSFNet/IPacketProtocol.h"
+#else
+#include "../CGSFNetLinux/ISessionService.h"
+#include "../CGSFNetLinux/IPacketProtocol.h"
+#endif
 
 class SFSessionService : public ISessionService
 {

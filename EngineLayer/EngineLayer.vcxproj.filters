@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="DataLoader">
-      <UniqueIdentifier>{20cc6690-0fe2-447b-b3ae-3d8931e63fb9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -16,9 +13,6 @@
     </Filter>
     <Filter Include="Logic">
       <UniqueIdentifier>{770a9c60-f72d-483c-bd26-9bb51653c8db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shouter">
-      <UniqueIdentifier>{d07dc62e-052f-4e2a-a608-ed2f1312111a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Packet\ProtobufPacket">
       <UniqueIdentifier>{27197d65-2387-4f0f-9e99-1d711b364bd1}</UniqueIdentifier>
@@ -40,23 +34,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include=".\SFExcel.cpp">
-      <Filter>DataLoader</Filter>
-    </ClCompile>
-    <ClCompile Include=".\SFIni.cpp">
-      <Filter>DataLoader</Filter>
-    </ClCompile>
-    <ClCompile Include=".\stdafx.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include=".\LogicEntry.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
     <ClCompile Include=".\SFLogicGateway.cpp">
       <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="SFShouter.cpp">
-      <Filter>Shouter</Filter>
     </ClCompile>
     <ClCompile Include="SFProtobufPacketImpl.cpp">
       <Filter>Packet\ProtobufPacket</Filter>
@@ -86,9 +68,6 @@
       <Filter>Packet\CGSFPacket</Filter>
     </ClCompile>
     <ClCompile Include=".\SFIOBuffer.cpp">
-      <Filter>Packet\CGSFPacket</Filter>
-    </ClCompile>
-    <ClCompile Include=".\SFCheckSum.cpp">
       <Filter>Packet\CGSFPacket</Filter>
     </ClCompile>
     <ClCompile Include="SFCGSFPacketProtocol.cpp">
@@ -124,9 +103,6 @@
     <ClCompile Include="SFPacketProtocolManager.cpp">
       <Filter>Packet\PacketProtocol</Filter>
     </ClCompile>
-    <ClCompile Include="SFLogicDispatcher.cpp">
-      <Filter>Dispatcher</Filter>
-    </ClCompile>
     <ClCompile Include="SFPacketPool.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -150,19 +126,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include=".\SFExcel.h">
-      <Filter>DataLoader</Filter>
-    </ClInclude>
-    <ClInclude Include=".\SFIni.h">
-      <Filter>DataLoader</Filter>
-    </ClInclude>
     <ClInclude Include=".\SFFactory.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include=".\SFMacro.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include=".\stdafx.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include=".\targetver.h">
@@ -176,9 +143,6 @@
     </ClInclude>
     <ClInclude Include=".\SFLogicGateway.h">
       <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="SFShouter.h">
-      <Filter>Shouter</Filter>
     </ClInclude>
     <ClInclude Include="SFConstant.h">
       <Filter>Common</Filter>
@@ -217,9 +181,6 @@
       <Filter>Packet\CGSFPacket</Filter>
     </ClInclude>
     <ClInclude Include=".\SFIOBuffer.h">
-      <Filter>Packet\CGSFPacket</Filter>
-    </ClInclude>
-    <ClInclude Include=".\SFCheckSum.h">
       <Filter>Packet\CGSFPacket</Filter>
     </ClInclude>
     <ClInclude Include="SFCGSFPacketProtocol.h">

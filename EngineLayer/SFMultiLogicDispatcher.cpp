@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "SFMultiLogicDispatcher.h"
 #include "SFEngine.h"
 #include "SFPacketPool.h"
@@ -93,7 +92,7 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 				SFIOCPQueue<BasePacket>* pQueue = iter.second;
 				pQueue->Push(pPacket);
 //일단 한스레드에만 패킷을 넘기고 전체 로직 스레드에게 타이머 패킷을 보낼 수 있도록 나중에 수정한다
-				break;
+				continue;
 			}			
 		}
 		else if (pPacket->GetPacketType() == SFPACKET_SERVERSHUTDOWN)
@@ -198,4 +197,6 @@ bool SFMultiLogicDispatcher::ChangeChannel(int serial, int channel)
 
 	ClientInfo& info = iter->second;
 	info.channel = channel;
+
+	return true;
 }

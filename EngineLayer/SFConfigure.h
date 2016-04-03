@@ -1,7 +1,5 @@
 #pragma once
-
-class IXMLStreamWriter;
-class IXMLStreamReader;
+#include <string>
 
 //////////////////////////////////////////////////////////////
 //Shouter Structure
@@ -32,15 +30,15 @@ public:
 	SFConfigure(void);
 	virtual ~SFConfigure(void);
 
-	BOOL Initialize();
+	bool Initialize();
 
-	BOOL Read(const WCHAR* pFileName);
-	BOOL Write(const WCHAR* pFileName);
+	bool Read(const char* pFileName);
+	bool Write(const char* pFileName);
 
 	_EngineConfig* GetConfigureInfo(){return &m_ConfigureInfo;}
 
-	void Serialize(IXMLStreamWriter* out) const;
-	void Deserialize(IXMLStreamReader* in);
+	//void Serialize(IXMLStreamWriter* out) const;
+	//void Deserialize(IXMLStreamReader* in);
 
 protected:
 	

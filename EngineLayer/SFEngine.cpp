@@ -1,13 +1,11 @@
-#include "stdafx.h"
 #include "SFEngine.h"
 #include <stdlib.h>  
 #include "ILogicDispatcher.h"
 #include "SFSessionService.h"
 #include "SFSingleLogicDispatcher.h"
-#include "SFUtil.h"
 #include "SFServerConnectionManager.h"
 #include "SFPacketProtocolManager.h"
-#include "XMl/StringConversion.h"
+
 
 #pragma comment(lib, "BaseLayer.lib")
 
@@ -20,7 +18,7 @@ SFEngine::SFEngine()
 {		
 
 	google::InitGoogleLogging("CGSFII");
-	m_config.Read(L"EngineConfig.xml");
+	//m_config.Read(L"EngineConfig.xml");
 
 #ifdef _DEBUG
 	_putenv_s("GLOG_logbufsecs", "0");
@@ -54,9 +52,9 @@ NET_ERROR_CODE SFEngine::CreateEngine(char* szModuleName)
 	if (m_engineHandle == nullptr)
 		return NET_ERROR_CODE::ENGINE_INIT_CREAT_ENGINE_LOAD_DLL_FAIL;
 
-	CREATENETWORKENGINE *pfunc;
-	pfunc = (CREATENETWORKENGINE*)::GetProcAddress(m_engineHandle, "CreateNetworkEngine");
-	m_pNetworkEngine = pfunc(this);
+	//CREATENETWORKENGINE *pfunc;
+	//pfunc = (CREATENETWORKENGINE*)::GetProcAddress(m_engineHandle, "CreateNetworkEngine");
+	//m_pNetworkEngine = pfunc(this);
 
 	if (m_pNetworkEngine == nullptr)
 		return NET_ERROR_CODE::ENGINE_INIT_CREAT_ENGINE_FUNC_NULL;
@@ -94,7 +92,8 @@ void SFEngine::SetLogFolder()
 	WCHAR szFilePath[MAX_PATH] = { 0, };
 	GetModuleFileName(nullptr, szFilePath, MAX_PATH);
 
-	WCHAR* path = SFUtil::ExtractPathInfo(szFilePath, SFUtil::PATH_DIR);
+	//WCHAR* path = SFUtil::ExtractPathInfo(szFilePath, SFUtil::PATH_DIR);
+	WCHAR* path = L"./";
 	SetCurrentDirectory(path);
 
 	std::wstring szLogPath = path;
@@ -106,11 +105,11 @@ void SFEngine::SetLogFolder()
 	std::wstring szLogWarning = szLogPath + L"WARNING_";
 	std::wstring szLogError = szLogPath + L"ERROR_";
 
-	google::SetLogDestination(google::GLOG_INFO, (char*)StringConversion::ToASCII(szLogInfo).c_str());
-	google::SetLogDestination(google::GLOG_WARNING, (char*)StringConversion::ToASCII(szLogWarning).c_str());
-	google::SetLogDestination(google::GLOG_ERROR, (char*)StringConversion::ToASCII(szLogError).c_str());
+	//google::SetLogDestination(google::GLOG_INFO, (char*)StringConversion::ToASCII(szLogInfo).c_str());
+	//google::SetLogDestination(google::GLOG_WARNING, (char*)StringConversion::ToASCII(szLogWarning).c_str());
+	//google::SetLogDestination(google::GLOG_ERROR, (char*)StringConversion::ToASCII(szLogError).c_str());
 
-	LOG(INFO) << "Log Destination " << (char*)StringConversion::ToASCII(szLogPath).c_str();	
+	//LOG(INFO) << "Log Destination " << (char*)StringConversion::ToASCII(szLogPath).c_str();	
 }
 
 NET_ERROR_CODE SFEngine::Intialize(ILogicEntry* pLogicEntry, ILogicDispatcher* pDispatcher)
@@ -135,7 +134,7 @@ NET_ERROR_CODE SFEngine::Intialize(ILogicEntry* pLogicEntry, ILogicDispatcher* p
 	
 	LOG(INFO) << "Basic Port: " << pInfo->serverPort;
 
-	std::string szNetworkEngineName = StringConversion::ToASCII(pInfo->engineName);
+	std::string szNetworkEngineName;// = StringConversion::ToASCII(pInfo->engineName);
 	LOG(INFO) << "NetworkEngine Create : " << szNetworkEngineName.c_str();
 
 	LOG(INFO) << "MaxAccept : " << pInfo->maxAccept;
@@ -236,8 +235,8 @@ bool SFEngine::Start(int protocolId)
 {
 	bool bResult = false;
 	_EngineConfig* pInfo = m_config.GetConfigureInfo();
-	LOG(INFO) << "Engine Starting... IP : " << (char*)StringConversion::ToASCII(pInfo->serverIP).c_str() << " Port : " << pInfo->serverPort;
-	char* serverIP = (char*)StringConversion::ToASCII(pInfo->serverIP).c_str();
+//	LOG(INFO) << "Engine Starting... IP : " << (char*)StringConversion::ToASCII(pInfo->serverIP).c_str() << " Port : " << pInfo->serverPort;
+	char* serverIP = "28";//(char*)StringConversion::ToASCII(pInfo->serverIP).c_str();
 	short port = pInfo->serverPort;
 
 	if (protocolId >= 0)
@@ -371,7 +370,7 @@ int SFEngine::AddListener(char* szIP, unsigned short port, int packetProtocolId)
 	return listenerId;
 }
 
-bool SFEngine::LoadConnectorList(WCHAR* szFileName)
+bool SFEngine::LoadConnectorList(char* szFileName)
 {
 	return m_pServerConnectionManager->LoadConnectorList(szFileName);
 }

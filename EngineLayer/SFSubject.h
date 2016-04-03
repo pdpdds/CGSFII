@@ -12,15 +12,15 @@ public:
 	SFSubject(void);
 	virtual ~SFSubject(void);
 
-	BOOL AddObserver(SFObserver* pObject);
-	BOOL DelObserver(SFObserver* pObject);
+	bool AddObserver(SFObserver* pObject);
+	bool DelObserver(SFObserver* pObject);
 
-	BOOL PropagateMessage(SFMessage* pMessage);
+	bool PropagateMessage(SFMessage* pMessage);
 
 	int GetObserverCount(){ return (int)m_Observerlist.size();}
 
 protected:
-	BOOL CheckDuplicate(SFObserver* pObject);
+	bool CheckDuplicate(SFObserver* pObject);
 
 private:
 	Observerlist m_Observerlist;
