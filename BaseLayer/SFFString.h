@@ -1,6 +1,10 @@
 #pragma once
 #include <vector>
+#ifndef _WIN32
 #include "CGSFDefine.h"
+#else
+#include <Windows.h>
+#endif
 
 class SFFString;
 

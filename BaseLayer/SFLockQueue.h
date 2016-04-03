@@ -1,10 +1,9 @@
 #pragma once
-#include "SFTSSyncQueue.h"
 #include "SFLock.h"
 #include <queue>
 
 template <typename T>
-class SFLockQueue : public SFTSSyncQueue<T>
+class SFLockQueue
 {
 	typedef std::queue<T*> LockQueue;
 
@@ -18,15 +17,15 @@ public:
 		Finally();
 	}
 
-	virtual bool Push(T* pMsg) 
+	bool Push(T* pMsg) 
 	{
 		SFLockHelper LockHelper(&m_Lock);
 		m_Queue.push(pMsg);
 
-		return TRUE;
+		return true;
 	}
 
-	virtual T* Pop() 
+	T* Pop(int wait)
 	{
 		SFLockHelper LockHelper(&m_Lock);
 		if(!m_Queue.empty())

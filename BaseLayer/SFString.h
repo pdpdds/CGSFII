@@ -1,4 +1,9 @@
 #pragma once
+#ifdef _WIN32
+#include "../BaseLayer/Macro.h"
+#else
+#include "../BaseLayerLinux/Macro.h"
+#endif
 
 #define DECLARE_STRING_TYPE(sType, iLength) \
 struct sType : public SFString \

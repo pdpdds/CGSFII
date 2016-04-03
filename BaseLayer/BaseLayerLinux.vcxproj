@@ -74,10 +74,8 @@
     <ClInclude Include="SFQueue.h" />
     <ClInclude Include="SFRegexChecker.h" />
     <ClInclude Include="SFScheduler.h" />
-    <ClInclude Include="SFString.h" />
     <ClInclude Include="SFTimer.h" />
     <ClInclude Include="SFTree.h" />
-    <ClInclude Include="SFTSSyncQueue.h" />
     <ClInclude Include="tinythread.h" />
     <ClInclude Include="VMemPool.h" />
   </ItemGroup>
@@ -115,6 +113,11 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>lib$(ProjectName)</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(StlIncludeDirectories);%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>

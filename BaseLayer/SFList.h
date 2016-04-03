@@ -1,5 +1,9 @@
 #pragma once
+#ifndef _WIN32
 #include "CGSFDefine.h"
+#else
+#include <Windows.h>
+#endif
 
 typedef struct _node
 {
@@ -15,7 +19,7 @@ public:
 	SFList();
 	virtual ~SFList();
 
-	BOOL IsEmpty();
+	bool IsEmpty();
 	int GetCount();
 	OPOS Findindex(int nIndex);
 	OPOS Find(void* pObject, OPOS posAfter = NULL);

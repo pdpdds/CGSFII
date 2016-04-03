@@ -1,7 +1,11 @@
 #pragma once
 #include <queue>
-#include "SFLock.h"
-#include "SFMessage.h"
+#ifdef _WIN32
+#include "../BaseLayer/SFLock.h"
+#else
+#include "../BaseLayerLinux/SFLock.h"
+#endif
+#include "SFObjectPool.h"
 
 template<typename T> class SFObjectPool
 {

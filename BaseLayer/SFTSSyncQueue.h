@@ -11,7 +11,7 @@ public:
 	virtual ~SFTSSyncQueue(void){}
 
 	virtual bool Push(T* pMsg) = 0;
-	virtual T* Pop() = 0;
+	virtual T* Pop((int wait = -1) = 0;
 
 protected:
 	virtual bool Initialize() = 0;

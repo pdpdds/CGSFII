@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 
 template <typename T>
 class SFIOCPQueue
@@ -36,15 +37,15 @@ public:
 		return (T*)(pCompletionKey);
 	}
 
-	T* Pop(int Wait = INFINITE) 
+	T* Pop(int Wait = -1) 
 	{
 		ULONG_PTR pCompletionKey = 0;
-		DWORD NumberOfBytesTransferred = 0;
+		DWORD numberOfBytesTransferred = 0;
 		LPOVERLAPPED pOverlapped = NULL;
 
 		//SFASSERT( FALSE != ::GetQueuedCompletionStatus(m_hIOCP, &NumberOfBytesTransferred, &pCompletionKey, &pOverlapped, Wait));
 
-		if(FALSE != ::GetQueuedCompletionStatus(m_hIOCP, &NumberOfBytesTransferred, &pCompletionKey, &pOverlapped, Wait))
+		if(FALSE != ::GetQueuedCompletionStatus(m_hIOCP, (LPDWORD)&numberOfBytesTransferred, &pCompletionKey, &pOverlapped, Wait))
 			return (T*)(pCompletionKey);
 
 		return nullptr;

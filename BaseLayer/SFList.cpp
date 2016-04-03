@@ -50,7 +50,7 @@ void SFList::_DelNode(OPOS Node)
 	m_posUsed = Node;
 }
 
-BOOL SFList::IsEmpty()
+bool SFList::IsEmpty()
 {
 	return (m_posHead == NULL && m_posTail == NULL);
 }

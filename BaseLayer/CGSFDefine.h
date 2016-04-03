@@ -36,3 +36,15 @@
 #define UINT32 unsigned int
 #endif
 
+#ifndef UINT
+#define UINT unsigned int
+#endif
+
+#ifndef CHAR
+#define CHAR char
+#endif
+
+#ifndef SHORT
+#define SHORT short
+#endif
+

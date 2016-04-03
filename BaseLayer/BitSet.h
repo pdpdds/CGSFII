@@ -1,5 +1,9 @@
 #pragma once
+#ifndef _WIN32
 #include "CGSFDefine.h"
+#else
+#include <Windows.h>
+#endif
 
 class CBitSet  
 {
