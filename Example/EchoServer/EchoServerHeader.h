@@ -1,9 +1,13 @@
 #pragma once
 #ifdef _WIN32
 #include <windows.h>
+#include "SFEngine.h"
+#else
+#include "../EngineLayerLinux/SFEngine.h"
 #endif
 
-#include "SFEngine.h"
+
+
 
 #ifdef _WIN32
 #pragma comment(lib, "EngineLayer.lib")

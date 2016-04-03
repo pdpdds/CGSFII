@@ -1,15 +1,27 @@
 #include "EchoServerHeader.h"
 #include "EchoLogicEntry.h"
+
+#ifdef _WIN32
 #include "SFCGSFPacketProtocol.h"
 #include "SFMultiLogicDispatcher.h"
 #include "DBStruct.h"
 #include "SFZdb.h"
+#else
+#include "../EngineLayerLinux/SFCGSFPacketProtocol.h"
+#include "../EngineLayerLinux/SFMultiLogicDispatcher.h"
+//#include "DBStruct.h"
+//#include "SFZdb.h"
+#endif
 
-SFZdb* g_db = nullptr;
+//SFZdb* g_db = nullptr;
 
 void CreateDatabase();
 
+#ifdef _WIN32
 int _tmain(int argc, _TCHAR* argv[])
+#else
+int main()
+#endif
 {
 	EchoLogicEntry* pLogicEntry = new EchoLogicEntry();
 	
@@ -37,6 +49,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 void CreateDatabase()
 {
-	g_db = new SFZdb();
+	//g_db = new SFZdb();
 
 }

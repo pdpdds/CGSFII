@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EchoLogicEntry.h" />
+    <ClInclude Include="EchoServerHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EchoLogicEntry.cpp" />
@@ -57,7 +58,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -70,10 +71,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(StlIncludeDirectories);%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <LibraryDependencies>
-      </LibraryDependencies>
+      <LibraryDependencies>Zlib;protobuf;ACE;GL;GLU;glut;SDL2;SDL2_image;BaseLayerLinux;EngineLayerLinux;glog;m;pthread;stdc++;boost</LibraryDependencies>
+      <AdditionalDependencies>$(StlAdditionalDependencies);%(AdditionalDependencies);</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);home/darkx3/projects</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

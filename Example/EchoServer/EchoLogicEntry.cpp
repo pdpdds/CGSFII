@@ -1,4 +1,9 @@
-#include "EchoServerHeader.h"
+#ifdef _WIN32
+#include "SFEngine.h"
+#else
+#include "../EngineLayerLinux/SFEngine.h"
+#endif // _WIN32
+
 #include "EchoLogicEntry.h"
 
 EchoLogicEntry::EchoLogicEntry(void)
