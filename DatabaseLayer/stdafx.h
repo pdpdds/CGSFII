@@ -12,7 +12,7 @@
 // TODO: reference additional headers your program requires here
 #include <windows.h>
 #include "DBStruct.h"
-#include "EngineStructure.h"
+#include "../CGSFNet/EngineStructure.h"
 
 #include <ace/ace.h>
 #include <ace/Thread_Manager.h>

@@ -3,8 +3,8 @@
 #include "SFDBAdaptor.h"
 #include "SFObjectPool.h"
 #include "SFDBPacketSystem.h"
-#include "BasePacket.h"
-#include "SFIni.h"
+#include "../CGSFNet/BasePacket.h"
+#include "../BaseLayer/Macro.h"
 
 class SFDatabase
 {
@@ -19,7 +19,7 @@ public:
 
 	BOOL Initialize()
 	{
-		SFIni ini;
+		/*SFIni ini;
 		_DBConnectionInfo Info;
 
 		ini.SetPathName(_T("./DataSource.ini"));
@@ -30,7 +30,7 @@ public:
 		ini.GetString(L"DataSourceInfo",L"IP",Info.IP, 20);
 		Info.Port = ini.GetInt(L"DataSourceInfo",L"PORT",0);
 
-		SetInfo(Info);
+		SetInfo(Info);*/
 
 		return m_pAdaptor->Initialize(&m_Info);
 	}

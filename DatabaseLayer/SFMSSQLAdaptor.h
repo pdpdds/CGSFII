@@ -11,7 +11,7 @@ public:
 	SFMSSQL* GetObject(){return m_pMSSql;}
 
 protected:
-	virtual BOOL Initialize(_DBConnectionInfo* pInfo) override;	
+	virtual bool Initialize(_DBConnectionInfo* pInfo) override;
 
 private:
 	SFMSSQL* m_pMSSql;	

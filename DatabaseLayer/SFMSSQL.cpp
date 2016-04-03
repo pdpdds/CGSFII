@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "SFMSSQL.h"
-#include <XML/StringConversion.h>
 
 SFMSSQL::SFMSSQL(void)
 {
@@ -27,9 +26,9 @@ SFMSSQL::~SFMSSQL(void)
 
 BOOL SFMSSQL::Initialize(_DBConnectionInfo* pInfo)
 {
-	if(FALSE == ConnectDB((char*)StringConversion::ToASCII(pInfo->szDBName).c_str(), 
+	/*if(FALSE == ConnectDB((char*)StringConversion::ToASCII(pInfo->szDBName).c_str(), 
 		                  (char*)StringConversion::ToASCII(pInfo->szUser).c_str(), 
-						  (char*)StringConversion::ToASCII(pInfo->szPassword).c_str()))
+						  (char*)StringConversion::ToASCII(pInfo->szPassword).c_str()))*/
 		return FALSE;
 
 	return TRUE;

@@ -12,7 +12,7 @@ public:
 	SFZdb* GetObject(){ return m_pZdb; }
 
 protected:
-	virtual BOOL Initialize(_DBConnectionInfo* pInfo) override;
+	virtual bool Initialize(_DBConnectionInfo* pInfo) override;
 
 private:
 	SFZdb* m_pZdb;

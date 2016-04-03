@@ -15,7 +15,7 @@ SFZdbAdpator::~SFZdbAdpator(void)
 		delete m_pZdb;
 }
 
-BOOL SFZdbAdpator::Initialize(_DBConnectionInfo* pInfo)
+bool SFZdbAdpator::Initialize(_DBConnectionInfo* pInfo)
 {
 	m_pZdb = new SFZdb();
 

@@ -14,7 +14,7 @@ SFMSSQLAdaptor::~SFMSSQLAdaptor(void)
 		delete m_pMSSql;
 }
 
-BOOL SFMSSQLAdaptor::Initialize(_DBConnectionInfo* pInfo)
+bool SFMSSQLAdaptor::Initialize(_DBConnectionInfo* pInfo)
 {
 	m_pMSSql = new SFMSSQL();
 
