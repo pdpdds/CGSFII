@@ -59,6 +59,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Application</ConfigurationType>
+    <UseOfStl>libstdc++_shared</UseOfStl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -74,9 +75,9 @@
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <LibraryDependencies>Zlib;protobuf;ACE;GL;GLU;glut;SDL2;SDL2_image;BaseLayerLinux;EngineLayerLinux;glog;m;pthread;stdc++;boost</LibraryDependencies>
-      <AdditionalDependencies>$(StlAdditionalDependencies);%(AdditionalDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);home/darkx3/projects</AdditionalLibraryDirectories>
+      <LibraryDependencies>glog;boost_system;boost_thread;protobuf;BaseLayerLinux;EngineLayerLinux</LibraryDependencies>
+      <AdditionalDependencies>$(StlAdditionalDependencies)%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);/home/darkx3/projects</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
