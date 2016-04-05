@@ -157,8 +157,6 @@
     <ClCompile Include=".\SFRegexChecker.cpp" />
     <ClCompile Include="BitSet.cpp" />
     <ClCompile Include="crc.cpp" />
-    <ClCompile Include="json\JsonBuilder.cpp" />
-    <ClCompile Include="json\JsonNode.cpp" />
     <ClCompile Include="Markup.cpp" />
     <ClCompile Include="SFCompressZLib.cpp" />
     <ClCompile Include="SFEncryptionXOR.cpp" />
@@ -175,13 +173,6 @@
     <ClInclude Include="CGSFDefine.h" />
     <ClInclude Include="crc.h" />
     <ClInclude Include="GPGLockFreeQueue.h" />
-    <ClInclude Include="json\DataTypeConvertor.h" />
-    <ClInclude Include="json\elements.h" />
-    <ClInclude Include="json\JsonBuilder.h" />
-    <ClInclude Include="json\JsonNode.h" />
-    <ClInclude Include="json\reader.h" />
-    <ClInclude Include="json\visitor.h" />
-    <ClInclude Include="json\writer.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="SFCompressor.h" />
     <ClInclude Include="SFCompressZLib.h" />
@@ -204,11 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include=".\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="json\elements.inl" />
-    <None Include="json\reader.inl" />
-    <None Include="json\writer.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,7 +5,7 @@
 #include "SFCGSFPacketProtocol.h"
 #include "SFMultiLogicDispatcher.h"
 #include "DBStruct.h"
-#include "SFZdb.h"
+//#include "SFZdb.h"
 #else
 #include "../EngineLayerLinux/SFCGSFPacketProtocol.h"
 #include "../EngineLayerLinux/SFMultiLogicDispatcher.h"

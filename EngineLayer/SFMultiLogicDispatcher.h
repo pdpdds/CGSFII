@@ -4,6 +4,7 @@
 #ifdef _WIN32
 #include "SFIOCPQueue.h"
 #include "tinythread.h"
+#include "SFLockQueue.h"
 #else
 #include "../BaseLayerLinux/SFLockQueue.h"
 #include "../BaseLayerLinux/tinythread.h"

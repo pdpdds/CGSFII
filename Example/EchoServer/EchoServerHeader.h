@@ -6,10 +6,7 @@
 #include "../EngineLayerLinux/SFEngine.h"
 #endif
 
-
-
-
 #ifdef _WIN32
 #pragma comment(lib, "EngineLayer.lib")
-#pragma comment(lib, "DatabaseLayer.lib")
+//#pragma comment(lib, "DatabaseLayer.lib")
 #endif

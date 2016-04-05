@@ -1,17 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="json">
-      <UniqueIdentifier>{f7ec9860-5053-435f-b8af-857fd9b710fc}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="json\JsonBuilder.cpp">
-      <Filter>json</Filter>
-    </ClCompile>
-    <ClCompile Include="json\JsonNode.cpp">
-      <Filter>json</Filter>
-    </ClCompile>
     <ClCompile Include="crc.cpp" />
     <ClCompile Include="BitSet.cpp" />
     <ClCompile Include="Markup.cpp" />
@@ -25,27 +14,6 @@
     <ClCompile Include="tinythread.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="json\writer.h">
-      <Filter>json</Filter>
-    </ClInclude>
-    <ClInclude Include="json\visitor.h">
-      <Filter>json</Filter>
-    </ClInclude>
-    <ClInclude Include="json\elements.h">
-      <Filter>json</Filter>
-    </ClInclude>
-    <ClInclude Include="json\JsonBuilder.h">
-      <Filter>json</Filter>
-    </ClInclude>
-    <ClInclude Include="json\JsonNode.h">
-      <Filter>json</Filter>
-    </ClInclude>
-    <ClInclude Include="json\reader.h">
-      <Filter>json</Filter>
-    </ClInclude>
-    <ClInclude Include="json\DataTypeConvertor.h">
-      <Filter>json</Filter>
-    </ClInclude>
     <ClInclude Include="crc.h" />
     <ClInclude Include="BaseCommonHeader.h" />
     <ClInclude Include="BitSet.h" />
@@ -75,16 +43,5 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include=".\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="json\writer.inl">
-      <Filter>json</Filter>
-    </None>
-    <None Include="json\elements.inl">
-      <Filter>json</Filter>
-    </None>
-    <None Include="json\reader.inl">
-      <Filter>json</Filter>
-    </None>
   </ItemGroup>
 </Project>
