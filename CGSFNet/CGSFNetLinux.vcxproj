@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>ACE_AS_STATIC_LIBS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <LibraryDependencies>dl;pthread;ACE</LibraryDependencies>
+      <LibraryDependencies>ACE</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

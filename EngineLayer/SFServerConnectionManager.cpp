@@ -2,8 +2,13 @@
 #include "SFServerConnectionManager.h"
 #include "SFPacketProtocolManager.h"
 
-#include "Markup.h"
+#ifdef _WIN32
 #include <process.h>
+#else
+#include <pthread.h>
+#include <time.h>
+#include <sys/time.h>
+#endif
 
 #include "../BaseLayer/Markup.h"
  
@@ -154,7 +159,26 @@ bool SFServerConnectionManager::SetupServerReconnectSys()
 		}
 	}
 
+#ifdef _WIN32
 	m_hThread = _beginthreadex(0, NULL, ServerReconnectProc, this, 0, (unsigned*)&m_dwThreadID);
+#else
+	pthread_t   *threadId;
+	
+	void        *thrdparam; //parameter to be passed to the thread when it 
+							//begins execution
+	pthread_attr_t  attr;
+	int rc = 0;			
+	unsigned stacksize = 8192;
+	if (rc = pthread_attr_init(&attr))
+		return false;
+			
+	if (rc = pthread_attr_setstacksize(&attr, stacksize))
+		return false;
+				
+	if (rc = pthread_create(threadId, &attr, (void*(*)(void*))ServerReconnectProc,
+		thrdparam))
+		return false;
+#endif
 
 	if (m_hThread == 0)
 	{
@@ -179,7 +203,7 @@ bool SFServerConnectionManager::WaitForSingleObject()
 	struct timespec ts;
 	struct timeval tp;
 
-	pthread_mutex_lock(m_lock);
+	pthread_mutex_lock(&m_lock);
 
 	if (gettimeofday(&tp, nullptr) != 0)
 	{
@@ -190,8 +214,10 @@ bool SFServerConnectionManager::WaitForSingleObject()
 	ts.tv_nsec = tp.tv_usec * 1000;
 	ts.tv_sec += 1;
 
-	nRet = pthread_cond_timedwait(m_event, m_lock, &ts);
-	pthread_mutex_unlock(m_lock);
+	int nRet = pthread_cond_timedwait(&m_event, &m_lock, &ts);
+	pthread_mutex_unlock(&m_lock);
+
+	return true;
 }
 #endif
 
@@ -206,8 +232,7 @@ static unsigned ServerReconnectProc(void* arg)
 #ifdef _WIN32
 	while (WaitForSingleObject(pConnectionManager->GetTimerHandle(), 1000) != WAIT_OBJECT_0 && pConnectionManager->m_bThreadEnd == false)
 #else
-	while (WaitForSingleObject() == true && pConnectionManager->m_bThreadEnd == false)
-}
+	while (pConnectionManager->WaitForSingleObject() == true && pConnectionManager->m_bThreadEnd == false)
 #endif
 	{
 		for (auto& iter : pConnectionManager->GetConnectorInfo())
