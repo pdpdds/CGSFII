@@ -213,8 +213,8 @@
     <ClInclude Include=".\SFEngine.h" />
     <ClInclude Include="DataBuffer.h" />
     <ClInclude Include="CommonHeader.h" />
+    <ClInclude Include="EngineLayerHeader.h" />
     <ClInclude Include="ILogicDispatcher.h" />
-    <ClInclude Include="PacketProtocolConstant.h" />
     <ClInclude Include="SFBasePacketProtocol.h" />
     <ClInclude Include="SFClassicDispatcher.h" />
     <ClInclude Include="SFConfigure.h" />

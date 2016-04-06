@@ -1,11 +1,6 @@
 #include "SFCGSFPacketProtocol.h"
-#ifdef _WIN32
 #include "../BaseLayer/SFCompressor.h"
 #include "../CGSFNet/ISession.h"
-#else
-#include "../BaseLayerLinux/SFCompressor.h"
-#include "../CGSFNetLinux/ISession.h"
-#endif
 #include "SFEngine.h"
 #include "SFPacketPool.h"
 
@@ -43,14 +38,14 @@ BasePacket* SFCGSFPacketProtocol::GetPacket(int& errorCode)
 	if (FALSE == m_pPacketIOBuffer->GetPacket(*pPacket->GetHeader(), (char*)pPacket->GetData(), m_packetSize, errorCode))
 	{
 		SFPacketPool::GetInstance()->Release(pPacket);
-		return NULL;
+		return nullptr;
 	}
 
-	/*if (FALSE == pPacket->Decode(m_packetSize, errorCode))
+	if (FALSE == pPacket->Decode(m_packetSize, errorCode))
 	{
-		PacketPoolSingleton::instance()->Release(pPacket);
-		return NULL;
-	}*/
+		SFPacketPool::GetInstance()->Release(pPacket);
+		return nullptr;
+	}
 
 	return pPacket;
 }

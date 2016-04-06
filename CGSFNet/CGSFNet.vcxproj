@@ -174,10 +174,10 @@ copy /Y "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)\lib\$(ProjectName).pdb"
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Common\BasePacket.h" />
     <ClInclude Include="ACEEngine.h" />
     <ClInclude Include="ACEHeader.h" />
     <ClInclude Include=".\SingltonObject.h" />
+    <ClInclude Include="BasePacket.h" />
     <ClInclude Include="IDMap.h" />
     <ClInclude Include="ACETimeOutHandler.h" />
     <ClInclude Include="InterlockedValue.h" />

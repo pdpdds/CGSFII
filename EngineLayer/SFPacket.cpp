@@ -1,12 +1,7 @@
 #include "EngineLayerHeader.h"
 #include "SFPacket.h"
-#ifdef _WIN32
-#include "SFCompressor.h"
-#include "SFCompressZLib.h"
-#else
-#include "../BaseLayerLinux/SFCompressor.h"
-#include "../BaseLayerLinux/SFCompressZLib.h"
-#endif // _WIN32
+#include "../BaseLayer/SFCompressor.h"
+#include "../BaseLayer/SFCompressZLib.h"
 
 #include "SFCGSFPacketProtocol.h"
 

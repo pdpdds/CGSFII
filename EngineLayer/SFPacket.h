@@ -1,14 +1,11 @@
 #pragma once
-#ifdef _WIN32
+#ifndef _WIN32
+#include <string.h>
 #include "../BaseLayer/CGSFDefine.h"
+#endif
+
 #include "../CGSFNet/BasePacket.h"
 #include "../BaseLayer/SFFastCRC.h"
-#else
-#include <string.h>
-#include "../BaseLayerLinux/CGSFDefine.h"
-#include "../CGSFNetLinux/BasePacket.h"
-#include "../BaseLayerLinux/SFFastCRC.h"
-#endif
 
 class SFCompress;
 
@@ -44,84 +41,84 @@ public:
 	void ReadStart(){ m_usCurrentReadPosition = sizeof(SFPacketHeader); }
 	void ReadEnd(){}
 
-	inline SFPacket& SFPacket::operator << (BYTE Data)
+	inline SFPacket& operator << (BYTE Data)
 	{
 		if (GetPacketSize() + sizeof(BYTE) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&m_pPacketBuffer[GetPacketSize()], &Data, sizeof(BYTE));
-		m_pHeader->dataSize += sizeof(BYTE);
+		m_pHeader->dataSize += (unsigned short)sizeof(BYTE);
 		
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator << (CHAR Data)
+	inline SFPacket& operator << (CHAR Data)
 	{
 		if (GetPacketSize() + sizeof(CHAR) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&m_pPacketBuffer[GetPacketSize()], &Data, sizeof(CHAR));
-		m_pHeader->dataSize += sizeof(CHAR);
+		m_pHeader->dataSize += (unsigned short)sizeof(CHAR);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator << (SHORT Data)
+	inline SFPacket& operator << (SHORT Data)
 	{
 		if (GetPacketSize() + sizeof(SHORT) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&m_pPacketBuffer[GetPacketSize()], &Data, sizeof(SHORT));
-		m_pHeader->dataSize += sizeof(SHORT);
+		m_pHeader->dataSize += (unsigned short)sizeof(SHORT);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator << (USHORT Data)
+	inline SFPacket& operator << (USHORT Data)
 	{
 		if (GetPacketSize() + sizeof(USHORT) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&m_pPacketBuffer[GetPacketSize()], &Data, sizeof(USHORT));
-		m_pHeader->dataSize += sizeof(USHORT);
+		m_pHeader->dataSize += (unsigned short)sizeof(USHORT);
 		
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator << (int Data)
+	inline SFPacket& operator << (int Data)
 	{
 		if (GetPacketSize() + sizeof(int) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&m_pPacketBuffer[GetPacketSize()], &Data, sizeof(int));
-		m_pHeader->dataSize += sizeof(int);
+		m_pHeader->dataSize += (unsigned short)sizeof(int);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator << (DWORD Data)
+	inline SFPacket& operator << (DWORD Data)
 	{
 		if (GetPacketSize() + sizeof(DWORD) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&m_pPacketBuffer[GetPacketSize()], &Data, sizeof(DWORD));
-		m_pHeader->dataSize += sizeof(DWORD);
+		m_pHeader->dataSize += (unsigned short)sizeof(DWORD);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator << (float Data)
+	inline SFPacket& operator << (float Data)
 	{
 		if (GetPacketSize() + sizeof(float) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&m_pPacketBuffer[GetPacketSize()], &Data, sizeof(float));
-		m_pHeader->dataSize += sizeof(float);
+		m_pHeader->dataSize += (unsigned short)sizeof(float);
 		
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator << (char* szStr)
+	inline SFPacket& operator << (char* szStr)
 	{
 		int len = (int)strlen(szStr);
 
@@ -136,7 +133,7 @@ public:
 		return *this;
 	}
 
-	void SFPacket::Write(const BYTE* pBuffer, int bufferSize)
+	void Write(const BYTE* pBuffer, int bufferSize)
 	{
 		if (GetPacketSize() + bufferSize > m_packetMaxSize)
 			return;
@@ -146,84 +143,84 @@ public:
 
 	}
 
-	inline SFPacket& SFPacket::operator >> (BYTE& Data)
+	inline SFPacket& operator >> (BYTE& Data)
 	{
 		if (m_usCurrentReadPosition + sizeof(BYTE) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&Data, &m_pPacketBuffer[m_usCurrentReadPosition], sizeof(BYTE));
-		m_usCurrentReadPosition += sizeof(BYTE);
+		m_usCurrentReadPosition += (unsigned short)sizeof(BYTE);
 		
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator >> (CHAR& Data)
+	inline SFPacket& operator >> (CHAR& Data)
 	{
 		if (m_usCurrentReadPosition + sizeof(CHAR) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&Data, &m_pPacketBuffer[m_usCurrentReadPosition], sizeof(CHAR));
-		m_usCurrentReadPosition += sizeof(CHAR);
+		m_usCurrentReadPosition += (unsigned short)sizeof(CHAR);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator >> (SHORT& Data)
+	inline SFPacket& operator >> (SHORT& Data)
 	{
 		if (m_usCurrentReadPosition + sizeof(SHORT) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&Data, &m_pPacketBuffer[m_usCurrentReadPosition], sizeof(SHORT));
-		m_usCurrentReadPosition += sizeof(SHORT);
+		m_usCurrentReadPosition += (unsigned short)sizeof(SHORT);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator >> (USHORT& Data)
+	inline SFPacket& operator >> (USHORT& Data)
 	{
 		if (m_usCurrentReadPosition + sizeof(USHORT) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&Data, &m_pPacketBuffer[m_usCurrentReadPosition], sizeof(USHORT));
-		m_usCurrentReadPosition += sizeof(USHORT);
+		m_usCurrentReadPosition += (unsigned short)sizeof(USHORT);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator >> (int& Data)
+	inline SFPacket& operator >> (int& Data)
 	{
 		if (m_usCurrentReadPosition + sizeof(int) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&Data, &m_pPacketBuffer[m_usCurrentReadPosition], sizeof(int));
-		m_usCurrentReadPosition += sizeof(int);
+		m_usCurrentReadPosition += (unsigned short)sizeof(int);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator >> (DWORD& Data)
+	inline SFPacket& operator >> (DWORD& Data)
 	{
 		if (m_usCurrentReadPosition + sizeof(DWORD) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&Data, &m_pPacketBuffer[m_usCurrentReadPosition], sizeof(DWORD));
-		m_usCurrentReadPosition += sizeof(DWORD);
+		m_usCurrentReadPosition += (unsigned short)sizeof(DWORD);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator >> (float& Data)
+	inline SFPacket& operator >> (float& Data)
 	{
 		if (m_usCurrentReadPosition + sizeof(float) > m_packetMaxSize)
 			return *this;
 
 		memcpy(&Data, &m_pPacketBuffer[m_usCurrentReadPosition], sizeof(float));
-		m_usCurrentReadPosition += sizeof(float);
+		m_usCurrentReadPosition += (unsigned short)sizeof(float);
 
 		return *this;
 	}
 
-	inline SFPacket& SFPacket::operator >> (char* szStr)
+	inline SFPacket& operator >> (char* szStr)
 	{
 		int strLen = (int)strlen((char*)&m_pPacketBuffer[m_usCurrentReadPosition]);
 		if (m_usCurrentReadPosition + strLen + 1 > m_packetMaxSize)
@@ -239,7 +236,7 @@ public:
 		return *this;
 	}
 
-	void SFPacket::Read(BYTE* pBuffer, int bufferSize)
+	void Read(BYTE* pBuffer, int bufferSize)
 	{
 		if (m_usCurrentReadPosition + bufferSize > m_packetMaxSize)
 			return;

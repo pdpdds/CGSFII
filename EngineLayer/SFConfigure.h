@@ -6,8 +6,8 @@
 //////////////////////////////////////////////////////////////
 typedef struct tag_EngineConfig
 {
-	std::wstring engineName;	
-	std::wstring serverIP;
+	std::string engineName;	
+	std::string serverIP;
 	unsigned short serverPort;
 	unsigned short maxAccept;	
 	
@@ -36,10 +36,7 @@ public:
 	bool Write(const char* pFileName);
 
 	_EngineConfig* GetConfigureInfo(){return &m_ConfigureInfo;}
-
-	//void Serialize(IXMLStreamWriter* out) const;
-	//void Deserialize(IXMLStreamReader* in);
-
+	
 protected:
 	
 

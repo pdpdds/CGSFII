@@ -46,9 +46,11 @@
 #endif // not Windows
 #endif // GNUC and not ICONV not STDCONV not WINCONV
 #endif // not VC++
-#if (defined(_UNICODE) || defined(UNICODE)) && ! defined(MARKUP_WCHAR)
-#define MARKUP_WCHAR
-#endif // _UNICODE or UNICODE
+//#if (defined(_UNICODE) || defined(UNICODE)) && ! defined(MARKUP_WCHAR)
+//MultiByte
+//#if (defined(_UNICODE) || defined(UNICODE)) && ! defined(MARKUP_WCHAR)
+//#define MARKUP_WCHAR
+//#endif // _UNICODE or UNICODE
 #if (defined(_MBCS) || defined(MBCS)) && ! defined(MARKUP_MBCS)
 #define MARKUP_MBCS
 #endif // _MBCS and not MBCS

@@ -1,14 +1,8 @@
 #pragma once
 #include "EngineLayerHeader.h"
 #include "SFConfigure.h"
-
-#ifdef _WIN32
 #include "../BaseLayer/tinythread.h"
 #include "../BaseLayer/SFObjectPool.h"
-#else
-#include "../BaseLayerLinux/tinythread.h"
-#include "../BaseLayerLinux/SFObjectPool.h"
-#endif
 #include <vector>
 
 class SFServerConnectionManager;

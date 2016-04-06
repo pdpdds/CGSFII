@@ -9,7 +9,6 @@
 #include <tchar.h>
 #endif
 
-#ifdef _WIN32
 #include "../BaseLayer/CGSFDefine.h"
 #include "CommonHeader.h"
 #include "../CGSFNet/ErrorCode.h"
@@ -22,21 +21,6 @@
 //#include "../BaseLayer/SFString.h"
 #include "../BaseLayer/SFObjectPool.h"
 #include "../BaseLayer/Macro.h"
-#else
-#include "../BaseLayerLinux/CGSFDefine.h"
-#include "CommonHeader.h"
-#include "../CGSFNetLinux/ErrorCode.h"
-#include "../CGSFNetLinux/EngineConstant.h"
-#include "../CGSFNetLinux/IEngine.h"
-#include "../CGSFNetLinux/INetworkEngine.h"
-#include "../CGSFNetLinux/INetworkCallback.h"
-#include "../CGSFNetLinux/IPacketProtocol.h"
-#include "../CGSFNetLinux/BasePacket.h"
-//#include "../BaseLayerLinux/SFString.h"
-#include "../BaseLayerLinux/SFObjectPool.h"
-#include "../BaseLayerLinux/Macro.h"
-#endif
-
 #include "SFLogicGateway.h"
 #include "ILogicEntry.h"
 #include "ILogicDispatcher.h"

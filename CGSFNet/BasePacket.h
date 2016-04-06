@@ -1,9 +1,5 @@
 #pragma once
-#ifdef _WIN32
 #include "../CGSFNet/EngineStructure.h"
-#else
-#include "../CGSFNetLinux/EngineStructure.h"
-#endif
 
 #define SFPACKET_NONE			0x00000001
 #define SFPACKET_CONNECT		0x00000002

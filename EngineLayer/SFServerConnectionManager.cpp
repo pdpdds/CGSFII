@@ -1,33 +1,50 @@
 #include "SFEngine.h"
 #include "SFServerConnectionManager.h"
 #include "SFPacketProtocolManager.h"
-#ifdef _WIN32
+
 #include "Markup.h"
 #include <process.h>
-#else
-#include "../BaseLayerLinux/Markup.h"
-#endif // _WIN32
 
-
+#include "../BaseLayer/Markup.h"
+ 
 SFServerConnectionManager::SFServerConnectionManager()
-//: m_hThread(NULL)
-//, m_hTimerEvent(NULL)
-//: m_dwThreadID(0)
-: m_bThreadEnd(false)
+: m_dwThreadID(0)
+, m_bThreadEnd(false)
 {
+#ifdef _WIN32
+	m_hThread = 0;
+	m_hTimerEvent = nullptr;
+#endif
 }
 
-static void ServerReconnectProc(void* arg);
+#ifdef _WIN32
+static unsigned WINAPI ServerReconnectProc(void* arg);
+#else
+static unsigned ServerReconnectProc(void* arg);
+#endif
 
 SFServerConnectionManager::~SFServerConnectionManager()
 {
-	/*(if (m_hThread)
+	if (m_hThread != 0)
 	{
 		m_bThreadEnd = true;
-		WaitForSingleObject(m_hThread, INFINITE);
-		CloseHandle(m_hThread);
-	}*/
+#ifdef _WIN32			
+		WaitForSingleObject((HANDLE)m_hThread, INFINITE);
+		CloseHandle((HANDLE)m_hThread);	
+#else
+		if (pthread_mutex_destroy(&m_lock) != 0)
+		{
+			printf("fail to pthread_mutex_destroy, %s\n", strerror(errno));		
+		}
+
+		if (pthread_cond_destroy(&m_event) != 0)
+		{
+			printf("fail to pthread_cond_destroy, %s\n", strerror(errno));			
+		}		
+#endif
+	}
 }
+
 
 /*
 bool SFServerConnectionManager::Save()
@@ -61,51 +78,62 @@ bool SFServerConnectionManager::Save()
 
 bool SFServerConnectionManager::LoadConnectorList(char* szFileName)
 {
-	/*CMarkup xml;
+	CMarkup xml;
 	bool result = xml.Load(szFileName);
 
 	if (result == false)
 		return false;
 
-	while (xml.FindChildElem(L"SERVER"))
+	while (xml.FindChildElem("SERVER"))
 	{
 		_ConnectorInfo connectorInfo;
 		xml.IntoElem();
 
-		xml.FindChildElem(L"IP");
+		xml.FindChildElem("IP");
 		connectorInfo.szIP = xml.GetChildData();
 
-		xml.FindChildElem(L"PORT");
-		connectorInfo.port = _ttoi(xml.GetChildData().c_str());
+		xml.FindChildElem("PORT");
+		connectorInfo.port = atoi(xml.GetChildData().c_str());
 
-		xml.FindChildElem(L"IDENTIFER");
-		connectorInfo.connectorId = _ttoi(xml.GetChildData().c_str());
+		xml.FindChildElem("IDENTIFER");
+		connectorInfo.connectorId = atoi(xml.GetChildData().c_str());
 
-		xml.FindChildElem(L"DESC");
+		xml.FindChildElem("DESC");
 		connectorInfo.szDesc = xml.GetChildData();
 
 		xml.OutOfElem();
-
 		
 		AddConnectorInfo(connectorInfo);
-	}*/
+	}
 
 	return true;
 }
 
 void SFServerConnectionManager::AddConnectorInfo(_ConnectorInfo& connectorInfo)
 {
-	/*m_listConnectorInfo.push_back(connectorInfo);
+	m_listConnectorInfo.push_back(connectorInfo);
 	SFEngine::GetInstance()->GetPacketProtocolManager()->AddConnectorInfo(&connectorInfo);
 
 	LOG(INFO) << "AddConnectorInfo. " << "connectID: " << connectorInfo.connectorId << ", ProtocolID: " << (int)connectorInfo.packetProtocolId << ", IP: " << connectorInfo.szIP.data() << ", Port: " << connectorInfo.port;
-	google::FlushLogFiles(google::GLOG_INFO);*/
+	google::FlushLogFiles(google::GLOG_INFO);
 }
 
 bool SFServerConnectionManager::SetupServerReconnectSys()
 {
-/*
+#ifdef _WIN32
 	m_hTimerEvent = CreateEvent(NULL, FALSE, FALSE, L"ServerReconnectEvent");
+#else	
+		
+	if (pthread_mutex_init(&m_lock, NULL) != 0)
+	{
+		printf("fail to pthread_mutex_init, %s\n", strerror(errno));		
+	}
+
+	if (pthread_cond_init(&m_event, NULL) != 0)
+	{
+		printf("fail to pthread_cond_init, %s\n", strerror(errno));		
+	}
+#endif
 
 	LOG(INFO) << "SetupServerReconnectSys. " << "First Connect";
 	google::FlushLogFiles(google::GLOG_INFO);
@@ -118,7 +146,7 @@ bool SFServerConnectionManager::SetupServerReconnectSys()
 		google::FlushLogFiles(google::GLOG_INFO);
 
 		int serial = -1;
-		//serial = SFEngine::GetInstance()->AddConnector(info.connectorId, (char*)StringConversion::ToASCII(info.szIP.c_str()).c_str(), info.port);
+		serial = SFEngine::GetInstance()->AddConnector(info.connectorId, (char*)info.szIP.c_str(), info.port);
 
 		if (serial >= 0)
 		{
@@ -126,34 +154,70 @@ bool SFServerConnectionManager::SetupServerReconnectSys()
 		}
 	}
 
-	m_hThread = (HANDLE)_beginthreadex(0, NULL, ServerReconnectProc, this, 0, (unsigned*)&m_dwThreadID);
+	m_hThread = _beginthreadex(0, NULL, ServerReconnectProc, this, 0, (unsigned*)&m_dwThreadID);
 
-	if (!m_hThread)
+	if (m_hThread == 0)
 	{
+#ifdef _WIN32
 		int errorNum = (GetLastError() == ERROR_SUCCESS) ? ERROR_MAX_THRDS_REACHED : GetLastError();
 		LOG(FATAL) << "ServerReconnectProc Thread Creation Fail. Error : " << errorNum;
+#else
+		LOG(FATAL) << "ServerReconnectProc Thread Creation Fail. Error : " << errno;
+		
+#endif
 		return false;
 	}
 	
 	LOG(INFO) << "ServerReconnectProc success";
-	*/
+
 	return true;
 }
 
-static void ServerReconnectProc(void* arg)
-{
-	/*SFServerConnectionManager * pConnectionManager = reinterpret_cast<SFServerConnectionManager*>(arg);
-	
-	while (WaitForSingleObject(pConnectionManager->m_hTimerEvent, 1000) != WAIT_OBJECT_0 && pConnectionManager->m_bThreadEnd == false)
+#ifndef _WIN32
+bool SFServerConnectionManager::WaitForSingleObject()
+{	
+	struct timespec ts;
+	struct timeval tp;
+
+	pthread_mutex_lock(m_lock);
+
+	if (gettimeofday(&tp, nullptr) != 0)
 	{
-		for (auto& iter : pConnectionManager->m_listConnectorInfo)
+		printf("fail to gettimeofday, %s\n", strerror(errno));		
+	}
+
+	ts.tv_sec = tp.tv_sec;
+	ts.tv_nsec = tp.tv_usec * 1000;
+	ts.tv_sec += 1;
+
+	nRet = pthread_cond_timedwait(m_event, m_lock, &ts);
+	pthread_mutex_unlock(m_lock);
+}
+#endif
+
+#ifdef _WIN32
+static unsigned WINAPI ServerReconnectProc(void* arg)
+#else
+static unsigned ServerReconnectProc(void* arg)
+#endif
+{
+	SFServerConnectionManager * pConnectionManager = reinterpret_cast<SFServerConnectionManager*>(arg);
+			
+#ifdef _WIN32
+	while (WaitForSingleObject(pConnectionManager->GetTimerHandle(), 1000) != WAIT_OBJECT_0 && pConnectionManager->m_bThreadEnd == false)
+#else
+	while (WaitForSingleObject() == true && pConnectionManager->m_bThreadEnd == false)
+}
+#endif
+	{
+		for (auto& iter : pConnectionManager->GetConnectorInfo())
 		{
 			_ConnectorInfo& info = iter;
 
 			if (info.connected == false)
 			{
 				int serial = -1;
-				//serial = SFEngine::GetInstance()->AddConnector(info.connectorId, (char*)StringConversion::ToASCII(info.szIP.c_str()).c_str(), info.port);
+				serial = SFEngine::GetInstance()->AddConnector(info.connectorId, (char*)info.szIP.c_str(), info.port);
 
 				if (serial >= 0)
 				{
@@ -161,7 +225,9 @@ static void ServerReconnectProc(void* arg)
 				}
 			}			
 		}
-	}*/
+	}
+
+	return 0;
 }
 
 bool SFServerConnectionManager::SetConnectorState(int connectorId, bool connected)

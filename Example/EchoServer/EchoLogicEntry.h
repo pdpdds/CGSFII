@@ -1,9 +1,5 @@
 #pragma once
-#ifdef _WIN32
-#include "ILogicEntry.h"
-#else
-#include "../EngineLayerLinux/ILogicEntry.h"
-#endif
+#include "../EngineLayer/ILogicEntry.h"
 
 class BasePacket;
 

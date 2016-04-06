@@ -1,13 +1,9 @@
 #pragma once
-
-
-#ifdef _WIN32
 #include "../CGSFNet/BasePacket.h"
+#ifdef _WIN32
 #include "../BaseLayer/SFIOCPQueue.h"
-#else
-#include "../CGSFNetLinux/BasePacket.h"
-#include "../BaseLayerLinux/SFLockQueue.h"
-#endif // _WIN32
+#endif
+#include "../BaseLayer/SFLockQueue.h"
 
 class SFLogicGateway
 {

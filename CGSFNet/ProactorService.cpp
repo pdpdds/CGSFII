@@ -6,8 +6,12 @@ volatile int g_currentSessionCnt = 0;
 
 ProactorService::ProactorService()
 	: m_bServiceCloseFlag(false)	
-{
-	//InterlockedIncrement((LONG *)&g_currentSessionCnt);
+{	
+#if defined(_WIN32)
+	InterlockedDecrement((LONG *)&g_currentSessionCnt);
+#elif defined(linux)
+	def__sync_fetch_and_add(&g_currentSessionCnt, 1);
+#endif
 
 	transferredData = 0;
 	sendData = 0;
@@ -28,7 +32,13 @@ ProactorService::~ProactorService( void )
 	printf("log result : elapsedTime : %d, transferred : %d, sendData : %d, receiveCount : %d, sendCount : %d\n", elapsedTime, transferredData, sendData, receiveCount, sendCount);
 #endif
 #endif //  _WIN32
-	//InterlockedDecrement((LONG *)&g_currentSessionCnt);
+
+#if defined(_WIN32)
+	InterlockedDecrement((LONG *)&g_currentSessionCnt);
+#elif defined(linux)
+	def__sync_fetch_and_add( &g_currentSessionCnt, 1 );
+#endif
+	
 }
 
 void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
@@ -43,7 +53,7 @@ void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
 
 	m_bServiceCloseFlag = false;
 
-	/*if (g_currentSessionCnt > GetEngine()->GetMaxUserAccept())
+	if (g_currentSessionCnt > GetEngine()->GetMaxUserAccept())
 	{
 		if (this->handle() != ACE_INVALID_HANDLE)
 			ACE_OS::closesocket(this->handle());
@@ -52,7 +62,7 @@ void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
 
 		delete this;
 		return;
-	}*/
+	}
 
 	m_serial = ProactorServiceManagerSinglton::instance()->Register(this);	
 
@@ -99,7 +109,7 @@ void ProactorService::PostRecv()
 
 void ProactorService::handle_read_stream( const ACE_Asynch_Read_Stream::Result& result )
 {
-	transferredData += result.bytes_transferred();
+	transferredData += (int)result.bytes_transferred();
 	ACE_Message_Block& block = result.message_block();
 	if (!result.success() || result.bytes_transferred() == 0)
 	{

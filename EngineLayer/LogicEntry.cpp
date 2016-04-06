@@ -20,7 +20,7 @@ bool LogicEntry::Initialize()
 	{
 		sLogicEntry.reset(m_pLogicEntry->Clone());
 #ifdef _WIN32
-		
+		LOG(INFO) << "LogicEntry Init. threadId :" << GetCurrentThreadId();
 #else
 		LOG(INFO) << "LogicEntry Init. threadId :" << pthread_self();
 #endif // _WIN32

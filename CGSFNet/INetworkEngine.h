@@ -4,16 +4,24 @@
 #pragma warning( push )
 #pragma warning (disable : 4100) 
 
-#ifdef NETWORKENGINE_EXPORTS
+#if defined(_WIN32) || defined(__WIN32__)
+
+#if defined(NETWORKENGINE_EXPORTS) // add by CMake 
+
 #define NETWORKENGINEDECL __declspec(dllexport)
 #else
-#define NETWORKENGINEDECL __declspec(dllimport)
+#define  NETWORKENGINEDECL __declspec(dllimport)
+#endif 
+#elif defined(linux) || defined(__linux)
+
+#define NETWORKENGINEDECL
+
 #endif
 
 class IEngine;
 class BasePacket;
 
-class  INetworkEngine
+class NETWORKENGINEDECL INetworkEngine
 {
   public:  
 	INetworkEngine(IEngine* pEngine)
@@ -73,7 +81,7 @@ private:
 #pragma warning( pop )
 
 
-//typedef INetworkEngine* (CREATENETWORKENGINE)(IEngine* pEngine);
-//extern "C" NETWORKENGINEDECL INetworkEngine* CreateNetworkEngine(IEngine* pEngine);
+typedef INetworkEngine* (CREATENETWORKENGINE)(IEngine* pEngine);
+extern "C" NETWORKENGINEDECL INetworkEngine* CreateNetworkEngine(IEngine* pEngine);
 
 #endif  // INETWORKENGINE_H_

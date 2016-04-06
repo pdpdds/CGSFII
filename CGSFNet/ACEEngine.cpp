@@ -13,8 +13,7 @@
 #pragma comment(lib, "ace.lib")
 #endif
 #else
-
-//#include <libcpuid/libcpuid.h>
+#include <unistd.h>
 #endif
 
 #define PROACTOR_THREAD_GROUP_ID 9783
@@ -152,15 +151,7 @@ bool ACEEngine::Init()
 	GetSystemInfo(&si);
 	int optimalThreadCount = si.dwNumberOfProcessors * 2;
 #else
-	/*struct cpu_raw_data_t raw;
-	struct cpu_id_t data;
-	if (cpu_identify(&raw, &data) < 0) {
-		printf("Sorrry, CPU identification failed.\n");
-		printf("Error: %s\n", cpuid_error());
-		return false;
-	}
-	int optimalThreadCount = data.num_cores * 2;*/
-	int optimalThreadCount = 4;
+	int optimalThreadCount = sysconf(_SC_NPROCESSORS_ONLN);
 #endif
 
 	m_workThreadGroupID = ACE_Thread_Manager::instance()->spawn_n(optimalThreadCount, (ACE_THR_FUNC)ProactorWorkerThread, NULL, THR_NEW_LWP, ACE_DEFAULT_THREAD_PRIORITY);

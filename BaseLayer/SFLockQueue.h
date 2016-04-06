@@ -35,7 +35,7 @@ public:
 			return pMsg;
 		}
 
-		return NULL;
+		return nullptr;
 	}
 
 	int Size(){return m_Queue.size();}

@@ -1,9 +1,8 @@
 #pragma once
 #ifdef _WIN32
 #include <Windows.h>
-#else
-#include "../BaseLayerLinux/CGSFDefine.h"
 #endif
+#include "../BaseLayer/CGSFDefine.h"
 #include "SFConstant.h"
 #include <string>
 #pragma pack(push, 1)
@@ -70,12 +69,12 @@ typedef struct tag_ListenerInfo
 
 typedef struct tag_ConnectorInfo
 {
-	std::wstring szIP;
+	std::string szIP;
 	unsigned short port;
 	int connectorId;
 	int packetProtocolId;
 
-	std::wstring szDesc;
+	std::string szDesc;
 	bool connected;
 
 	tag_ConnectorInfo()

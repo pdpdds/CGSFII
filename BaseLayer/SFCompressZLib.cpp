@@ -1,4 +1,4 @@
-#include "SFCompressZLib.h"
+#include "../BaseLayer/SFCompressZLib.h"
 
 #ifdef _WIN32
 #include <zlib/zlib.h>

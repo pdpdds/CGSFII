@@ -1503,7 +1503,11 @@ bool FilePos::FileErrorAddResult()
 #endif
 #else // no C error routine, use Windows API
 	DWORD dwErr = ::GetLastError();
-	if ( ::FormatMessage(0x1200,0,dwErr,0,szError,nErrorBufferSize,0) < 1 )
+#ifdef MARKUP_WCHAR
+	if ( ::FormatMessageW(0x1200,0,dwErr,0,szError,nErrorBufferSize,0) < 1 )
+#else
+	if (::FormatMessageA(0x1200, 0, dwErr, 0, szError, nErrorBufferSize, 0) < 1)
+#endif
 		szError[0] = '\0';
 	nErr = (int)dwErr;
 #endif // no C error routine

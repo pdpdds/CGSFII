@@ -1,10 +1,6 @@
 #pragma once
 #include <queue>
-#ifdef _WIN32
 #include "../BaseLayer/SFLock.h"
-#else
-#include "../BaseLayerLinux/SFLock.h"
-#endif
 #include "SFObjectPool.h"
 
 template<typename T> class SFObjectPool

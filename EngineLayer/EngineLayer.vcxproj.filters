@@ -216,9 +216,6 @@
     <ClInclude Include="SFPacketProtocolManager.h">
       <Filter>Packet\PacketProtocol</Filter>
     </ClInclude>
-    <ClInclude Include="PacketProtocolConstant.h">
-      <Filter>Packet\PacketProtocol</Filter>
-    </ClInclude>
     <ClInclude Include="SFLogicDispatcher.h">
       <Filter>Dispatcher</Filter>
     </ClInclude>
@@ -242,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="SFProtobuf2ExtensionProtocol.h">
       <Filter>Packet\ProtobufPacket</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineLayerHeader.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,17 +1,9 @@
 #include "EchoServerHeader.h"
 #include "EchoLogicEntry.h"
-
-#ifdef _WIN32
-#include "SFCGSFPacketProtocol.h"
-#include "SFMultiLogicDispatcher.h"
-#include "DBStruct.h"
-//#include "SFZdb.h"
-#else
-#include "../EngineLayerLinux/SFCGSFPacketProtocol.h"
-#include "../EngineLayerLinux/SFMultiLogicDispatcher.h"
+#include "../EngineLayer/SFCGSFPacketProtocol.h"
+#include "../EngineLayer/SFMultiLogicDispatcher.h"
 //#include "DBStruct.h"
 //#include "SFZdb.h"
-#endif
 
 //SFZdb* g_db = nullptr;
 

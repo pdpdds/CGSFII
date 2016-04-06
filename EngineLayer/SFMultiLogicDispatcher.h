@@ -3,12 +3,9 @@
 #include "SFLogicDispatcher.h"
 #ifdef _WIN32
 #include "SFIOCPQueue.h"
-#include "tinythread.h"
-#include "SFLockQueue.h"
-#else
-#include "../BaseLayerLinux/SFLockQueue.h"
-#include "../BaseLayerLinux/tinythread.h"
 #endif
+
+#include "../BaseLayer/SFLockQueue.h"
 #include <map>
 
 typedef struct tag_ClientInfo
@@ -19,7 +16,11 @@ typedef struct tag_ClientInfo
 
 class SFMultiLogicDispatcher : public SFLogicDispatcher
 {
+#ifdef _WIN32
+	typedef std::map<int, SFIOCPQueue<BasePacket>*> mapQueue;
+#else
 	typedef std::map<int, SFLockQueue<BasePacket>*> mapQueue;
+#endif
 	typedef std::map<int, tthread::thread*> mapThread;
 	typedef std::map<int, ClientInfo> mapClient;
 

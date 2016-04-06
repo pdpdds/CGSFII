@@ -2,7 +2,7 @@
 #include "SFBasePacketProtocol.h"
 #include "SFPacketProtocol.h"
 #ifndef _WIN32
-#include "../BaseLayerLinux/CGSFDefine.h"
+#include "../BaseLayer/CGSFDefine.h"
 #endif
 
 class SFPacketIOBuffer;

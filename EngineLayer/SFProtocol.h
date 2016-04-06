@@ -1,10 +1,6 @@
 #pragma once
 #include "DataBuffer.h"
-#ifdef _WIN32
 #include "../CGSFNet/BasePacket.h"
-#else
-#include "../CGSFNetLinux/BasePacket.h"
-#endif
 
 /**
 A subclass of this class defines a communication protocol between Push Framework and remote clients (or a category of remote

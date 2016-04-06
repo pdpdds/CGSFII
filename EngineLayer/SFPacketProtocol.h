@@ -9,13 +9,8 @@
 #include "EngineLayerHeader.h"
 #include "SFConstant.h"
 #include "SFPacketIOBuffer.h"
-#ifdef _WIN32
 #include "../BaseLayer/SFEncryption.h"
 #include "../BaseLayer/SFEncryptionXOR.h"
-#else
-#include "../BaseLayerLinux/SFEncryption.h"
-#include "../BaseLayerLinux/SFEncryptionXOR.h"
-#endif
 
 class BasePacket;
 

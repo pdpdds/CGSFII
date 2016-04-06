@@ -27,8 +27,11 @@ bool SFMultiLogicDispatcher::CreateLogicSystem(ILogicEntry* pLogicEntry)
 
 	for (int index = 0; index < m_channelCount; index++)
 	{
-		//SFIOCPQueue<BasePacket>* pQueue = new SFIOCPQueue<BasePacket>();
+#ifdef _WIN32
+		SFIOCPQueue<BasePacket>* pQueue = new SFIOCPQueue<BasePacket>();
+#else
 		SFLockQueue<BasePacket>* pQueue = new SFLockQueue<BasePacket>();
+#endif
 
 		tthread::thread* pThread = new tthread::thread(MultiLogicProc, pQueue);
 		m_mapThread.insert(std::make_pair(index, pThread));
@@ -62,8 +65,11 @@ bool SFMultiLogicDispatcher::ShutDownLogicSystem()
 
 	for (auto& queue : m_mapQueue)
 	{
-		//SFIOCPQueue<BasePacket>* pQueue = queue.second;		
+#ifdef _WIN32
+		SFIOCPQueue<BasePacket>* pQueue = queue.second;		
+#else
 		SFLockQueue<BasePacket>* pQueue = queue.second;
+#endif
 		delete pQueue;		
 	}
 
@@ -91,11 +97,14 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 		{
 			for (auto& iter : pDispatcher->m_mapQueue)
 			{
-				//SFIOCPQueue<BasePacket>* pQueue = iter.second;
+#ifdef _WIN32
+				SFIOCPQueue<BasePacket>* pQueue = iter.second;
+#else
 				SFLockQueue<BasePacket>* pQueue = iter.second;
+#endif				
 				pQueue->Push(pPacket);
 //일단 한스레드에만 패킷을 넘기고 전체 로직 스레드에게 타이머 패킷을 보낼 수 있도록 나중에 수정한다
-				continue;
+				break;
 			}			
 		}
 		else if (pPacket->GetPacketType() == SFPACKET_SERVERSHUTDOWN)
@@ -106,8 +115,11 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 				pCommand->SetSerial(-1);
 				pCommand->SetPacketType(SFPACKET_SERVERSHUTDOWN);
 
-				//SFIOCPQueue<BasePacket>* pQueue = queue.second;
+#ifdef _WIN32
+				SFIOCPQueue<BasePacket>* pQueue = queue.second;
+#else
 				SFLockQueue<BasePacket>* pQueue = queue.second;
+#endif
 				pQueue->Push(pCommand);
 			}
 
@@ -123,8 +135,11 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 
 				if (iter != pDispatcher->m_mapQueue.end())
 				{
-					//SFIOCPQueue<BasePacket>* pQueue = iter->second;
+#ifdef _WIN32
+					SFIOCPQueue<BasePacket>* pQueue = iter->second;
+#else
 					SFLockQueue<BasePacket>* pQueue = iter->second;
+#endif
 					pQueue->Push(pPacket);
 				}
 				else
@@ -148,14 +163,20 @@ void SFMultiLogicDispatcher::PacketDistributorProc(void* Args)
 
 void SFMultiLogicDispatcher::MultiLogicProc(void* Args)
 {
-	//SFIOCPQueue<BasePacket>* pQueue = static_cast<SFIOCPQueue<BasePacket>*>(Args);
+#ifdef _WIN32
+	SFIOCPQueue<BasePacket>* pQueue = static_cast<SFIOCPQueue<BasePacket>*>(Args);
+#else
 	SFLockQueue<BasePacket>* pQueue = static_cast<SFLockQueue<BasePacket>*>(Args);
+#endif
 	
 	LogicEntry::GetInstance()->Initialize();
 
 	while (true)
 	{
 		BasePacket* pPacket = pQueue->Pop(-1);
+
+		if (pPacket == nullptr)
+			continue;
 
 		if (pPacket->GetPacketType() == SFPACKET_SERVERSHUTDOWN)
 			break;
