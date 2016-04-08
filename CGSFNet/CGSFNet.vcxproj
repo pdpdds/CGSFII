@@ -176,7 +176,6 @@ copy /Y "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)\lib\$(ProjectName).pdb"
   <ItemGroup>
     <ClInclude Include="ACEEngine.h" />
     <ClInclude Include="ACEHeader.h" />
-    <ClInclude Include=".\SingltonObject.h" />
     <ClInclude Include="BasePacket.h" />
     <ClInclude Include="IDMap.h" />
     <ClInclude Include="ACETimeOutHandler.h" />
@@ -184,8 +183,10 @@ copy /Y "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)\lib\$(ProjectName).pdb"
     <ClInclude Include="Lock.h" />
     <ClInclude Include="ProactorAcceptor.h" />
     <ClInclude Include="ProactorService.h" />
-    <ClInclude Include="ProactorServiceManager.h" />
-    <ClInclude Include="ProactorWorkerThread.h" />
+    <ClInclude Include="ReactorAcceptor.h" />
+    <ClInclude Include="ReactorService.h" />
+    <ClInclude Include="ServiceManager.h" />
+    <ClInclude Include="WorkerThread.h" />
     <ClInclude Include="Queue.h" />
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +194,9 @@ copy /Y "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)\lib\$(ProjectName).pdb"
     <ClCompile Include="InterlockedValue.cpp" />
     <ClCompile Include="ProactorAcceptor.cpp" />
     <ClCompile Include="ProactorService.cpp" />
-    <ClCompile Include="ProactorWorkerThread.cpp" />
+    <ClCompile Include="ReactorAcceptor.cpp" />
+    <ClCompile Include="ReactorService.cpp" />
+    <ClCompile Include="WorkerThread.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

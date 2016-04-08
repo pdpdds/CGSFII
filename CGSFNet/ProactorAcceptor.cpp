@@ -1,5 +1,4 @@
 #include "ProactorAcceptor.h"
-#include "SingltonObject.h"
 
 ProactorAcceptor::ProactorAcceptor(INetworkEngine* pOwner, char* szIP, unsigned short port)
 : m_pOwner(pOwner)

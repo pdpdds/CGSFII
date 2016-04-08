@@ -2,6 +2,7 @@
 #include <ace/Containers.h>
 #include <assert.h>
 
+#define INVALID_ID  0xffffffff
 template<class T>
 class Queue
 {
@@ -34,14 +35,12 @@ protected:
 	ACE_Unbounded_Queue<T>	m_Queue;
 };
 
-#define INVALID_ID  0xffffffff
-template<int MaxIDCount>
 class IDQueue
 {
 public:
-	IDQueue(int offset) : m_offset(offset)
+	IDQueue(int maxIdCount, int offset) : m_maxIdCount(maxIdCount), m_offset(offset)
 	{
-		for (int i = 0; i < MaxIDCount; ++i)
+		for (int i = 0; i < m_maxIdCount; ++i)
 			m_idleIdQueue.Push(i + m_offset);
 	}
 
@@ -68,11 +67,12 @@ public:
 
 	inline bool IsValidId(int id) const
 	{
-		return (INVALID_ID != id) && (id >= m_offset) && (id < (MaxIDCount + m_offset));
+		return (INVALID_ID != id) && (id >= m_offset) && (id < (m_maxIdCount + m_offset));
 	}
 
 private:
 	int				m_offset;
+	int				m_maxIdCount;
 	Queue<int>	m_idleIdQueue;
 };
 

@@ -14,16 +14,10 @@
     <ClInclude Include="ACEHeader.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="ProactorWorkerThread.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="ProactorAcceptor.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="ProactorService.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include=".\SingltonObject.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Queue.h">
@@ -41,20 +35,26 @@
     <ClInclude Include="Lock.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="ProactorServiceManager.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="IDMap.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="BasePacket.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="WorkerThread.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceManager.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactorAcceptor.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactorService.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ProactorWorkerThread.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="ProactorAcceptor.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -65,6 +65,15 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="ACEEngine.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkerThread.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactorAcceptor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactorService.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

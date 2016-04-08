@@ -1,5 +1,5 @@
+#include "ServiceManager.h"
 #include "ProactorService.h"
-#include "SingltonObject.h"
 #include <assert.h>
 
 volatile int g_currentSessionCnt = 0;
@@ -64,7 +64,7 @@ void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
 		return;
 	}
 
-	m_serial = ProactorServiceManagerSinglton::instance()->Register(this);	
+	m_serial = CGSFServiceManager::instance()->Register(this);	
 
 	if (m_serial == INVALID_ID)
 	{
@@ -161,7 +161,7 @@ void ProactorService::Disconnect()
 
 void ProactorService::ReserveClose()
 {	
-	ProactorServiceManagerSinglton::instance()->UnRegister(m_serial);
+	CGSFServiceManager::instance()->UnRegister(m_serial);
 
 	if(this->handle() != ACE_INVALID_HANDLE)
 		ACE_OS::closesocket(this->handle());

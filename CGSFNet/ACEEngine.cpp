@@ -1,10 +1,10 @@
 #include "ACEEngine.h"
 #include "ACEHeader.h"
-#include "ProactorWorkerThread.h"
+#include "WorkerThread.h"
 #include "ProactorAcceptor.h"
-#include "SingltonObject.h"
 #include <assert.h>
 #include "BasePacket.h"
+#include "ServiceManager.h"
 
 #ifdef  _WIN32
 #ifdef _DEBUG
@@ -25,11 +25,11 @@ INetworkEngine * CreateNetworkEngine(IEngine* pEngine)
 
 ACEEngine::ACEEngine(IEngine* pEngine)
 	: INetworkEngine(pEngine)
-	, m_TimeOutHandler(this)
+	, m_timeOutHandler(this)
 	, m_acceptorIndex(0)
 {
 	ACE::init();
-	ProactorServiceManagerSinglton::instance();
+	CGSFServiceManager::instance();
 }
 
 ACEEngine::~ACEEngine(void)
@@ -39,12 +39,12 @@ ACEEngine::~ACEEngine(void)
 
 bool ACEEngine::SendRequest(BasePacket* pPacket)
 {
-	return ProactorServiceManagerSinglton::instance()->SendRequest(pPacket);
+	return CGSFServiceManager::instance()->SendRequest(pPacket);
 }
 
 bool ACEEngine::Disconnect(int serial)
 {
-	ProactorServiceManagerSinglton::instance()->Disconnect(serial);
+	CGSFServiceManager::instance()->Disconnect(serial);
 	return true;
 }
 
@@ -55,7 +55,11 @@ bool ACEEngine::NetworkOpen()
 
 	for (auto& acceptor : m_mapAcceptor)
 	{
+#ifdef _WIN32
 		ProactorAcceptor* pAcceptor = acceptor.second;
+#else
+		ReactorAcceptor* pAcceptor = acceptor.second;
+#endif
 
 		ACE_INET_Addr listen_addr;
 		listen_addr.set(pAcceptor->GetPort());
@@ -80,21 +84,31 @@ long ACEEngine::AddTimer(unsigned int timerID, unsigned int startTime, unsigned 
 	ACE_Time_Value interval(period / 1000, (period % 1000) * 1000);
 	ACE_Time_Value start(startTime / 1000, (startTime % 1000) * 1000);
 
-	return ACE_Proactor::instance()->schedule_timer(m_TimeOutHandler, (void*)timerID, start, interval);
+#ifdef _WIN32
+	return ACE_Proactor::instance()->schedule_timer(m_timeOutHandler, (void*)timerID, start, interval);
+#else
+	return ACE_Reactor::instance()->schedule_timer(m_timeOutHandler, (void*)timerID, start, interval);
+#endif
 }
 
 bool ACEEngine::CancelTimer(int timerID)
 {
 	if (timerID < 0)
 	{
-		ACE_Proactor::instance()->cancel_timer(m_TimeOutHandler);
+#ifdef _WIN32
+		ACE_Proactor::instance()->cancel_timer(m_timeOutHandler);
+#else
+		return ACE_Reactor::instance()->cancel_timer(m_timeOutHandler);
+#endif
 		return true;
 	}
 
+#ifdef _WIN32
 	return ACE_Proactor::instance()->cancel_timer(timerID) == 1;
+#else
+	return ACE_Reactor::instance()->cancel_timer(timerID) == 1;
+#endif
 }
-
-
 
 int ACEEngine::AddConnector(int connectorIndex, char* szIP, unsigned short port)
 {
@@ -135,9 +149,13 @@ int ACEEngine::AddListener(char* szIP, unsigned short port)
 
 bool ACEEngine::Shutdown()
 {	
-	ACE_Proactor::instance()->cancel_timer(m_TimeOutHandler);
-
-	ACE_Proactor::instance()->end_event_loop();
+#ifdef _WIN32
+	ACE_Proactor::instance()->cancel_timer(m_timeOutHandler);
+	ACE_Proactor::instance()->end_event_loop();	
+#else
+	ACE_Reactor::instance()->cancel_timer(m_timeOutHandler);
+	ACE_Reactor::instance()->end_event_loop();
+#endif
 	
 	ACE_Thread_Manager::instance()->wait_grp(m_workThreadGroupID);		
 	
@@ -154,7 +172,11 @@ bool ACEEngine::Init()
 	int optimalThreadCount = sysconf(_SC_NPROCESSORS_ONLN);
 #endif
 
+#ifdef _WIN32
 	m_workThreadGroupID = ACE_Thread_Manager::instance()->spawn_n(optimalThreadCount, (ACE_THR_FUNC)ProactorWorkerThread, NULL, THR_NEW_LWP, ACE_DEFAULT_THREAD_PRIORITY);
+#else
+	m_workThreadGroupID = ACE_Thread_Manager::instance()->spawn_n(optimalThreadCount, (ACE_THR_FUNC)ReactorWorkerThread, NULL, THR_NEW_LWP, ACE_DEFAULT_THREAD_PRIORITY);
+#endif
 
 	if (m_workThreadGroupID == -1)
 	{

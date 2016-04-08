@@ -6,6 +6,7 @@
 #include <ace/Thread_Manager.h>
 #include <ace/Thread_Mutex.h>
 #include <ace/Proactor.h>
+#include <ace/Reactor.h>
 #include <ace/Task.h>
 #include <ace/INET_Addr.h>
 #include <ace/SOCK_Connector.h>

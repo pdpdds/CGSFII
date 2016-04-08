@@ -2,7 +2,11 @@
 #include "ACEHeader.h"
 #include "INetworkEngine.h"
 
-class ACETimeOutHandler : public ACE_Handler
+#ifdef _WIN32
+class ACETimeOutHandler : public ACE_Handler	
+#else
+class ACETimeOutHandler : public ACE_Event_Handler
+#endif // _WIN32
 {
 public:
 	ACETimeOutHandler(INetworkEngine* pOwner){m_pOwner = pOwner;}

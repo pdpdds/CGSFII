@@ -4,7 +4,11 @@
 #include "ACETimeOutHandler.h"
 #include <map>
 
+#ifdef _WIN32
 typedef std::map<int, ProactorAcceptor*> mapAcceptor;
+#else
+typedef std::map<int, ReactorAcceptor*> mapAcceptor;
+#endif
 
 class ACEEngine : public INetworkEngine
 {
@@ -37,5 +41,5 @@ protected:
 	mapAcceptor m_mapAcceptor;
 
 private:
-	ACETimeOutHandler m_TimeOutHandler;
+	ACETimeOutHandler m_timeOutHandler;
 };
