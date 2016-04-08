@@ -48,17 +48,19 @@
     <ClInclude Include="PeerInfo.h" />
     <ClInclude Include="ProactorAcceptor.h" />
     <ClInclude Include="ProactorService.h" />
-    <ClInclude Include="ProactorServiceManager.h" />
-    <ClInclude Include="ProactorWorkerThread.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="ReactorAcceptor.h" />
+    <ClInclude Include="ReactorService.h" />
+    <ClInclude Include="ServiceManager.h" />
     <ClInclude Include="SFMessage.h" />
-    <ClInclude Include="SingltonObject.h" />
+    <ClInclude Include="WorkerThread.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ACEEngine.cpp" />
     <ClCompile Include="ProactorAcceptor.cpp" />
     <ClCompile Include="ProactorService.cpp" />
-    <ClCompile Include="ProactorWorkerThread.cpp" />
+    <ClCompile Include="ReactorService.cpp" />
+    <ClCompile Include="WorkerThread.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E85B70C3-16E4-47DC-9A8B-DCE2DB7DFEEB}</ProjectGuid>
