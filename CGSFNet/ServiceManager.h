@@ -5,6 +5,7 @@
 #include "BasePacket.h"
 
 class ProactorService;
+class ReactorService;
 
 template <typename LockStrategy, typename T, int maxIdCount>
 class ServiceManager
@@ -80,8 +81,6 @@ private:
 
 #define MAX_CGSF_CONCURRENT_USER 5000
 
-#ifdef _WIN32
+
 typedef ACE_Singleton<ServiceManager<ACE_Null_Mutex, ProactorService, MAX_CGSF_CONCURRENT_USER>, ACE_Thread_Mutex> CGSFServiceManager;
-#else
-typedef ACE_Singleton<ServiceManager<ACE_Null_Mutex, ReactorService, MAX_CGSF_CONCURRENT_USER>, ACE_Thread_Mutex> CGSFServiceManager;
-#endif
+typedef ACE_Singleton<ServiceManager<ACE_Null_Mutex, ReactorService, MAX_CGSF_CONCURRENT_USER>, ACE_Thread_Mutex> ReactorServiceManager;

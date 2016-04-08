@@ -70,9 +70,6 @@
     <ClCompile Include="WorkerThread.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="ReactorAcceptor.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="ReactorService.cpp">
       <Filter>Source</Filter>
     </ClCompile>

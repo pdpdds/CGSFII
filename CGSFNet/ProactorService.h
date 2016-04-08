@@ -2,13 +2,14 @@
 #include <ace/Asynch_IO.h>
 #include <ace/OS.h>
 #include <ace/Message_Block.h>
+#include "ace/Event_Handler.h"
 
 #include "EngineStructure.h"
 #include "BasePacket.h"
 
 #include "ISession.h"
 
-class ProactorService : public ACE_Service_Handler, public ISession
+class ProactorService : public ACE_Service_Handler, public ACE_Event_Handler, public ISession
 {
 public:
 	ProactorService();

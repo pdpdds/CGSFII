@@ -194,7 +194,6 @@ copy /Y "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)\lib\$(ProjectName).pdb"
     <ClCompile Include="InterlockedValue.cpp" />
     <ClCompile Include="ProactorAcceptor.cpp" />
     <ClCompile Include="ProactorService.cpp" />
-    <ClCompile Include="ReactorAcceptor.cpp" />
     <ClCompile Include="ReactorService.cpp" />
     <ClCompile Include="WorkerThread.cpp" />
   </ItemGroup>

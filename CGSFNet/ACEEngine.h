@@ -1,10 +1,11 @@
 #pragma once
 #include "INetworkEngine.h"
 #include "ProactorAcceptor.h"
+#include "ReactorAcceptor.h"
 #include "ACETimeOutHandler.h"
 #include <map>
 
-#ifdef _WIN32
+#ifdef ACE_PROACTOR
 typedef std::map<int, ProactorAcceptor*> mapAcceptor;
 #else
 typedef std::map<int, ReactorAcceptor*> mapAcceptor;

@@ -2,7 +2,7 @@
 #include "ACEHeader.h"
 #include "INetworkEngine.h"
 
-#ifdef _WIN32
+#ifdef ACE_PROACTOR
 class ACETimeOutHandler : public ACE_Handler	
 #else
 class ACETimeOutHandler : public ACE_Event_Handler
@@ -12,11 +12,17 @@ public:
 	ACETimeOutHandler(INetworkEngine* pOwner){m_pOwner = pOwner;}
 	virtual ~ACETimeOutHandler(void){}
 
+#ifdef ACE_PROACTOR
 	 virtual void handle_time_out (const ACE_Time_Value &tv,
                                 const void *arg)
+#else
+	virtual int handle_timeout(const ACE_Time_Value &tv, const void *act)
+#endif
     {
 		IEngine* pEngine = m_pOwner->GetEngine();
-		pEngine->OnTimer(arg);
+		pEngine->OnTimer(act);
+
+		return 0;
     }
 
 protected:
