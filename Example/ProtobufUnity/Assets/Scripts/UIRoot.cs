@@ -53,7 +53,7 @@ namespace CGSF
 
         public void OnConnect()
         {
-            network.AsyncConnect("192.168.0.13", 25251);
+            network.AsyncConnect("127.0.0.1", 25251);
             connectionText.text = "Connecting...";
             outputScroll.GetComponentInChildren<Text>().text = "sdffsdfdsd";
             outputScroll.GetComponentInChildren<Scrollbar>().enabled = true;
