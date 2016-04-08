@@ -16,13 +16,15 @@ public:
 	 virtual void handle_time_out (const ACE_Time_Value &tv,
                                 const void *arg)
 #else
-	virtual int handle_timeout(const ACE_Time_Value &tv, const void *act)
+	virtual int handle_timeout(const ACE_Time_Value &tv, const void *arg)
 #endif
     {
 		IEngine* pEngine = m_pOwner->GetEngine();
-		pEngine->OnTimer(act);
+		pEngine->OnTimer(arg);
 
+#ifndef ACE_PROACTOR
 		return 0;
+#endif
     }
 
 protected:

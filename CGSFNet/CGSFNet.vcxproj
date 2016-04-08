@@ -112,7 +112,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>NETWORKENGINE_EXPORTS;WIN32;_DEBUG;_WINDOWS;_USRDLL;CGSFENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ACE_PROACTOR;NETWORKENGINE_EXPORTS;WIN32;_DEBUG;_WINDOWS;_USRDLL;CGSFENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../Common;../ThirdParty/ACE</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
