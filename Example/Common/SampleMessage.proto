@@ -1,0 +1,12 @@
+package SAMPLE;
+
+enum ID
+{
+	UNKNOWN 			= 0;		
+	HELLO 				= 1;
+}
+
+message Hello
+{
+	required string message = 1;
+}
