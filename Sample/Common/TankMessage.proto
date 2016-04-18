@@ -1,0 +1,157 @@
+package Tank;
+
+//--------------------------------------------------------------------------------
+// primitives
+//--------------------------------------------------------------------------------
+
+message Vec2
+{
+	required float x = 1;
+	required float y = 2;
+}
+
+message Vec3
+{
+	required float x = 1;
+	required float y = 2;
+	required float z = 3;
+}
+
+message Vec4
+{
+	required float x = 1;
+	required float y = 2;
+	required float z = 3;
+	required float w = 4;
+}
+
+//--------------------------------------------------------------------------------
+// Header
+//--------------------------------------------------------------------------------
+
+message MessageHeader
+{
+	required uint32 messageID = 1;
+	required uint32 channel = 2;
+	required uint32 index = 3;
+		
+	optional Login login 					= 105;
+	optional RoomState roomstate 			= 106;
+	optional SubscribeChannel subscribechannel = 107;
+}
+
+//--------------------------------------------------------------------------------
+// Server Support Message
+//--------------------------------------------------------------------------------
+
+message Login
+{
+	required uint32 ClientId = 1;	
+}
+
+message RoomState
+{
+	required uint32 host = 1;
+	repeated uint32 clients = 2;	
+}
+
+message SubscribeChannel
+{
+	required uint32 channel = 1;
+	optional bool   result = 2;
+}
+
+//--------------------------------------------------------------------------------
+// Client Messages
+//--------------------------------------------------------------------------------
+
+message Message
+{
+	enum ID
+	{
+		UNKNOWN 		= 0;
+		
+		LOGIN 			= 1;
+		ROOMSTATE		= 2;
+		SUBSCRIBECHANNEL= 3;
+				
+		PING 			= 100;
+		TIMEREQ 		= 101;
+		TIMEANS 		= 102;
+		CHARACTERSTATE 	= 103;
+		GAMESTATE		= 108;		
+		GAMESTATEREQ	= 109;
+	}
+		
+	optional CharacterState characterstate 	= 104;	
+		
+	message CharacterState
+	{	
+		enum ActionID
+		{
+			NONE 			= 0;
+			MOVEACTION 		= 1;
+			ROTATIONACTION 	= 2;
+			TURRETROTATIONACTION 	= 3;
+			FIREACTION 	= 4;
+		}
+		
+		required uint32 charID = 1;
+		required float time = 2;
+		required ActionID action = 3;
+		required Vec3 position = 4;
+		optional Vec3 direction = 5;
+		optional Vec4 rotate = 6;
+		optional float curspeed = 7;
+		optional float speed = 8;
+		
+	}
+	
+	message TimeReq
+	{
+		required uint32 ansChannel = 1;
+		required float reqTime = 2;
+	}
+
+	message TimeAns
+	{
+		required TimeReq req = 1;
+		required float time = 2;
+	}
+	
+	message GameState
+	{
+		repeated BallState ballStates = 1;
+	}
+	
+	message GameStateReq
+	{
+		required uint32 ansChannel = 1;
+	}
+	
+	message BallState
+	{
+		enum ControlID
+		{
+			MANUAL = 0;
+			PHYSICS = 1;
+			SHOOT = 2;
+			CHARACTER = 3;
+		}
+		
+		required ControlID control = 1;
+		required float time = 2;
+		optional Vec3 position = 3;
+		optional uint32 ownerClientID = 4;
+		optional float shootRimTime = 5;
+	}
+	
+}
+
+service GameServer
+{
+	rpc HandleTimeReq(Message.TimeReq) returns (Message.TimeAns);
+	rpc HandleGameStateReq(Message.GameStateReq) returns (Message.GameState);
+}
+
+
