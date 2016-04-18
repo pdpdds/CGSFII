@@ -176,6 +176,7 @@
     <ClInclude Include="Macro.h" />
     <ClInclude Include="SFCompressor.h" />
     <ClInclude Include="SFCompressZLib.h" />
+    <ClInclude Include="SFDispatch.h" />
     <ClInclude Include="SFEncryption.h" />
     <ClInclude Include="SFEncryptionXOR.h" />
     <ClInclude Include="SFFastCRC.h" />

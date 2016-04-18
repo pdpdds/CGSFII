@@ -4,7 +4,8 @@
 #include "../EngineLayer/SFMultiLogicDispatcher.h"
 //#include "DBStruct.h"
 //#include "SFZdb.h"
-
+#include "SFDispatch.h"
+#include <functional>
 //SFZdb* g_db = nullptr;
 
 void CreateDatabase();
@@ -16,8 +17,7 @@ int main()
 #endif
 {
 	EchoLogicEntry* pLogicEntry = new EchoLogicEntry();
-	
-	//auto errorCode = SFEngine::GetInstance()->Intialize(pLogicEntry);
+
 	auto errorCode = SFEngine::GetInstance()->Intialize(pLogicEntry, new SFMultiLogicDispatcher(10));
 	if (errorCode != NET_ERROR_CODE::SUCCESS)
 		return 0;

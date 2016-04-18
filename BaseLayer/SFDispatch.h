@@ -16,8 +16,26 @@ public:
 	SFDispatch(void){}
 	virtual ~SFDispatch(void){m_MsgMap.clear();}
 
-	void RegisterMessage(TMsgType Msg, TMsgHandler Method);
-	bool HandleMessage(TMsgType Msg, TMsg& Message);
+	void RegisterMessage(TMsgType MsgType, TMsgHandler Method)
+	{
+		m_MsgMap.insert(std::make_pair(MsgType, Method));
+	}
+
+	bool HandleMessage(TMsgType MsgType, TMsg& Message)
+	{
+		MsgMap::iterator iter = m_MsgMap.find(MsgType);
+
+		if (iter != m_MsgMap.end())
+		{
+			(*iter).second(Message);
+		}
+		else
+		{
+			return false;
+		}
+
+		return true;
+	}
 
 protected:
 
@@ -25,28 +43,7 @@ private:
 	MsgMap m_MsgMap; 
 };
 
-template <typename TMsgType, typename TMsgHandler, typename TMsg>
-void SFDispatch<typename TMsgType, typename TMsgHandler, typename TMsg>::RegisterMessage(TMsgType MsgType, TMsgHandler Method)
-{
-	m_MsgMap.insert(std::make_pair(MsgType, Method));
-}
 
-template <typename TMsgType, typename TMsgHandler, typename TMsg>
-bool SFDispatch<typename TMsgType, typename TMsgHandler, typename TMsg>::HandleMessage(TMsgType MsgType, TMsg& Message)
-{
-	MsgMap::iterator iter = m_MsgMap.find(MsgType);
-
-	if(iter != m_MsgMap.end())
-	{
-		(*iter).second(Message);
-	}
-	else
-	{
-		return false;
-	}
-
-	return true;
-}
 
 /////////////////////////////////////////////////////////////////////////////
 //20120823 ≈€«√∏¥ º”º∫

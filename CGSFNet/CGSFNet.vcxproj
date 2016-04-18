@@ -161,7 +161,7 @@ copy /Y "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)\lib\$(ProjectName).pdb"
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NETWORKENGINE_EXPORTS;WIN32;NDEBUG;_WINDOWS;_USRDLL;CGSFENGINE_EXPORTS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ACE_PROACTOR;NETWORKENGINE_EXPORTS;WIN32;NDEBUG;_WINDOWS;_USRDLL;CGSFENGINE_EXPORTS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../Common;../ThirdParty/ACE</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
