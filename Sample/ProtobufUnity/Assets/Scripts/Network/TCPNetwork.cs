@@ -27,11 +27,11 @@ namespace CGSF
 
         public bool AsyncConnect(string ip, int port)
         {
-            IPAddress ipAddress = IPAddress.Parse(ip);
-            IPEndPoint ipEndpoint = new IPEndPoint(ipAddress, port);     
+            //IPAddress ipAddress = IPAddress.Parse(ip);
+            //IPEndPoint ipEndpoint = new IPEndPoint(ipAddress, port);     
 
             //Asynchronous call
-            IAsyncResult asyncConnect = tcp.BeginConnect(ipAddress, port, connectCallback, null);
+            IAsyncResult asyncConnect = tcp.BeginConnect(ip, port, connectCallback, null);
 
             
             return true;

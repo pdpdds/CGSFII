@@ -4,8 +4,21 @@
 
 volatile int g_currentSessionCnt = 0;
 
+
+#ifndef _WIN32
+unsigned long GetTickCount()
+{
+	static time_t   secStart = timeStart.tv_.tv_sec;
+	static time_t   usecStart = timeStart.tv_.tv_usec;
+	timeval tv;
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec - secStart) * 1000 + (tv.tv_usec - usecStart) / 1000;
+}
+#endif
+
 ProactorService::ProactorService()
-	: m_bServiceCloseFlag(false)	
+	: m_bServiceCloseFlag(false)
+	, m_reserveCloseStartTime(0)
 {	
 #if defined(_WIN32)
 	InterlockedDecrement((LONG *)&g_currentSessionCnt);
@@ -17,21 +30,16 @@ ProactorService::ProactorService()
 	sendData = 0;
 	receiveCount = 0;
 	sendCount = 0;
-#ifdef _WIN32
+
 	startTime = GetTickCount();
 	elapsedTime = GetTickCount();
-#endif
+
 }
 
 ProactorService::~ProactorService( void )
 {		
-
-#ifdef  _WIN32
-#ifdef _DEBUG 
 	elapsedTime = GetTickCount() - startTime;
 	printf("log result : elapsedTime : %d, transferred : %d, sendData : %d, receiveCount : %d, sendCount : %d\n", elapsedTime, transferredData, sendData, receiveCount, sendCount);
-#endif
-#endif //  _WIN32
 
 #if defined(_WIN32)
 	InterlockedDecrement((LONG *)&g_currentSessionCnt);
@@ -45,7 +53,7 @@ void ProactorService::open( ACE_HANDLE h, ACE_Message_Block& MessageBlock )
 {
 	this->handle(h);	
 
-	if (this->m_AsyncReader.open(*this) != 0 || this->m_AsyncWriter.open(*this) != 0)
+	if (this->m_asyncReader.open(*this) != 0 || this->m_asyncWriter.open(*this) != 0)
 	{
 		delete this;
 		return;
@@ -100,7 +108,7 @@ void ProactorService::PostRecv()
 	ACE_Message_Block* pBlock;
 
 	ACE_NEW_NORETURN(pBlock, ACE_Message_Block (2048));
-	if(this->m_AsyncReader.read(*pBlock, pBlock->space()) != 0)
+	if(this->m_asyncReader.read(*pBlock, pBlock->space()) != 0)
 	{
 		pBlock->release();
 		ReserveClose();
@@ -171,6 +179,7 @@ void ProactorService::ReserveClose()
 	ISession::OnDisconnect(this->m_serial, m_sessionDesc);
 
 	m_bServiceCloseFlag = true;
+	m_reserveCloseStartTime = GetTickCount();
 }
 
 void ProactorService::handle_time_out(const ACE_Time_Value& tv, const void* arg)
@@ -178,10 +187,12 @@ void ProactorService::handle_time_out(const ACE_Time_Value& tv, const void* arg)
 	ACE_UNUSED_ARG(tv);
 	ACE_UNUSED_ARG(arg);
 
-	if(m_bServiceCloseFlag == true)
+//20160421 14:00
+	if(m_bServiceCloseFlag == true && m_reserveCloseStartTime + 5000 < GetTickCount())
 	{			
+		m_bServiceCloseFlag = false;
 		UnregisterTimer();
-		delete this;	
+		delete this;
 	}
 }
 
@@ -191,17 +202,20 @@ void ProactorService::SendInternal(char* pBuffer, int bufferSize)
 
 	ACE_NEW_NORETURN(pBlock, ACE_Message_Block(bufferSize));
 
+	if (pBlock == nullptr)
+		return;
+
 	pBlock->copy((const char*)pBuffer, bufferSize);
 	sendData += bufferSize;
 
-	//if(NULL == pBlock->cont())
-	//{
-		m_AsyncWriter.write(*pBlock, pBlock->length());
-	//}
-	//else
-	//{
-		//m_AsyncWriter.writev(*pBlock, pBlock->total_length());
-	//}
+	if(NULL == pBlock->cont())
+	{
+		m_asyncWriter.write(*pBlock, pBlock->length());
+	}
+	else
+	{
+		m_asyncWriter.writev(*pBlock, pBlock->total_length());
+	}
 }
 
 bool ProactorService::SendRequest(BasePacket* pPacket)

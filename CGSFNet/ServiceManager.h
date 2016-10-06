@@ -7,17 +7,20 @@
 class ProactorService;
 class ReactorService;
 
-template <typename LockStrategy, typename T, int maxIdCount>
+template <typename T>
 class ServiceManager
 {
 public:
 	ServiceManager(){}
 	virtual ~ServiceManager(){}
 
+	void Init(int maxIdCount, int offset)
+	{
+		m_IdMap.Init(maxIdCount, offset);
+	}
+
 	bool SendRequest(BasePacket* pPacket)
 	{
-		SFLockHelper lock(&m_lock);
-
 		T* pService = m_IdMap.Get(pPacket->GetSerial());
 
 		if (pService != NULL)
@@ -30,7 +33,6 @@ public:
 
 	bool Disconnect(int serial)
 	{
-		SFLockHelper lock(&m_lock);
 
 		T* pService = m_IdMap.Get(serial);
 
@@ -44,9 +46,7 @@ public:
 	}
 
 	bool BroadCast(int ownerSerial, int destSerial[], int destSize, char* buffer, unsigned int bufferSize)
-	{
-		SFLockHelper lock(&m_lock);
-
+	{		
 		for (int i = 0; i < destSize; i++)
 		{
 			T* pService = m_IdMap.Get(destSerial[i]);
@@ -61,26 +61,19 @@ public:
 	}
 	
 	int Register(T* p)
-	{
-		SFLockHelper lock(&m_lock);
-
+	{		
 		return m_IdMap.Register(p);
 	}
 
 	void UnRegister(int id)
-	{
-		SFLockHelper lock(&m_lock);
-
+	{		
 		m_IdMap.UnRegister(id);
 	}
 
-private:
-	SFLock m_lock;
-	SFIDMap<LockStrategy, T, maxIdCount> m_IdMap;
+private:	
+	SFIDMap<T> m_IdMap;
 };
 
-#define MAX_CGSF_CONCURRENT_USER 5000
+typedef ACE_Singleton<ServiceManager<ProactorService>, ACE_Null_Mutex> CGSFServiceManager;
+typedef ACE_Singleton<ServiceManager<ReactorService>, ACE_Null_Mutex> ReactorServiceManager;
 
-
-typedef ACE_Singleton<ServiceManager<ACE_Null_Mutex, ProactorService, MAX_CGSF_CONCURRENT_USER>, ACE_Thread_Mutex> CGSFServiceManager;
-typedef ACE_Singleton<ServiceManager<ACE_Null_Mutex, ReactorService, MAX_CGSF_CONCURRENT_USER>, ACE_Thread_Mutex> ReactorServiceManager;

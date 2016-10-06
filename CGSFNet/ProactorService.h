@@ -37,8 +37,8 @@ protected:
 	void ReserveClose();
 
 private:	
-	ACE_Asynch_Write_Stream m_AsyncWriter;
-	ACE_Asynch_Read_Stream m_AsyncReader;
+	ACE_Asynch_Write_Stream m_asyncWriter;
+	ACE_Asynch_Read_Stream m_asyncReader;
 
 	int m_serial;	
 	_SessionDesc m_sessionDesc;
@@ -51,4 +51,6 @@ private:
 	int sendCount;
 	unsigned int startTime;
 	unsigned int elapsedTime;
+
+	unsigned int m_reserveCloseStartTime;
 };

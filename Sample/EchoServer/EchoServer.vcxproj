@@ -76,8 +76,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(ProjectDir)/../Intermediate/$(Configuration)\$(ProjectName)\</IntDir>
-    <OutDir>$(ProjectDir)/../Bin/Debug/</OutDir>
+    <IntDir>$(ProjectDir)../../Intermediate/$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>$(ProjectDir)../../Bin/Debug/</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -145,13 +145,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../DatabaseLayer;../../EngineLayer;../../Common;../../BaseLayer;%(AdditionalIncludeDirectories);../../ThirdParty\libzdb\libzdb\src;../../ThirdParty/libzdb/libzdb/src/db;../../ThirdParty\libzdb\libzdb\src\net;../../ThirdParty/libzdb\libzdb\src\exceptions;../../ThirdParty\libzdb\ThirdParty\sqlite3\include;../../ThirdParty\libzdb\ThirdParty\pthreads-w32-2-9-1-release\Pre-built.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../EngineLayer;../../Common;../../BaseLayer;../../DatabaseLayer;%(AdditionalIncludeDirectories);../../ThirdParty\libzdb\libzdb\src;../../ThirdParty/libzdb/libzdb/src/db;../../ThirdParty\libzdb\libzdb\src\net;../../ThirdParty/libzdb\libzdb\src\exceptions;../../ThirdParty\libzdb\ThirdParty\sqlite3\include;../../ThirdParty\libzdb\ThirdParty\pthreads-w32-2-9-1-release\Pre-built.2\include;../../ThirdParty/google/glog/src/windows..</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -35,11 +35,55 @@ protected:
 	ACE_Unbounded_Queue<T>	m_Queue;
 };
 
-class IDQueue
+/////////////////////////
+// Description:
+//   Thread Safe Queue
+////////////////////////
+template<class T>
+class TSQueueT
 {
 public:
-	IDQueue(int maxIdCount, int offset) : m_maxIdCount(maxIdCount), m_offset(offset)
+	void Push(T t)
 	{
+		ACE_Guard<ACE_Thread_Mutex> guard(_lock);
+		_queue.enqueue_tail(t);
+	}
+
+	/////////////////////////////////////////
+	// Description:
+	//   when the queue is empty, return false
+	/////////////////////////////////////////
+	bool Pop(T& t)
+	{
+		ACE_Guard<ACE_Thread_Mutex> guard(_lock);
+		return (-1 != _queue.dequeue_head(t));
+	}
+
+	bool Head(T*& t)
+	{
+		ACE_Guard<ACE_Thread_Mutex> guard(_lock);
+		return (-1 != _queue.get(t));
+	}
+
+	int Size()
+	{
+		ACE_Guard<ACE_Thread_Mutex> guard(_lock);
+		return _queue.size();
+	}
+
+protected:
+	ACE_Unbounded_Queue<T>	_queue;
+	ACE_Thread_Mutex				_lock;
+};
+
+class IDQueue
+{
+public:	
+	void Init(int maxIdCount, int offset)
+	{
+		m_maxIdCount = maxIdCount;
+		m_offset = offset;
+
 		for (int i = 0; i < m_maxIdCount; ++i)
 			m_idleIdQueue.Push(i + m_offset);
 	}
@@ -73,6 +117,5 @@ public:
 private:
 	int				m_offset;
 	int				m_maxIdCount;
-	Queue<int>	m_idleIdQueue;
+	TSQueueT<int>	m_idleIdQueue;
 };
-

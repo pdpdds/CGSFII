@@ -30,7 +30,7 @@ ACEEngine::ACEEngine(IEngine* pEngine)
 	, m_acceptorIndex(0)
 {
 	ACE::init();
-	CGSFServiceManager::instance();
+	CGSFServiceManager::instance()->Init(5000, 1);
 }
 
 ACEEngine::~ACEEngine(void)

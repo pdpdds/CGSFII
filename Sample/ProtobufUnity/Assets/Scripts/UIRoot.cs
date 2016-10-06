@@ -29,22 +29,26 @@ namespace CGSF
         void Update() {
             if(network.IsConnected())
             {
-                connectionText.text = "Connected";
+                OnSendButton();
+               // connectionText.text = "Connected";
             }
             else
             {
-                connectionText.text = "Disconnected";
+               // connectionText.text = "Disconnected";
             }
         }
+
+        static int index = 1;
 
         public void OnSendButton()
         {
             if(network.IsConnected())
             {
                 network.GetStream().Flush();
-
+                
                 SAMPLE.Hello message = new SAMPLE.Hello();
-                message.message = inputField.text;
+                message.message = "test " + index.ToString();
+                index++;
                 byte[] data = CGSFNet.CGSFNetProtocol.Encode<SAMPLE.Hello>(message, (ushort)SAMPLE.ID.HELLO);
                 NetworkStream stream = network.GetStream();
                 stream.BeginWrite(data, 0, data.Length, WriteCallback, null);
@@ -53,7 +57,8 @@ namespace CGSF
 
         public void OnConnect()
         {
-            network.AsyncConnect("127.0.0.1", 25251);
+            //network.AsyncConnect("192.168.0.43", 25251);
+            network.AsyncConnect("galaxyenter.cloudapp.net", 25251);
             connectionText.text = "Connecting...";
             outputScroll.GetComponentInChildren<Text>().text = "sdffsdfdsd";
             outputScroll.GetComponentInChildren<Scrollbar>().enabled = true;

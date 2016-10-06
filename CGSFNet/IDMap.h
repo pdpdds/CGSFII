@@ -2,14 +2,19 @@
 #include <ace/Map_Manager.h>
 #include "Queue.h"
 
-template <typename LockStrategy, typename T, int maxIdCount>
+template <typename T>
 class SFIDMap
 {
-	typedef ACE_Map_Manager<int, T*, LockStrategy> IDMap;
+	typedef ACE_Map_Manager<int, T*, ACE_Thread_Mutex> IDMap;
 
 public:
-	SFIDMap(void) :  m_idleIdQueue(maxIdCount, 1){}
+	SFIDMap() {}
 	virtual ~SFIDMap(void){}
+
+	void Init(int maxIdCount, int offset)
+	{
+		m_idleIdQueue.Init(maxIdCount, offset);
+	}
 
 	int Register(T* p)
 	{				
@@ -46,5 +51,5 @@ public:
 
 protected:
 	IDMap m_IDMap;
-	IDQueue m_idleIdQueue;	
+	IDQueue m_idleIdQueue;
 };
