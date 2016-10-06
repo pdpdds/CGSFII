@@ -35,15 +35,15 @@ bool SFPacketIOBuffer::GetPacket(SFPacketHeader& header, char* pBuffer, unsigned
 		return false;
 	}
 
-	if (GetUsedBufferSize() < (int)dataSize - sizeof(SFPacketHeader))
+	if (GetUsedBufferSize() < (int)dataSize)
 	{
 		SetHead(oldHead);
 		return false;
 	}
 
-	int getDataSize = GetData((char*)pBuffer, dataSize - sizeof(SFPacketHeader));
+	int getDataSize = GetData((char*)pBuffer, dataSize);
 
-	if (dataSize != (unsigned int)getDataSize + sizeof(SFPacketHeader))
+	if (dataSize != (unsigned int)getDataSize)
 	{
 		SetHead(oldHead);
 		errorCode = PACKETIO_ERROR_DATA;

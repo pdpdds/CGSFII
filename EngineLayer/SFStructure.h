@@ -7,7 +7,8 @@
 #include <string>
 #pragma pack(push, 1)
 
-typedef struct tag_SFPacketHeader
+//20160421
+/*typedef struct tag_SFPacketHeader
 {
 	USHORT packetID;
 	DWORD  packetOption;
@@ -23,6 +24,32 @@ typedef struct tag_SFPacketHeader
 	inline bool CheckEncryption(){ return (packetOption & PACKET_OPTION_ENCRYPTION) != 0; }
 	inline bool CheckCompressed(){ return (packetOption & PACKET_OPTION_COMPRESS) != 0; }
 	inline void SetPacketOption(DWORD Option){ packetOption = Option; }
+
+	void Clear()
+	{
+		packetID = 0;
+		packetOption = 0;
+		dataCRC = 0;
+		dataSize = 0;
+	}
+}SFPacketHeader;*/
+
+typedef struct tag_SFPacketHeader
+{
+	USHORT dataSize;
+	USHORT packetID;
+	WORD  packetOption;
+	WORD  dataCRC;	
+
+	tag_SFPacketHeader()
+	{
+		Clear();
+	}
+
+	inline bool CheckDataCRC() { return (packetOption & PACKET_OPTION_DATACRC) != 0; }
+	inline bool CheckEncryption() { return (packetOption & PACKET_OPTION_ENCRYPTION) != 0; }
+	inline bool CheckCompressed() { return (packetOption & PACKET_OPTION_COMPRESS) != 0; }
+	inline void SetPacketOption(DWORD Option) { packetOption = Option; }
 
 	void Clear()
 	{
