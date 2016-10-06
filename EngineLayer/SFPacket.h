@@ -1,6 +1,6 @@
 #pragma once
 #include "../CGSFNet/BasePacket.h"
-#include "SFFastCRC.h"
+#include "../BaseLayer/SFFastCRC.h"
 
 class SFCompress;
 

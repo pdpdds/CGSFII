@@ -6,6 +6,21 @@ volatile int g_currentSessionCnt = 0;
 
 
 #ifndef _WIN32
+namespace
+{
+	class __GET_TICK_COUNT
+	{
+	public:
+		__GET_TICK_COUNT()
+		{
+			if (gettimeofday(&tv_, NULL) != 0)
+				throw 0;
+		}
+		timeval tv_;
+	};
+	__GET_TICK_COUNT timeStart;
+}
+
 unsigned long GetTickCount()
 {
 	static time_t   secStart = timeStart.tv_.tv_sec;
@@ -208,14 +223,14 @@ void ProactorService::SendInternal(char* pBuffer, int bufferSize)
 	pBlock->copy((const char*)pBuffer, bufferSize);
 	sendData += bufferSize;
 
-	if(NULL == pBlock->cont())
-	{
+	//if(NULL == pBlock->cont())
+	//{
 		m_asyncWriter.write(*pBlock, pBlock->length());
-	}
-	else
-	{
-		m_asyncWriter.writev(*pBlock, pBlock->total_length());
-	}
+	//}
+	//else
+	//{
+		//m_asyncWriter.writev(*pBlock, pBlock->total_length());
+	//}
 }
 
 bool ProactorService::SendRequest(BasePacket* pPacket)

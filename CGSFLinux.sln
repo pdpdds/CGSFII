@@ -3,22 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BaseLayerLinux", "BaseLayer\BaseLayerLinux.vcxproj", "{32C6A310-92EA-4553-93AE-81AF947FDF7C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BaseLayer", "BaseLayer\BaseLayerLinux.vcxproj", "{32C6A310-92EA-4553-93AE-81AF947FDF7C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineLayerLinux", "EngineLayer\EngineLayerLinux.vcxproj", "{6CAABB07-A4D5-45F8-9F4B-DFC8F407B35D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineLayer", "EngineLayer\EngineLayerLinux.vcxproj", "{6CAABB07-A4D5-45F8-9F4B-DFC8F407B35D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{32C6A310-92EA-4553-93AE-81AF947FDF7C} = {32C6A310-92EA-4553-93AE-81AF947FDF7C}
 		{E85B70C3-16E4-47DC-9A8B-DCE2DB7DFEEB} = {E85B70C3-16E4-47DC-9A8B-DCE2DB7DFEEB}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGSFNetLinux", "CGSFNet\CGSFNetLinux.vcxproj", "{E85B70C3-16E4-47DC-9A8B-DCE2DB7DFEEB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGSFNet", "CGSFNet\CGSFNetLinux.vcxproj", "{E85B70C3-16E4-47DC-9A8B-DCE2DB7DFEEB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EchoServreLinux", "Example\EchoServer\EchoServreLinux.vcxproj", "{1E0D90E2-BC7F-4A75-B4B4-A5C204D2636F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6CAABB07-A4D5-45F8-9F4B-DFC8F407B35D} = {6CAABB07-A4D5-45F8-9F4B-DFC8F407B35D}
-		{32C6A310-92EA-4553-93AE-81AF947FDF7C} = {32C6A310-92EA-4553-93AE-81AF947FDF7C}
-		{E85B70C3-16E4-47DC-9A8B-DCE2DB7DFEEB} = {E85B70C3-16E4-47DC-9A8B-DCE2DB7DFEEB}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EchoServer", "Sample\EchoServer\EchoServreLinux.vcxproj", "{1E0D90E2-BC7F-4A75-B4B4-A5C204D2636F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
