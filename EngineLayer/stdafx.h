@@ -12,7 +12,7 @@
 #include <windows.h>
 #include "CommonHeader.h"
 
-#include "BasePacket.h"
+#include "CGSFNet/BasePacket.h"
 
 #include <tchar.h>
 #include "Macro.h"
@@ -21,7 +21,7 @@
 #include "SFLogicGateway.h"
 #include "LogicEntry.h"
 #include "SFPacket.h"
-#include "ErrorCode.h"
+#include "CGSFNet/ErrorCode.h"
 #include "SFPacketProtocol.H"
 
 #define GOOGLE_GLOG_DLL_DECL

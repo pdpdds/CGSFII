@@ -77,7 +77,7 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(ProjectDir)../../Intermediate/$(Configuration)\$(ProjectName)\</IntDir>
-    <OutDir>$(ProjectDir)../../Bin/Debug/</OutDir>
+    <OutDir>$(ProjectDir)/../../Bin/Debug/</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

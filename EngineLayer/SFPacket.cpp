@@ -1,8 +1,8 @@
-#include "EngineLayerHeader.h"
+#include "StdAfx.h"
 #include "SFPacket.h"
-#include "../BaseLayer/SFCompressor.h"
-#include "../BaseLayer/SFCompressZLib.h"
-
+#include "SFCompressor.h"
+#include "SFCompressZLib.h"
+#include "SFChecksum.h"
 #include "SFCGSFPacketProtocol.h"
 
 USHORT SFPacket::m_packetMaxSize = MAX_PACKET_SIZE;
@@ -75,7 +75,7 @@ bool SFPacket::Encode(unsigned short packetSize, int packetOption)
 		return true;
 	}
 
-	char* pDestBuf[MAX_PACKET_SIZE] = { 0, };
+	BYTE pDestBuf[MAX_PACKET_SIZE] = { 0, };
 	int destSize = packetSize - sizeof(SFPacketHeader);
 
 	DWORD dwResult = 0;
@@ -133,6 +133,54 @@ bool SFPacket::Decode(unsigned short packetSize, int& errorCode)
 {
 	SFPacketHeader* pHeader = GetHeader();
 
+	if(TRUE == pHeader->CheckDataCRC())
+	{
+		BOOL result = CheckDataCRC();
+
+		if (TRUE != result)
+		{
+			LOG(WARNING) << "Packet CRC Check Fail!!";
+			
+			errorCode = PACKETIO_ERROR_DATA_CRC;
+			return FALSE;
+		}
+	}
+
+	if (TRUE == pHeader->CheckEncryption())
+	{	
+		if(FALSE == SFEncrytion<SFEncryptionXOR>::Decrypt((BYTE*)GetData(), GetDataSize()))
+		{
+			SFASSERT(0);
+			errorCode = PACKETIO_ERROR_DATA_ENCRYPTION;
+			return FALSE;
+		}
+	}
+
+	if(TRUE == pHeader->CheckCompressed())
+	{
+		BYTE pSrcBuf[MAX_IO_SIZE] = { 0, };
+		int destSize = packetSize;
+
+		memcpy(pSrcBuf, GetData(), GetDataSize());
+		ResetDataBuffer();
+
+		if (FALSE == SFCompressor<SFCompressZLib>::GetCompressor()->Uncompress(GetData(), destSize, pSrcBuf, GetDataSize()))
+		{
+			//SFLOG_WARN(L"Packet Uncompress Fail!! %d %d", pHeader->DataCRC, dwDataCRC);
+
+			errorCode = PACKETIO_ERROR_DATA_COMPRESS;
+
+			return FALSE;
+		}
+
+		if (destSize + sizeof(SFPacketHeader) > packetSize)
+		{
+			errorCode = PACKETIO_ERROR_DATA_COMPRESS;
+			return FALSE;
+		}
+
+		SetDataSize((USHORT)destSize);
+	}
 
 	BasePacket::SetPacketID(pHeader->packetID);
 
@@ -141,7 +189,7 @@ bool SFPacket::Decode(unsigned short packetSize, int& errorCode)
 
 BOOL SFPacket::GetDataCRC(BYTE* pDataBuf, DWORD DataSize, DWORD& dwDataCRC)
 {
-	BOOL Result = m_FastCRC.GetZLibCRC((BYTE*)pDataBuf, DataSize, (unsigned int&)dwDataCRC);
+	BOOL Result = m_FastCRC.GetZLibCRC((BYTE*)pDataBuf, DataSize, dwDataCRC);
 
 	if(TRUE != Result)
 	{

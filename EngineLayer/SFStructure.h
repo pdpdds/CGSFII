@@ -8,7 +8,7 @@
 #pragma pack(push, 1)
 
 //20160421
-/*typedef struct tag_SFPacketHeader
+typedef struct tag_SFPacketHeader
 {
 	USHORT packetID;
 	DWORD  packetOption;
@@ -32,9 +32,9 @@
 		dataCRC = 0;
 		dataSize = 0;
 	}
-}SFPacketHeader;*/
+}SFPacketHeader;
 
-typedef struct tag_SFPacketHeader
+/*typedef struct tag_SFPacketHeader
 {
 	USHORT dataSize;
 	USHORT packetID;
@@ -58,7 +58,7 @@ typedef struct tag_SFPacketHeader
 		dataCRC = 0;
 		dataSize = 0;
 	}
-}SFPacketHeader;
+}SFPacketHeader;*/
 
 typedef struct tag_TimerInfo
 {
