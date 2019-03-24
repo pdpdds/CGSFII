@@ -41,9 +41,6 @@
     <ClInclude Include="BasePacket.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="WorkerThread.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="ServiceManager.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -51,6 +48,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="ReactorService.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkerThread.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
@@ -67,10 +67,10 @@
     <ClCompile Include="ACEEngine.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="WorkerThread.cpp">
+    <ClCompile Include="ReactorService.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="ReactorService.cpp">
+    <ClCompile Include="WorkerThread.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

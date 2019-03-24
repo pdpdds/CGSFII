@@ -28,12 +28,3 @@
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #include "glog/logging.h"
 
-#define BOOST_ALL_NO_LIB 
-
-#ifdef _DEBUG
-#pragma comment(lib, "boost_thread-vc140-mt-gd-1_60.lib")
-#pragma comment(lib, "boost_system-vc140-mt-gd-1_60.lib")
-#else
-#pragma comment(lib, "boost_thread-vc140-mt-1_60.lib")
-#pragma comment(lib, "boost_system-vc140-mt-1_60.lib")
-#endif
