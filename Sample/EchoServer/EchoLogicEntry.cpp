@@ -2,6 +2,7 @@
 #include "EchoLogicEntry.h"
 
 EchoLogicEntry::EchoLogicEntry(void)
+	: m_timerCount(0)
 {
 }
 
@@ -33,7 +34,8 @@ bool EchoLogicEntry::ProcessPacket(BasePacket* pPacket)
 		SFEngine::GetInstance()->SendRequest(pPacket);
 		break;
 	case SFPACKET_TIMER:
-		printf("timer call!\n");
+		printf("timer call! %d\n", m_timerCount);
+		m_timerCount++;
 		break;
 	}
 
