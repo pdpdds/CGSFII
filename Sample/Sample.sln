@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGSFNet", "..\CGSFNet\CGSFNet.vcxproj", "{D3434D93-3187-430C-885F-FD6F9613366A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineLayer", "..\EngineLayer\EngineLayer.vcxproj", "{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EchoServer", "EchoServer\EchoServer.vcxproj", "{DD9698A1-F393-47EF-B4E7-41DB22BA2DD6}"
@@ -23,10 +21,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D3434D93-3187-430C-885F-FD6F9613366A}.Debug|x64.ActiveCfg = Debug|x64
-		{D3434D93-3187-430C-885F-FD6F9613366A}.Debug|x64.Build.0 = Debug|x64
-		{D3434D93-3187-430C-885F-FD6F9613366A}.Release|x64.ActiveCfg = Release|x64
-		{D3434D93-3187-430C-885F-FD6F9613366A}.Release|x64.Build.0 = Release|x64
 		{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}.Debug|x64.ActiveCfg = Debug|x64
 		{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}.Debug|x64.Build.0 = Debug|x64
 		{F7276B81-CD8E-4E0B-ABF5-BAB8FEBE0511}.Release|x64.ActiveCfg = Release|x64
@@ -54,5 +48,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E21517DA-5060-4B55-9D44-79EA108B65EF}
 	EndGlobalSection
 EndGlobal
