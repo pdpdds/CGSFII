@@ -1,7 +1,7 @@
 # CGSFII
 CGSF Second Edition
 # Setting
-Compiler : Visual Studio 2015
+Compiler : Visual Studio 2017
 
 Download Binary
 * [CGSF External] (https://drive.google.com/file/d/0B4zZS0o3dor0M3I0TkdoQUZrWlU/view?usp=sharing)
