@@ -124,6 +124,12 @@
     <ClCompile Include="SFProtobuf2ExtensionProtocol.cpp">
       <Filter>Packet\ProtobufPacket</Filter>
     </ClCompile>
+    <ClCompile Include="JsonNode.cpp">
+      <Filter>Packet\JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonBuilder.cpp">
+      <Filter>Packet\JSON</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".\SFFactory.h">

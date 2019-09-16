@@ -26,7 +26,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	SFEngine::GetInstance()->Intialize(pLogicEntry);
 	int packetProtocolIndex = SFEngine::GetInstance()->AddPacketProtocol(new SFPacketProtocol<SFJsonProtocol>);
 
-	if (false == SFEngine::GetInstance()->LoadConnectorList(L"ServerConnection.xml"))
+	if (false == SFEngine::GetInstance()->LoadConnectorList("ServerConnection.xml"))
 		return 0;
 
 	pLogicEntry->AddConnectorCallback(AUTH_SERVER_1, pAuthServerCallback, packetProtocolIndex);

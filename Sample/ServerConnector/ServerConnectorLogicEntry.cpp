@@ -23,8 +23,9 @@ bool ServerConnectorLogicEntry::ProcessPacket(BasePacket* pPacket)
 	{	
 	case SFPACKET_DATA:		
 		SFJsonPacket* pJsonPacket = (SFJsonPacket*)pPacket;
+		tstring result = pJsonPacket->GetData().GetTValue<tstring>("ECHO");
 
-		std::cout << "Received : " << pJsonPacket->GetData().GetValue<tstring>("ECHO") << std::endl;
+		std::cout << "Received : " << result << std::endl;
 
 		break;
 	}

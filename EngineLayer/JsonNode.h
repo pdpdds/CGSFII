@@ -87,7 +87,7 @@ public:
 	}
 
 	template<typename T>
-	T		GetValue(const char* key) const
+	T		GetTValue(const char* key) const
 	{
 		tstring result = GetValueImpl(key);
 		T returnValue;
